@@ -1,1 +1,4 @@
 /cocos2d-x/HelloWorld/cocos2d/*
+/cocos2d-x/HelloWorld/bin/*
+/cocos2d-x/HelloWorld/proj.win32/.vs/*
+/cocos2d-x/HelloWorld/proj.win32/Debug.*
