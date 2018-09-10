@@ -1,0 +1,1 @@
+cocos run -s ./game01 -p Win32 --vs=2017
