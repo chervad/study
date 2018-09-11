@@ -3,3 +3,5 @@
 /cocos2d-x/HelloWorld/proj.win32/.vs/*
 /cocos2d-x/HelloWorld/proj.win32/Debug.*
 *.db
+/cocos2d-x/TankStrike/proj.win32/.vs/*
+/cocos2d-x/TankStrike/proj.win32/Debug.*
