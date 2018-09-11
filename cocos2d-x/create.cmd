@@ -1,0 +1,1 @@
+cocos new game01 -p ru.chervad.game01 -l cpp -d ./ -e %COCOS_ROOT%

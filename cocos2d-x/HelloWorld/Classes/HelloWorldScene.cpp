@@ -11,21 +11,20 @@ Scene* HelloWorld::createScene()
     return scene;
 }
 
-static void problemLoading(const char* filename)
+/*static void problemLoading(const char* filename)
 {
     printf("Error while loading: %s\n", filename);
     printf("Depending on how you compiled you might have to add 'Resources/' in front of filenames in HelloWorldScene.cpp\n");
-}
+}*/
 
 bool HelloWorld::init()
 {
     if (!Layer::init())
     {
-
         return false;
     }
 	Size size = Director::getInstance()->getWinSize();
-	auto sprite = Sprite::create("res/sprites/tanks_all.png");
+	auto sprite = Sprite::create("res/sprites/tank_01_top.png");
 	sprite->setPosition(Vec2(size.width / 2, size.height / 2));
 	this->addChild(sprite);
     return true;
