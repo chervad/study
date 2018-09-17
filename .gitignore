@@ -13,3 +13,4 @@
 *.tlog
 *.vcxproj.user
 *.log
+/simple_sniffer/.vs/
