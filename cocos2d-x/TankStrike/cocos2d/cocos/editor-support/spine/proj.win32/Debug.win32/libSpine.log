@@ -1,1 +1,56 @@
-﻿
+﻿  Animation.c
+  AnimationState.c
+  AnimationStateData.c
+  Array.c
+  Atlas.c
+  AtlasAttachmentLoader.c
+  Attachment.c
+  AttachmentLoader.c
+  Bone.c
+  BoneData.c
+  BoundingBoxAttachment.c
+  ClippingAttachment.c
+  Color.c
+  Event.c
+  EventData.c
+  extension.c
+  IkConstraint.c
+  IkConstraintData.c
+  Json.c
+  MeshAttachment.c
+  PathAttachment.c
+  PathConstraint.c
+  PathConstraintData.c
+  PointAttachment.c
+  RegionAttachment.c
+  Skeleton.c
+  SkeletonBinary.c
+  SkeletonBounds.c
+  SkeletonClipping.c
+  SkeletonData.c
+f:\study\cocos2d-x\tankstrike\cocos2d\cocos\editor-support\spine\skeletonbinary.c(310): warning C4018: '<': signed/unsigned mismatch
+f:\study\cocos2d-x\tankstrike\cocos2d\cocos\editor-support\spine\skeletonbinary.c(372): warning C4018: '<': signed/unsigned mismatch
+f:\study\cocos2d-x\tankstrike\cocos2d\cocos\editor-support\spine\skeletonbinary.c(484): warning C4018: '<': signed/unsigned mismatch
+f:\study\cocos2d-x\tankstrike\cocos2d\cocos\editor-support\spine\skeletonbinary.c(649): warning C4018: '<': signed/unsigned mismatch
+f:\study\cocos2d-x\tankstrike\cocos2d\cocos\editor-support\spine\skeletonbinary.c(652): warning C4018: '<': signed/unsigned mismatch
+  SkeletonJson.c
+  Skin.c
+  Slot.c
+  SlotData.c
+f:\study\cocos2d-x\tankstrike\cocos2d\cocos\editor-support\spine\skeletonjson.c(97): warning C4018: '>=': signed/unsigned mismatch
+  TransformConstraint.c
+  TransformConstraintData.c
+  Triangulator.c
+  VertexAttachment.c
+  VertexEffect.c
+  AttachmentVertices.cpp
+  Cocos2dAttachmentLoader.cpp
+  SkeletonAnimation.cpp
+  SkeletonBatch.cpp
+f:\study\cocos2d-x\tankstrike\cocos2d\cocos\editor-support\spine\skeletonbatch.cpp(110): warning C4018: '<': signed/unsigned mismatch
+  SkeletonRenderer.cpp
+  SkeletonTwoColorBatch.cpp
+  spine-cocos2dx.cpp
+f:\study\cocos2d-x\tankstrike\cocos2d\cocos\editor-support\spine\skeletontwocolorbatch.cpp(237): warning C4018: '<': signed/unsigned mismatch
+f:\study\cocos2d-x\tankstrike\cocos2d\cocos\editor-support\spine\skeletontwocolorbatch.cpp(274): warning C4018: '<': signed/unsigned mismatch
+  libSpine.vcxproj -> F:\study\cocos2d-x\TankStrike\proj.win32\Debug.win32\libSpine.lib
