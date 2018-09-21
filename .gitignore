@@ -14,3 +14,4 @@
 *.vcxproj.user
 *.log
 /simple_sniffer/.vs/
+/cocos2d-x/TankStrike/cocos2d/cocos/2d/Debug.win32/
