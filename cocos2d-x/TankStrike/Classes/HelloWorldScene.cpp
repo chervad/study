@@ -5,10 +5,9 @@ using namespace cocos2d;
 
 HelloWorld::HelloWorld() 
 	: pTankHero(nullptr)
-	, pAnimateMoveTrucks(nullptr)
+	, createAnimate(false)
 	, nX_delta(0)
 	, nY_delta(0)
-	, nCountKeyPressed(0)
 {}
 
 HelloWorld::~HelloWorld() {}
@@ -41,38 +40,19 @@ bool HelloWorld::init()
 
 	this->pTankHero = Sprite::create("res/sprites/tank_01_top.png");
 	this->pTankHero->setPosition(Vec2(size.width / 2, size.height / 2));
-
-	auto animation = Animation::create();
-	for (int i = 1; i <= 8; i++) {
-		std::string name = StringUtils::format("res/sprites/tank_%02d_top.png", i);
-		animation->addSpriteFrameWithFile(name.c_str());
-	}
-	animation->setDelayPerUnit(0.15f);
-	animation->setRestoreOriginalFrame(true);
-	animation->setLoops(-1);
-	auto animate = Animate::create(animation);
-
-	this->pAnimateMoveTrucks = (RepeatForever *)this->pTankHero->runAction(animate);
-
 	this->addChild(this->pTankHero);
-
-	this->pTankHero->getActionManager()->pauseTarget(this->pTankHero);
-
 	this->scheduleUpdate();
-
     return true;
 }
 
 void HelloWorld::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event) {
-	//log("Key with keycode %d released", keyCode);
+	log("Key with keycode %d pressed", keyCode);
 	if (keyCode == EventKeyboard::KeyCode::KEY_LEFT_ARROW || 
 		keyCode == EventKeyboard::KeyCode::KEY_RIGHT_ARROW || 
 		keyCode == EventKeyboard::KeyCode::KEY_UP_ARROW ||
 		keyCode == EventKeyboard::KeyCode::KEY_DOWN_ARROW ||
 		keyCode == EventKeyboard::KeyCode::KEY_SPACE)
 	{
-		nCountKeyPressed++;
-		this->pTankHero->getActionManager()->resumeTarget(this->pTankHero);
 		if (keyCode == EventKeyboard::KeyCode::KEY_LEFT_ARROW ||
 			keyCode == EventKeyboard::KeyCode::KEY_RIGHT_ARROW)
 		{
@@ -106,10 +86,28 @@ void HelloWorld::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event) {
 			break;
 		}
 	}
+	if (this->nX_delta != 0 || this->nY_delta != 0) {
+		if (!this->createAnimate) {
+			auto animation = Animation::create();
+			for (int i = 1; i <= 8; i++) {
+				std::string name = StringUtils::format("res/sprites/tank_%02d_top.png", i);
+				animation->addSpriteFrameWithFile(name.c_str());
+			}
+			animation->setDelayPerUnit(0.2f);
+			animation->setRestoreOriginalFrame(true);
+			animation->setLoops(-1);
+			auto animate = Animate::create(animation);
+			this->pTankHero->runAction(animate);
+			this->createAnimate = true;
+		}
+		else {
+			this->pTankHero->getActionManager()->resumeTarget(this->pTankHero);
+		}
+	}
 }
 
 void HelloWorld::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event) {
-	//log("Key with keycode %d released", keyCode);
+	log("Key with keycode %d released", keyCode);
 
 	if (keyCode == EventKeyboard::KeyCode::KEY_LEFT_ARROW ||
 		keyCode == EventKeyboard::KeyCode::KEY_RIGHT_ARROW ||
@@ -117,7 +115,6 @@ void HelloWorld::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event) {
 		keyCode == EventKeyboard::KeyCode::KEY_DOWN_ARROW ||
 		keyCode == EventKeyboard::KeyCode::KEY_SPACE)
 	{
-		nCountKeyPressed--;
 		if (keyCode == EventKeyboard::KeyCode::KEY_LEFT_ARROW ||
 			keyCode == EventKeyboard::KeyCode::KEY_RIGHT_ARROW)
 		{
@@ -129,7 +126,7 @@ void HelloWorld::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event) {
 			this->nY_delta = 0;
 		}
 	}
-	if (nCountKeyPressed == 0) {
+	if (this->nX_delta == 0 && this->nY_delta == 0) {
 		/*dt = pAnimateMoveTrucks->getElapsed();
 		pTankHero->getActionManager()->pauseAllRunningActions();*/
 		this->pTankHero->getActionManager()->pauseTarget(this->pTankHero);

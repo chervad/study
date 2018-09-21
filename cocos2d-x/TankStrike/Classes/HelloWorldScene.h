@@ -26,16 +26,11 @@ public:
 
 	virtual void update(float dt);
 
-protected:
-
-	void runAnimation();
-
 private:
 	Sprite *pTankHero;
-	RepeatForever *pAnimateMoveTrucks;
+	bool createAnimate;
 	int nX_delta;
 	int nY_delta;
-	u_short nCountKeyPressed;
 	float dt;
 };
 
