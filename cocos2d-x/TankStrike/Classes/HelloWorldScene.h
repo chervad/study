@@ -22,16 +22,24 @@ public:
 
 	void onKeyReleased(EventKeyboard::KeyCode keyCode, Event * event);
 
-    CREATE_FUNC(HelloWorld);
-
 	virtual void update(float dt);
 
+	void loadObjects();
+
+	CREATE_FUNC(HelloWorld);
 private:
+	void fillAnimatation(Animation *animation);
+private:
+	Texture2D *pTextures;
 	Sprite *pTankHero;
+	Animation *pTankHeroMoveAnimation;
+	Sprite *pTank;
 	bool createAnimate;
 	int nX_delta;
 	int nY_delta;
 	float dt;
+	float tileWidth;
+	float tileHeight;
 };
 
 #endif // __HELLOWORLD_SCENE_H__
