@@ -1,11 +1,15 @@
-#include "HelloWorldScene.h"
+#include "BattleScene.h"
 #include "SimpleAudioEngine.h"
+
+#include "defens.h"
+
+#include "HeroTank.h"
 
 using namespace cocos2d;
 
 //https://github.com/war1oc/cocos2d-x-player/tree/master/Classes
 
-HelloWorld::HelloWorld() 
+BattleScene::BattleScene()
 	: pTextures(nullptr)
 	, pTankHero(nullptr)
 	, pTankHeroMove(nullptr)
@@ -15,17 +19,17 @@ HelloWorld::HelloWorld()
 	, nY_delta(0)
 {}
 
-HelloWorld::~HelloWorld() {}
+BattleScene::~BattleScene() {}
 
-Scene* HelloWorld::createScene()
+Scene* BattleScene::createScene()
 {
 	auto scene = Scene::create();
-	auto layer = HelloWorld::create(); //тут вызывается конструктор сцены и сразу же метод init сцены
+	auto layer = BattleScene::create(); //тут вызывается конструктор сцены и сразу же метод init сцены
 	scene->addChild(layer);
     return scene;
 }
 
-bool HelloWorld::init()
+bool BattleScene::init()
 {
     if (!Layer::init())
     {
@@ -35,8 +39,8 @@ bool HelloWorld::init()
 	/*listener->onKeyPressed = [](EventKeyboard::KeyCode keyCode, Event* event) {
 		log("Key with keycode %d pressed", keyCode);
 	};*/
-	listener->onKeyPressed = CC_CALLBACK_2(HelloWorld::onKeyPressed, this);
-	listener->onKeyReleased = CC_CALLBACK_2(HelloWorld::onKeyReleased, this);
+	listener->onKeyPressed = CC_CALLBACK_2(BattleScene::onKeyPressed, this);
+	listener->onKeyReleased = CC_CALLBACK_2(BattleScene::onKeyReleased, this);
 
 	this->_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
@@ -49,7 +53,7 @@ bool HelloWorld::init()
 	this->tileHeight = rect.size.height / 12;
 
 	this->pTankHero
-		= Sprite::createWithSpriteFrame(SpriteFrame::createWithTexture(this->pTextures, Rect(14 * this->tileWidth, 0 * this->tileHeight, this->tileWidth, this->tileHeight)));
+		= HeroTank::createWithSpriteFrame(SpriteFrame::createWithTexture(this->pTextures, Rect(14 * this->tileWidth, 0 * this->tileHeight, this->tileWidth, this->tileHeight)));
 	this->pTankHero->setPosition(Vec2(size.width / 2, size.height / 2));
 	this->addChild(this->pTankHero);
 
@@ -72,7 +76,7 @@ bool HelloWorld::init()
     return true;
 }
 
-void HelloWorld::fillAnimatation(Animation *animation) {
+void BattleScene::fillAnimatation(Animation *animation) {
 	for (int i = 0; i < 8; i++) {
 		Rect rect = Rect((14 + i) * this->tileWidth, 0 * this->tileHeight, this->tileWidth, this->tileHeight);
 		SpriteFrame *frame = SpriteFrame::createWithTexture(this->pTextures, rect);
@@ -80,7 +84,7 @@ void HelloWorld::fillAnimatation(Animation *animation) {
 	}
 }
 
-void HelloWorld::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event) {
+void BattleScene::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event) {
 	log("Key with keycode %d pressed", keyCode);
 	if (keyCode == EventKeyboard::KeyCode::KEY_LEFT_ARROW || 
 		keyCode == EventKeyboard::KeyCode::KEY_RIGHT_ARROW || 
@@ -131,7 +135,7 @@ void HelloWorld::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event) {
 	}
 }
 
-void HelloWorld::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event) {
+void BattleScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event) {
 	log("Key with keycode %d released", keyCode);
 
 	if (keyCode == EventKeyboard::KeyCode::KEY_LEFT_ARROW ||
@@ -164,7 +168,7 @@ void HelloWorld::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event) {
 	}
 }
 
-void HelloWorld::update(float dt) {
+void BattleScene::update(float dt) {
 	if (this->nX_delta != 0 || this->nY_delta != 0) {
 		Point p = this->pTankHero->getPosition();
 		Size size = Director::getInstance()->getWinSize();

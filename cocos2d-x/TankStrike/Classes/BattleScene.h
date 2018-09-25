@@ -5,14 +5,12 @@
 
 using namespace cocos2d;
 
-#define DELTA 1
-
-class HelloWorld : public Layer
+class BattleScene : public Layer
 {
 public:
-	HelloWorld(); 
+	BattleScene(); 
 
-	virtual ~HelloWorld();
+	virtual ~BattleScene();
 
     static Scene* createScene();
 
@@ -24,7 +22,7 @@ public:
 
 	virtual void update(float dt);
 
-	CREATE_FUNC(HelloWorld);
+	CREATE_FUNC(BattleScene);
 private:
 	void fillAnimatation(Animation *animation);
 private:
