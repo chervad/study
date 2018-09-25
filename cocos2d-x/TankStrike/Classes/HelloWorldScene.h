@@ -24,15 +24,13 @@ public:
 
 	virtual void update(float dt);
 
-	void loadObjects();
-
 	CREATE_FUNC(HelloWorld);
 private:
 	void fillAnimatation(Animation *animation);
 private:
 	Texture2D *pTextures;
 	Sprite *pTankHero;
-	Animation *pTankHeroMoveAnimation;
+	Animate *pTankHeroMove;
 	Sprite *pTank;
 	bool createAnimate;
 	int nX_delta;

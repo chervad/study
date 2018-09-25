@@ -3,17 +3,17 @@
 
 using namespace cocos2d;
 
+//https://github.com/war1oc/cocos2d-x-player/tree/master/Classes
+
 HelloWorld::HelloWorld() 
 	: pTextures(nullptr)
 	, pTankHero(nullptr)
-	, pTankHeroMoveAnimation(nullptr)
+	, pTankHeroMove(nullptr)
 	, pTank(nullptr)
 	, createAnimate(false)
 	, nX_delta(0)
 	, nY_delta(0)
-{
-	log("4");
-}
+{}
 
 HelloWorld::~HelloWorld() {}
 
@@ -47,30 +47,29 @@ bool HelloWorld::init()
 	rect.size = this->pTextures->getContentSize();
 	this->tileWidth = rect.size.width / 22;
 	this->tileHeight = rect.size.height / 12;
+
 	this->pTankHero
 		= Sprite::createWithSpriteFrame(SpriteFrame::createWithTexture(this->pTextures, Rect(14 * this->tileWidth, 0 * this->tileHeight, this->tileWidth, this->tileHeight)));
 	this->pTankHero->setPosition(Vec2(size.width / 2, size.height / 2));
 	this->addChild(this->pTankHero);
 
 	this->pTank
-		= Sprite::createWithSpriteFrame(SpriteFrame::createWithTexture(this->pTextures, Rect(17 * this->tileWidth, 4 * this->tileHeight, this->tileWidth, this->tileHeight)));
+		= Sprite::createWithSpriteFrame(SpriteFrame::createWithTexture(this->pTextures
+			, Rect(17 * this->tileWidth, 4 * this->tileHeight, this->tileWidth, this->tileHeight)));
 	this->pTank->setPosition(Vec2(100, 100));
 	this->addChild(this->pTank);
 
-	this->loadObjects();
+	auto tankHeroAnimation = Animation::create();
+	this->fillAnimatation(tankHeroAnimation);
+	tankHeroAnimation->setDelayPerUnit(0.1f);
+	tankHeroAnimation->setRestoreOriginalFrame(true);
+	tankHeroAnimation->setLoops(-1);
+	this->pTankHeroMove = Animate::create(tankHeroAnimation);
+	this->pTankHeroMove->retain();
 
 	this->scheduleUpdate();
 
     return true;
-}
-
-void HelloWorld::loadObjects() {
-	this->pTankHeroMoveAnimation = Animation::create();
-	this->fillAnimatation(this->pTankHeroMoveAnimation);
-	this->pTankHeroMoveAnimation->setDelayPerUnit(0.1f);
-	this->pTankHeroMoveAnimation->setRestoreOriginalFrame(true);
-	this->pTankHeroMoveAnimation->setLoops(-1);
-	this->pTankHero->getActionManager()->addAction(Animate::create(this->pTankHeroMoveAnimation), this->pTankHero, true);
 }
 
 void HelloWorld::fillAnimatation(Animation *animation) {
@@ -123,24 +122,12 @@ void HelloWorld::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event) {
 		}
 	}
 	if (this->nX_delta != 0 || this->nY_delta != 0) {
-		/*if (!this->createAnimate) {
-			auto animation = Animation::create();
-			//for (int i = 1; i <= 8; i++) {
-			//	std::string name = StringUtils::format("res/sprites/tank_%02d_top.png", i);
-			//	animation->addSpriteFrameWithFile(name.c_str());
-			//}
-			this->fillAnimatation(animation);
-			animation->setDelayPerUnit(0.1f);
-			animation->setRestoreOriginalFrame(true);
-			animation->setLoops(-1);
-			auto animate = Animate::create(animation);
-			this->pTankHero->runAction(animate);
-			this->createAnimate = true;
+		if (this->pTankHeroMove->getTarget() != nullptr) {
+			this->pTankHero->getActionManager()->resumeTarget(this->pTankHero);
 		}
 		else {
-			this->pTankHero->getActionManager()->resumeTarget(this->pTankHero);
-		}*/
-		this->pTankHero->getActionManager()->resumeTarget(this->pTankHero);
+			this->pTankHero->runAction(RepeatForever::create(this->pTankHeroMove));
+		}
 	}
 }
 
@@ -162,6 +149,14 @@ void HelloWorld::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event) {
 			keyCode == EventKeyboard::KeyCode::KEY_DOWN_ARROW)
 		{
 			this->nY_delta = 0;
+		}
+		if (keyCode == EventKeyboard::KeyCode::KEY_SPACE) {
+			Vec2 curPos = this->pTank->getPosition();
+			float minX = -1 * curPos.x;
+			float maxX = 640 - curPos.x;
+			float minY = -1 * curPos.y;
+			float maxY = 480 - curPos.y;
+			this->pTank->runAction(MoveBy::create(2.0f, Vec2(random<float>(minX, maxX), random<float>(minY, maxY))));
 		}
 	}
 	if (this->nX_delta == 0 && this->nY_delta == 0) {
