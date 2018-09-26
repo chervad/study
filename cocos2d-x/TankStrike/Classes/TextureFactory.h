@@ -12,7 +12,8 @@ class TextureFactory {
 public:
 	static TextureFactory &getInstance();
 
-	SpriteFrame *getHeroTankSprite();
+	SpriteFrame *getPlayerTankSprite();
+	Animate *getPlayerTankAnimate();
 	SpriteFrame *getEnemyTankSprite();
 private:
 	TextureFactory();
@@ -20,13 +21,15 @@ private:
 	TextureFactory& operator=(const TextureFactory&) {}
 private:
 	const char *tiles_res = "res/sprites/tiles.png";
-	const tiletype heroTankTile = { 14, 0 };
+	const tiletype playerTankTile = { 14, 0 };
 	const tiletype enemyTankTile = { 17, 4 };
 
 	Texture2D *pTextures;
 
-	SpriteFrame *pHeroTank;
+	SpriteFrame *pPlayerTank;
 	SpriteFrame *pEnemyTank;
+
+	Animate *pPlayerTankAnimate;
 
 	float tileWidth;
 	float tileHeight;

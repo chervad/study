@@ -3,6 +3,8 @@
 
 #include "cocos2d.h"
 
+#include "PlayerTank.h"
+
 using namespace cocos2d;
 
 class BattleScene : public Layer
@@ -24,15 +26,12 @@ public:
 
 	CREATE_FUNC(BattleScene);
 private:
-	void fillAnimatation(Animation *animation);
-private:
 	Texture2D *pTextures;
-	Sprite *pTankHero;
-	Animate *pTankHeroMove;
+
+	PlayerTank *pPlayerTank;
+
 	Sprite *pTank;
-	bool createAnimate;
-	int nX_delta;
-	int nY_delta;
+
 	float dt;
 	float tileWidth;
 	float tileHeight;
