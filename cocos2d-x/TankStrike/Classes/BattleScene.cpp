@@ -59,9 +59,8 @@ bool BattleScene::init()
 	this->pPlayerTank->setPosition(Vec2(size.width / 2, size.height / 2));
 	this->addChild(this->pPlayerTank);
 
-	this->pTank
-		= Sprite::createWithSpriteFrame(SpriteFrame::createWithTexture(this->pTextures
-			, Rect(17 * this->tileWidth, 4 * this->tileHeight, this->tileWidth, this->tileHeight)));
+	this->pTank = Sprite::createWithSpriteFrame(SpriteFrame::createWithTexture(this->pTextures
+					, Rect(17 * this->tileWidth, 4 * this->tileHeight, this->tileWidth, this->tileHeight)));
 	this->pTank->setPosition(Vec2(100, 100));
 	this->addChild(this->pTank);
 
@@ -72,6 +71,7 @@ bool BattleScene::init()
 
 void BattleScene::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event) {
 	log("Key with keycode %d pressed", keyCode);
+	pPlayerTank->onKeyPressed(keyCode, event);
 	/*if (this->nX_delta != 0 || this->nY_delta != 0) {
 		if (this->pTankHeroMove->getTarget() != nullptr) {
 			this->pTankHero->getActionManager()->resumeTarget(this->pTankHero);
@@ -84,20 +84,22 @@ void BattleScene::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event) {
 
 void BattleScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event) {
 	log("Key with keycode %d released", keyCode);	
-	if (keyCode == EventKeyboard::KeyCode::KEY_SPACE) {
+	pPlayerTank->onKeyReleased(keyCode, event);
+	/*if (keyCode == EventKeyboard::KeyCode::KEY_SPACE) {
 		Vec2 curPos = this->pTank->getPosition();
 		float minX = -1 * curPos.x;
 		float maxX = 640 - curPos.x;
 		float minY = -1 * curPos.y;
 		float maxY = 480 - curPos.y;
 		this->pTank->runAction(MoveBy::create(2.0f, Vec2(random<float>(minX, maxX), random<float>(minY, maxY))));
-	}
+	}*/
 	/*if (this->nX_delta == 0 && this->nY_delta == 0) {
 		this->pPlayerTank->getActionManager()->pauseTarget(this->pPlayerTank);
 	}*/
 }
 
 void BattleScene::update(float dt) {
+	pPlayerTank->update(dt);
 	/*if (this->nX_delta != 0 || this->nY_delta != 0) {
 		Point p = this->pPlayerTank->getPosition();
 		Size size = Director::getInstance()->getWinSize();
