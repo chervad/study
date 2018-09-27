@@ -142,7 +142,7 @@ void PlayerTank::update(float dt)
 			getActionManager()->resumeTarget(this);
 		}
 		else {
-			runAction(RepeatForever::create(pMoveAnimate));
+			auto a = runAction(RepeatForever::create(pMoveAnimate));
 		}
 	}
 	if (nX_delta == 0 && nY_delta == 0) {

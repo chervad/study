@@ -47,7 +47,7 @@ bool BattleScene::init()
 	menu->alignItemsHorizontallyWithPadding(10);
 	addChild(menu);*/
 
-	Size size = Director::getInstance()->getWinSize();
+	Size sceneSize = Director::getInstance()->getWinSize();
 
 	this->pTextures = Director::getInstance()->getTextureCache()->addImage("res/sprites/tiles.png");
 	Rect rect = Rect::ZERO;
@@ -56,7 +56,7 @@ bool BattleScene::init()
 	this->tileHeight = rect.size.height / 12;
 
 	this->pPlayerTank = PlayerTank::create();
-	this->pPlayerTank->setPosition(Vec2(size.width / 2, size.height / 2));
+	this->pPlayerTank->setPosition(Vec2(sceneSize.width / 2, sceneSize.height / 2));
 	this->addChild(this->pPlayerTank);
 
 	this->pTank = Sprite::createWithSpriteFrame(SpriteFrame::createWithTexture(this->pTextures
@@ -102,10 +102,10 @@ void BattleScene::update(float dt) {
 	pPlayerTank->update(dt);
 	/*if (this->nX_delta != 0 || this->nY_delta != 0) {
 		Point p = this->pPlayerTank->getPosition();
-		Size size = Director::getInstance()->getWinSize();
+		Size sceneSize = Director::getInstance()->getWinSize();
 
-		if (p.x + this->nX_delta > DELTA && p.x + this->nX_delta < size.width - DELTA &&
-			p.y + this->nY_delta > DELTA && p.y + this->nY_delta < size.height - DELTA)
+		if (p.x + this->nX_delta > DELTA && p.x + this->nX_delta < sceneSize.width - DELTA &&
+			p.y + this->nY_delta > DELTA && p.y + this->nY_delta < sceneSize.height - DELTA)
 		{
 			this->pPlayerTank->setPosition(Vec2(p.x + this->nX_delta, p.y + this->nY_delta));
 		}
