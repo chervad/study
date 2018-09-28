@@ -69,12 +69,6 @@ void PlayerTank::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event) {
 	}
 }
 
-/*void PlayerTank::stopMove() {
-	nX_delta = 0;
-	nY_delta = 0;
-	eDirection = MoveDirection::UP;
-}*/
-
 /*void PlayerTank::runMoveAnimate() {
 	if (!pCurrentMoveAction) {
 		stopAction(pCurrentMoveAction);
@@ -119,12 +113,6 @@ void PlayerTank::moveTo(MoveDirection direct, int delta) {
 		break;
 	}
 }
-
-/*void PlayerTank::moveTo(int deltaX, int deltaY)
-{
-	this->stopAllActions();
-	this->runAction(RepeatForever::create(pMoveAnimate));
-}*/
 
 void PlayerTank::update(float dt)
 {

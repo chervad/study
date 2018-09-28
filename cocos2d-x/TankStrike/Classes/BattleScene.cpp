@@ -49,19 +49,12 @@ bool BattleScene::init()
 
 	Size sceneSize = Director::getInstance()->getWinSize();
 
-	this->pTextures = Director::getInstance()->getTextureCache()->addImage("res/sprites/tiles.png");
-	Rect rect = Rect::ZERO;
-	rect.size = this->pTextures->getContentSize();
-	this->tileWidth = rect.size.width / 22;
-	this->tileHeight = rect.size.height / 12;
-
 	this->pPlayerTank = PlayerTank::create();
-	this->pPlayerTank->setPosition(Vec2(sceneSize.width / 2, sceneSize.height / 2));
+	this->pPlayerTank->setPosition(EnemyTank::convertArea2Pos(EnemyTank::convertPos2Area(Vec2(sceneSize.width / 2, sceneSize.height / 2))));
 	this->addChild(this->pPlayerTank);
 
-	this->pTank = Sprite::createWithSpriteFrame(SpriteFrame::createWithTexture(this->pTextures
-					, Rect(17 * this->tileWidth, 4 * this->tileHeight, this->tileWidth, this->tileHeight)));
-	this->pTank->setPosition(Vec2(100, 100));
+	this->pTank = EnemyTank::create();
+	this->pTank->setPosition(EnemyTank::convertArea2Pos(10, 10));
 	this->addChild(this->pTank);
 
 	this->scheduleUpdate();
@@ -100,6 +93,7 @@ void BattleScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event) {
 
 void BattleScene::update(float dt) {
 	pPlayerTank->update(dt);
+	pTank->update(dt);
 	/*if (this->nX_delta != 0 || this->nY_delta != 0) {
 		Point p = this->pPlayerTank->getPosition();
 		Size sceneSize = Director::getInstance()->getWinSize();

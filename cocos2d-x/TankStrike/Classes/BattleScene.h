@@ -4,6 +4,7 @@
 #include "cocos2d.h"
 
 #include "PlayerTank.h"
+#include "EnemyTank.h"
 
 using namespace cocos2d;
 
@@ -30,7 +31,7 @@ private:
 
 	PlayerTank *pPlayerTank;
 
-	Sprite *pTank;
+	EnemyTank *pTank;
 
 	float dt;
 	float tileWidth;
