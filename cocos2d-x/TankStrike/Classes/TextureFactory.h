@@ -15,6 +15,9 @@ public:
 
 	static TextureFactory &getInstance();
 
+	SpriteFrame *getSprite(ObjType objType);
+	Animate *getAnimate(ObjType objType);
+
 	SpriteFrame *getPlayerTankSprite();
 	Animate *getPlayerTankAnimate();
 

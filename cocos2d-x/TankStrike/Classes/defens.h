@@ -5,3 +5,7 @@
 
 #define DELTA 1
 
+enum class ObjType {
+	PLAYER,
+	ENEMY
+};

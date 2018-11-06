@@ -62,6 +62,23 @@ TextureFactory::TextureFactory()
 	pEnemyTankAnimate->retain();
 }
 
+SpriteFrame *TextureFactory::getSprite(ObjType objType) {
+	if (objType == ObjType::ENEMY) {
+		return pEnemyTank;
+	} else if (objType == ObjType::PLAYER) {
+		return pPlayerTank;
+	}
+}
+
+Animate *TextureFactory::getAnimate(ObjType objType) {
+	if (objType == ObjType::ENEMY) {
+		return pEnemyTankAnimate;
+	}
+	else if (objType == ObjType::PLAYER) {
+		return pPlayerTankAnimate;
+	}
+}
+
 SpriteFrame *TextureFactory::getPlayerTankSprite() {
 	return pPlayerTank;
 }
