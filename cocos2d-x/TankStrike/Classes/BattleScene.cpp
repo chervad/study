@@ -8,12 +8,14 @@ using namespace cocos2d;
 //https://github.com/war1oc/cocos2d-x-player/tree/master/Classes
 
 BattleScene::BattleScene()
-	: pTextures(nullptr)
-	, pPlayerTank(nullptr)
-	, pTank(nullptr)
+	: pPlayerTank(nullptr)
+	, pEnemyTank(nullptr)
 {}
 
-BattleScene::~BattleScene() {}
+BattleScene::~BattleScene() {
+	CC_SAFE_DELETE(this->pPlayerTank);
+	CC_SAFE_DELETE(this->pEnemyTank);
+}
 
 Scene* BattleScene::createScene()
 {
@@ -53,9 +55,11 @@ bool BattleScene::init()
 	this->pPlayerTank->setPosition(EnemyTank::convertArea2Pos(EnemyTank::convertPos2Area(Vec2(sceneSize.width / 2, sceneSize.height / 2))));
 	this->addChild(this->pPlayerTank);
 
-	this->pTank = EnemyTank::create();
-	this->pTank->setPosition(EnemyTank::convertArea2Pos(10, 10));
-	this->addChild(this->pTank);
+	this->pEnemyTank = EnemyTank::create();
+	this->pEnemyTank->setPosition(EnemyTank::convertArea2Pos(10, 10));
+	this->addChild(this->pEnemyTank);
+
+	this->pWall = Wall::create();
 
 	this->scheduleUpdate();
 
@@ -79,12 +83,12 @@ void BattleScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event) {
 	log("Key with keycode %d released", keyCode);	
 	pPlayerTank->onKeyReleased(keyCode, event);
 	/*if (keyCode == EventKeyboard::KeyCode::KEY_SPACE) {
-		Vec2 curPos = this->pTank->getPosition();
+		Vec2 curPos = this->pEnemyTank->getPosition();
 		float minX = -1 * curPos.x;
 		float maxX = 640 - curPos.x;
 		float minY = -1 * curPos.y;
 		float maxY = 480 - curPos.y;
-		this->pTank->runAction(MoveBy::create(2.0f, Vec2(random<float>(minX, maxX), random<float>(minY, maxY))));
+		this->pEnemyTank->runAction(MoveBy::create(2.0f, Vec2(random<float>(minX, maxX), random<float>(minY, maxY))));
 	}*/
 	/*if (this->nX_delta == 0 && this->nY_delta == 0) {
 		this->pPlayerTank->getActionManager()->pauseTarget(this->pPlayerTank);
@@ -93,7 +97,7 @@ void BattleScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event) {
 
 void BattleScene::update(float dt) {
 	pPlayerTank->update(dt);
-	pTank->update(dt);
+	pEnemyTank->update(dt);
 	/*if (this->nX_delta != 0 || this->nY_delta != 0) {
 		Point p = this->pPlayerTank->getPosition();
 		Size sceneSize = Director::getInstance()->getWinSize();

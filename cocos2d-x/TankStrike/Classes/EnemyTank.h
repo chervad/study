@@ -18,13 +18,12 @@ public:
 	//void stopMove();
 	void moveToArea(MoveDirection direct, int deltaArea);
 	//void moveTo(int deltaX, int deltaY);
-
+	virtual ~EnemyTank();
 private:
 	//MoveDirection eDirection;
 	uint16_t targetAreaX;
 	uint16_t targetAreaY;
 
-	~EnemyTank();
 	void initTank();
 
 	//void runMoveAnimate();

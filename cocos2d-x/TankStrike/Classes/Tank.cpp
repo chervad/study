@@ -2,7 +2,6 @@
 
 #include "TextureFactory.h"
 
-
 Tank::~Tank()
 {
 	CC_SAFE_RELEASE(pMoveAnimate);

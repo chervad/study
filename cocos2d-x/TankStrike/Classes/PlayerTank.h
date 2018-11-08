@@ -16,11 +16,10 @@ public:
 
 	//void stopMove();
 	//void moveTo(int deltaX, int deltaY);
-
+	virtual ~PlayerTank();
 private:
 	//MoveDirection eDirection;
 
-	~PlayerTank();
 	void initTank();
 
 	//void runMoveAnimate();

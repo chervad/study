@@ -20,11 +20,11 @@ public:
 
 	void moveTo(MoveDirection direct);
 	void moveTo(MoveDirection direct, int delta);
+
+	virtual ~Tank();
 protected:
 	int nX_delta;
 	int nY_delta;
 
 	Animate *pMoveAnimate;
-
-	~Tank();
 };
