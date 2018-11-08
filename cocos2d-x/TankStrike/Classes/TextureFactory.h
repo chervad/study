@@ -34,13 +34,15 @@ private:
 	const char *tiles_res = "res/sprites/tiles.png";
 	static const uint16_t playerTankTile = 14;
 	static const uint16_t playerTankAnimateTile = 14;
-	static const uint16_t enemyTankTile = (17 + 4 * 22);
-	static const uint16_t enemyTankAnimateTile = (15 + 9 * 22);
+	static const uint16_t enemyTankTile = 17 + 4 * 22;
+	static const uint16_t enemyTankAnimateTile = 15 + 9 * 22;
+	static const uint16_t wallTile = 10 + 1 * 22;
 
 	Texture2D *pTextures;
 
 	SpriteFrame *pPlayerTank;
 	SpriteFrame *pEnemyTank;
+	SpriteFrame *pWall;
 
 	Animate *pPlayerTankAnimate;
 	Animate *pEnemyTankAnimate;

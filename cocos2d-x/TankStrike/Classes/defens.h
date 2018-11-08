@@ -7,5 +7,6 @@
 
 enum class ObjType {
 	PLAYER,
-	ENEMY
+	ENEMY,
+	WALL
 };

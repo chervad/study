@@ -12,6 +12,10 @@ class Wall : public GameObject {
 	friend class GameObject;
 public:
 	~Wall() {}
+
+	virtual ObjType getObjectType() {
+		return ObjType::WALL;
+	}
 protected:
 	void initObject();
 };

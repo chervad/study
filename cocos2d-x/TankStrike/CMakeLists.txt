@@ -63,6 +63,7 @@ list(APPEND GAME_SOURCE
      Classes/Tank.cpp  
      Classes/TextureFactory.cpp  
      Classes/Wall.cpp
+     Classes/Maze.cpp	
      )
 list(APPEND GAME_HEADER
      Classes/AppDelegate.h
@@ -75,6 +76,7 @@ list(APPEND GAME_HEADER
      Classes/Tank.h  
      Classes/TextureFactory.h  
      Classes/Wall.h  
+     Classes/Maze.h
      Classes/defens.h
      )
 

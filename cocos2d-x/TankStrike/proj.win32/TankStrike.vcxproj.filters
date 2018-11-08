@@ -39,7 +39,7 @@
     <ClCompile Include="..\Classes\GameObject.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\ObjectFactory.cpp">
+    <ClCompile Include="..\Classes\Maze.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -74,7 +74,7 @@
     <ClInclude Include="..\Classes\GameObject.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\ObjectFactory.h">
+    <ClInclude Include="..\Classes\Maze.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

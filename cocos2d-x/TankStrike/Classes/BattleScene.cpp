@@ -12,11 +12,13 @@ using namespace cocos2d;
 BattleScene::BattleScene()
 	: pPlayerTank(nullptr)
 	, pEnemyTank(nullptr)
+	, pMaze(nullptr)
 {}
 
 BattleScene::~BattleScene() {
 	CC_SAFE_DELETE(this->pPlayerTank);
 	CC_SAFE_DELETE(this->pEnemyTank);
+	CC_SAFE_DELETE(this->pMaze);
 }
 
 Scene* BattleScene::createScene()
@@ -54,14 +56,16 @@ bool BattleScene::init()
 	Size sceneSize = Director::getInstance()->getWinSize();
 
 	this->pPlayerTank = PlayerTank::create();
-	this->pPlayerTank->setPosition(EnemyTank::convertArea2Pos(EnemyTank::convertPos2Area(Vec2(sceneSize.width / 2, sceneSize.height / 2))));
+	this->pPlayerTank->setPosition(Vec2(sceneSize.width / 2, sceneSize.height / 2));
 	this->addChild(this->pPlayerTank);
 
 	this->pEnemyTank = EnemyTank::create();
 	this->pEnemyTank->setPosition(EnemyTank::convertArea2Pos(10, 10));
 	this->addChild(this->pEnemyTank);
 
-	this->pWall = GameObject::create<Wall>();
+	std::tuple<uint16_t, uint16_t> max_pos = EnemyTank::convertPos2Area(Vec2(sceneSize.width, sceneSize.height));
+
+	this->pMaze = Maze::create(std::get<0>(max_pos) - 1, std::get<1>(max_pos), this);
 
 	this->scheduleUpdate();
 

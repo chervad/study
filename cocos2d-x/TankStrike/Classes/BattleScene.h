@@ -4,7 +4,7 @@
 
 #include "PlayerTank.h"
 #include "EnemyTank.h"
-#include "Wall.h"
+#include "Maze.h"
 
 using namespace cocos2d;
 
@@ -28,7 +28,7 @@ public:
 private:
 	PlayerTank *pPlayerTank;
 	EnemyTank *pEnemyTank;
-	Wall *pWall;
+	Maze *pMaze;
 
 	float dt;
 	float tileWidth;

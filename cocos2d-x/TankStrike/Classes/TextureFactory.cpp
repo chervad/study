@@ -19,6 +19,7 @@ TextureFactory::TextureFactory()
 	: pTextures(Director::getInstance()->getTextureCache()->addImage(tiles_res))
 	, pPlayerTank(nullptr)
 	, pEnemyTank(nullptr)
+	, pWall(nullptr)
 	, pPlayerTankAnimate(nullptr)
 	, pEnemyTankAnimate(nullptr)
 {
@@ -36,6 +37,10 @@ TextureFactory::TextureFactory()
 	auto eat = diff2tiletype(enemyTankAnimateTile);
 	pEnemyTank = SpriteFrame::createWithTexture(this->pTextures, TILERECT(et, TextureFactory::tileWidth, TextureFactory::tileHeight));
 	pEnemyTank->retain();
+
+	auto wt = diff2tiletype(wallTile);
+	pWall = SpriteFrame::createWithTexture(this->pTextures, TILERECT(wt, TextureFactory::tileWidth, TextureFactory::tileHeight));
+	pWall->retain();
 
 	auto playerTankAnimation = Animation::create();
 	for (int i = 0; i < 8; i++) {
@@ -67,7 +72,10 @@ SpriteFrame *TextureFactory::getSprite(ObjType objType) {
 		return pEnemyTank;
 	} else if (objType == ObjType::PLAYER) {
 		return pPlayerTank;
+	} else if (objType == ObjType::WALL) {
+		return pWall;
 	}
+	return nullptr;
 }
 
 Animate *TextureFactory::getAnimate(ObjType objType) {
@@ -77,6 +85,7 @@ Animate *TextureFactory::getAnimate(ObjType objType) {
 	else if (objType == ObjType::PLAYER) {
 		return pPlayerTankAnimate;
 	}
+	return nullptr;
 }
 
 SpriteFrame *TextureFactory::getPlayerTankSprite() {
