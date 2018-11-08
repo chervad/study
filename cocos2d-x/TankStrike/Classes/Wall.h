@@ -4,12 +4,14 @@
 
 #include "defens.h"
 
+#include "GameObject.h"
+
 using namespace cocos2d;
 
-class Wall : public Sprite {
+class Wall : public GameObject {
+	friend class GameObject;
 public:
-	static Wall *create();
-	~Wall();
+	~Wall() {}
 protected:
 	void initObject();
 };

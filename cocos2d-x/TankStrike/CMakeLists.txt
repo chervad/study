@@ -25,7 +25,7 @@
 
 cmake_minimum_required(VERSION 3.1)
 
-set(APP_NAME TemplateCpp)
+set(APP_NAME TankStrike)
 
 project(${APP_NAME})
 
@@ -55,11 +55,27 @@ include_directories(
 # add cross-platforms source files and header files 
 list(APPEND GAME_SOURCE
      Classes/AppDelegate.cpp
-     Classes/HelloWorldScene.cpp
+     Classes/BattleScene.cpp  
+     Classes/EnemyTank.cpp  
+     Classes/GameObject.cpp  
+     Classes/ObjectFactory.cpp  
+     Classes/PlayerTank.cpp  
+     Classes/Tank.cpp  
+     Classes/TextureFactory.cpp  
+     Classes/Wall.cpp
      )
 list(APPEND GAME_HEADER
      Classes/AppDelegate.h
-     Classes/HelloWorldScene.h
+     Classes/AppDelegate.h  
+     Classes/BattleScene.h  
+     Classes/EnemyTank.h  
+     Classes/GameObject.h  
+     Classes/ObjectFactory.h  
+     Classes/PlayerTank.h  
+     Classes/Tank.h  
+     Classes/TextureFactory.h  
+     Classes/Wall.h  
+     Classes/defens.h
      )
 
 if(ANDROID)

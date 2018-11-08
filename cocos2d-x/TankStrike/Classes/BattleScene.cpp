@@ -3,6 +3,8 @@
 
 #include "defens.h"
 
+#include "Wall.h"
+
 using namespace cocos2d;
 
 //https://github.com/war1oc/cocos2d-x-player/tree/master/Classes
@@ -59,7 +61,7 @@ bool BattleScene::init()
 	this->pEnemyTank->setPosition(EnemyTank::convertArea2Pos(10, 10));
 	this->addChild(this->pEnemyTank);
 
-	this->pWall = Wall::create();
+	this->pWall = GameObject::create<Wall>();
 
 	this->scheduleUpdate();
 
