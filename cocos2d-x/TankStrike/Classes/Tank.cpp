@@ -1,6 +1,9 @@
 #include "Tank.h"
+#include "Maze.h"
 
 #include "TextureFactory.h"
+
+using namespace cocos2d;
 
 Tank::~Tank()
 {
@@ -12,7 +15,7 @@ void Tank::moveTo(MoveDirection direct) {
 }
 
 void Tank::moveTo(MoveDirection direct, int delta) {
-	//eDirection = direct;
+	eDirection = direct;
 	if (direct == MoveDirection::LEFT || direct == MoveDirection::RIGHT) {
 		nY_delta = 0;
 	}
@@ -48,7 +51,10 @@ void Tank::update(float dt)
 		if (p.x + nX_delta > DELTA && p.x + nX_delta < size.width - DELTA &&
 			p.y + nY_delta > DELTA && p.y + nY_delta < size.height - DELTA)
 		{
-			setPosition(Vec2(p.x + nX_delta, p.y + nY_delta));
+			Vec2 newPos = Vec2(p.x + nX_delta, p.y + nY_delta);
+			if (Maze::moveTankThisPosition(p, eDirection)) {
+				setPosition(newPos);
+			}
 		}
 		//runMoveAnimate();
 		if (pMoveAnimate->getTarget() != nullptr) {

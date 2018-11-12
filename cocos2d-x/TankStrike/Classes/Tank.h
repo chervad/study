@@ -26,5 +26,7 @@ protected:
 	int nX_delta;
 	int nY_delta;
 
+	MoveDirection eDirection;
+
 	Animate *pMoveAnimate;
 };

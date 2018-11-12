@@ -54,6 +54,9 @@ bool BattleScene::init()
 	addChild(menu);*/
 
 	Size sceneSize = Director::getInstance()->getWinSize();
+	std::tuple<uint16_t, uint16_t> max_pos = EnemyTank::convertPos2Area(Vec2(sceneSize.width, sceneSize.height));
+
+	this->pMaze = Maze::create(std::get<0>(max_pos), std::get<1>(max_pos) + 1, this);
 
 	this->pPlayerTank = PlayerTank::create();
 	this->pPlayerTank->setPosition(Vec2(sceneSize.width / 2, sceneSize.height / 2));
@@ -63,9 +66,6 @@ bool BattleScene::init()
 	this->pEnemyTank->setPosition(EnemyTank::convertArea2Pos(10, 10));
 	this->addChild(this->pEnemyTank);
 
-	std::tuple<uint16_t, uint16_t> max_pos = EnemyTank::convertPos2Area(Vec2(sceneSize.width, sceneSize.height));
-
-	this->pMaze = Maze::create(std::get<0>(max_pos) - 1, std::get<1>(max_pos), this);
 
 	this->scheduleUpdate();
 
