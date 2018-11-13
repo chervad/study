@@ -27,6 +27,7 @@ TextureFactory::TextureFactory()
 	rect.size = pTextures->getContentSize();
 	tileWidth = rect.size.width / 22;
 	tileHeight = rect.size.height / 12;
+	log("Tile size: %.2f x %.2f", tileWidth, tileHeight);
 
 	auto pt = diff2tiletype(playerTankTile);
 	auto pat = diff2tiletype(playerTankAnimateTile);

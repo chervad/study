@@ -1,5 +1,5 @@
 ﻿#include "AppDelegate.h"
-#include "BattleScene.h"
+#include "BattleLayer.h"
 
 #include "defens.h"
 
@@ -87,7 +87,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     register_all_packages();
     // create a scene. it's an autorelease object
-    auto scene = BattleScene::createScene();
+    auto scene = BattleLayer::createScene();
     // run
     director->runWithScene(scene);
 

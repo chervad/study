@@ -52,7 +52,8 @@ void Tank::update(float dt)
 			p.y + nY_delta > DELTA && p.y + nY_delta < size.height - DELTA)
 		{
 			Vec2 newPos = Vec2(p.x + nX_delta, p.y + nY_delta);
-			if (Maze::moveTankThisPosition(p, eDirection)) {
+			//if (Maze::moveTankThisPosition(p, eDirection)) {
+			if (this->getBoundingBox().intersectsRect()) {
 				setPosition(newPos);
 			}
 		}

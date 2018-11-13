@@ -69,6 +69,7 @@ bool Maze::moveTankThisPosition(Vec2 vpos, Tank::MoveDirection direct) {
 	std::tuple<uint16_t, uint16_t> pos = EnemyTank::convertPos2Area(vpos);
 	uint16_t x = std::get<0>(pos);
 	uint16_t y = std::get<1>(pos);
+	log("Current to position: %.2f x %.2f -> %d x %d. Block: %c", vpos.x, vpos.y, x, y);
 	switch (direct) {
 	case Tank::MoveDirection::LEFT:
 		x += -1;
@@ -85,7 +86,7 @@ bool Maze::moveTankThisPosition(Vec2 vpos, Tank::MoveDirection direct) {
 	}
 	if (x >= 0 && x <= 26 && y >= 0 && y < 19) {
 		char block = mazePlan[19 - y - 1][x];
-		log("Move to position: %.2f x %.2f -> %d x %d. Block: %c", vpos.x, vpos.y, x, y, block);
+		log("Move to position: %d x %d. Block: %c", x, y, block);
 		return block == ' ' ? true : false;
 	}
 	return false;
