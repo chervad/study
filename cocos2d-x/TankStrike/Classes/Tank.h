@@ -29,4 +29,6 @@ protected:
 	MoveDirection eDirection;
 
 	Animate *pMoveAnimate;
+
+	void initPhysics();
 };

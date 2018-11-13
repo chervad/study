@@ -16,9 +16,9 @@ BattleLayer::BattleLayer()
 {}
 
 BattleLayer::~BattleLayer() {
-	CC_SAFE_DELETE(this->pPlayerTank);
+	/*CC_SAFE_DELETE(this->pPlayerTank);
 	CC_SAFE_DELETE(this->pEnemyTank);
-	CC_SAFE_DELETE(this->pMaze);
+	CC_SAFE_DELETE(this->pMaze);*/
 }
 
 Scene* BattleLayer::createScene()
@@ -26,6 +26,11 @@ Scene* BattleLayer::createScene()
 	auto scene = Scene::createWithPhysics();
 	auto layer = BattleLayer::create(); //тут вызывается конструктор сцены и сразу же метод init сцены
 	scene->addChild(layer);
+
+	PhysicsWorld* world = scene->getPhysicsWorld();
+	world->setGravity(Vec2(.0f, .0f));
+	//world->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+
     return scene;
 }
 
@@ -42,7 +47,23 @@ bool BattleLayer::init()
 	listener->onKeyPressed = CC_CALLBACK_2(BattleLayer::onKeyPressed, this);
 	listener->onKeyReleased = CC_CALLBACK_2(BattleLayer::onKeyReleased, this);
 
-	this->_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+	/*auto contactListener = EventListenerPhysicsContact::create();
+	contactListener->onContactBegin = [](PhysicsContact &contact) {
+		PhysicsShape *shapeA = contact.getShapeA();
+		PhysicsBody *bodyA = shapeA->getBody();
+
+		PhysicsShape *shapeB = contact.getShapeB();
+		PhysicsBody *bodyB = shapeB->getBody();
+
+		if (!(bodyA->getContactTestBitmask() & bodyB->getContactTestBitmask())) {
+			log("Contact begin %2x, %2x!", bodyA->getContactTestBitmask(), bodyB->getContactTestBitmask());
+			return true;
+		}
+		return false;
+	};*/
+
+	this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
+	//this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(contactListener, this);
 
 	/*auto startlabel = LabelTTF::create("[$200]", "Courier New.ttf", 51);
 	const ccMenuCallback& callback = [](Object *obj) {
@@ -73,7 +94,7 @@ bool BattleLayer::init()
 }
 
 void BattleLayer::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event) {
-	log("Key with keycode %d pressed", keyCode);
+	//log("Key with keycode %d pressed", keyCode);
 	pPlayerTank->onKeyPressed(keyCode, event);
 	/*if (this->nX_delta != 0 || this->nY_delta != 0) {
 		if (this->pTankHeroMove->getTarget() != nullptr) {
@@ -86,7 +107,7 @@ void BattleLayer::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event) {
 }
 
 void BattleLayer::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event) {
-	log("Key with keycode %d released", keyCode);	
+	//log("Key with keycode %d released", keyCode);	
 	pPlayerTank->onKeyReleased(keyCode, event);
 	/*if (keyCode == EventKeyboard::KeyCode::KEY_SPACE) {
 		Vec2 curPos = this->pEnemyTank->getPosition();
@@ -104,6 +125,7 @@ void BattleLayer::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event) {
 void BattleLayer::update(float dt) {
 	pPlayerTank->update(dt);
 	pEnemyTank->update(dt);
+	this->getBoundingBox();
 	/*if (this->nX_delta != 0 || this->nY_delta != 0) {
 		Point p = this->pPlayerTank->getPosition();
 		Size sceneSize = Director::getInstance()->getWinSize();

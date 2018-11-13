@@ -65,31 +65,57 @@ Maze *Maze::create(uint16_t width, uint16_t height, Node *pParentNode) {
 	return NULL;
 }
 
-bool Maze::moveTankThisPosition(Vec2 vpos, Tank::MoveDirection direct) {
-	std::tuple<uint16_t, uint16_t> pos = EnemyTank::convertPos2Area(vpos);
-	uint16_t x = std::get<0>(pos);
-	uint16_t y = std::get<1>(pos);
-	log("Current to position: %.2f x %.2f -> %d x %d. Block: %c", vpos.x, vpos.y, x, y);
-	switch (direct) {
+bool Maze::moveTankThisPosition(Vec2 curPos, Vec2 newPos, Size size, Tank::MoveDirection eDirection) {
+	size.width -= 6;
+	size.height -= 6;
+
+	float width = size.width / 2;
+	float height = size.height / 2;
+
+	Vec2 checkPos_leftTrack = newPos;
+	Vec2 checkPos_rightTrack = newPos;
+
+	switch (eDirection) {
 	case Tank::MoveDirection::LEFT:
-		x += -1;
+		checkPos_leftTrack.x += -1 * width;
+		checkPos_leftTrack.y += -1 * height;
+
+		checkPos_rightTrack.x += -1 * width;
+		checkPos_rightTrack.y += height;
 		break;
 	case Tank::MoveDirection::RIGHT:
-		x += 1;
+		checkPos_leftTrack.x += width;
+		checkPos_leftTrack.y += height;
+
+		checkPos_rightTrack.x += width;
+		checkPos_rightTrack.y += -1 * height;
 		break;
-	case  Tank::MoveDirection::UP:
-		y += 1;
+	case Tank::MoveDirection::UP:
+		checkPos_leftTrack.x += -1 * width;
+		checkPos_leftTrack.y += height;
+
+		checkPos_rightTrack.x += width;
+		checkPos_rightTrack.y += height;
 		break;
-	case  Tank::MoveDirection::DOWN:
-		y += -1;
+	case Tank::MoveDirection::DOWN:
+		checkPos_leftTrack.x += width;
+		checkPos_leftTrack.y += -1 * height;
+
+		checkPos_rightTrack.x += -1 * width;
+		checkPos_rightTrack.y += -1 * height;
 		break;
 	}
-	if (x >= 0 && x <= 26 && y >= 0 && y < 19) {
-		char block = mazePlan[19 - y - 1][x];
-		log("Move to position: %d x %d. Block: %c", x, y, block);
-		return block == ' ' ? true : false;
-	}
-	return false;
+
+	std::tuple<uint16_t, uint16_t> pos_1= EnemyTank::convertPos2Area(checkPos_leftTrack);
+	std::tuple<uint16_t, uint16_t> pos_2 = EnemyTank::convertPos2Area(checkPos_rightTrack);
+
+	uint16_t x1 = std::get<0>(pos_1);
+	uint16_t y1 = std::get<1>(pos_1);
+
+	uint16_t x2 = std::get<0>(pos_2);
+	uint16_t y2 = std::get<1>(pos_2);
+
+	return mazePlan[19 - y1 - 1][x1] == ' ' && mazePlan[19 - y2 - 1][x2] == ' ' ? true : false;
 }
 
 void Maze::build() {

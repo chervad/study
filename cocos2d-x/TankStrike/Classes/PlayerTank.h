@@ -18,8 +18,6 @@ public:
 	//void moveTo(int deltaX, int deltaY);
 	virtual ~PlayerTank();
 private:
-	//MoveDirection eDirection;
-
 	void initTank();
 
 	//void runMoveAnimate();

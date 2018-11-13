@@ -20,7 +20,6 @@ public:
 	//void moveTo(int deltaX, int deltaY);
 	virtual ~EnemyTank();
 private:
-	//MoveDirection eDirection;
 	uint16_t targetAreaX;
 	uint16_t targetAreaY;
 

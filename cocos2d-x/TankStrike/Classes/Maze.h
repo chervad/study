@@ -12,7 +12,7 @@ class Tank;
 class Maze {
 public:
 	static Maze *create(uint16_t width, uint16_t height, Node *pParentNode);
-	static bool moveTankThisPosition(Vec2 vpos, Tank::MoveDirection direct);
+	static bool moveTankThisPosition(Vec2 curPos, Vec2 newPos, Size size, Tank::MoveDirection eDirection);
 	~Maze();
 
 	void build();

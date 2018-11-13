@@ -10,37 +10,43 @@
     <Filter Include="src">
       <UniqueIdentifier>{bb6c862e-70e9-49d9-81b7-3829a6f50471}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Headers">
+      <UniqueIdentifier>{89d1d0f3-ddaa-439f-b55f-6c4ed2731e0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Sources">
+      <UniqueIdentifier>{79425eb3-eeaf-49a3-bcdb-48ef3aa7b309}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>win32</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\EnemyTank.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\TextureFactory.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\PlayerTank.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Tank.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Wall.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\GameObject.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Maze.cpp">
-      <Filter>src</Filter>
+      <Filter>src\Sources</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\BattleLayer.cpp">
-      <Filter>src</Filter>
+      <Filter>src\Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\EnemyTank.cpp">
+      <Filter>src\Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameObject.cpp">
+      <Filter>src\Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Maze.cpp">
+      <Filter>src\Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\PlayerTank.cpp">
+      <Filter>src\Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Tank.cpp">
+      <Filter>src\Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\TextureFactory.cpp">
+      <Filter>src\Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Wall.cpp">
+      <Filter>src\Sources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -48,34 +54,34 @@
       <Filter>win32</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\AppDelegate.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\defens.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\EnemyTank.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\TextureFactory.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\PlayerTank.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Tank.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Wall.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\GameObject.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Maze.h">
-      <Filter>src</Filter>
+      <Filter>src\Headers</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\BattleLayer.h">
-      <Filter>src</Filter>
+      <Filter>src\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\defens.h">
+      <Filter>src\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameObject.h">
+      <Filter>src\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\EnemyTank.h">
+      <Filter>src\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Maze.h">
+      <Filter>src\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\PlayerTank.h">
+      <Filter>src\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Tank.h">
+      <Filter>src\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\TextureFactory.h">
+      <Filter>src\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Wall.h">
+      <Filter>src\Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

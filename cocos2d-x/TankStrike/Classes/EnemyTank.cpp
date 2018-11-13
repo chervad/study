@@ -9,15 +9,17 @@ EnemyTank::~EnemyTank()
 
 EnemyTank *EnemyTank::create()
 {
-	EnemyTank *tank = new EnemyTank();
-	if (tank && tank->initWithSpriteFrame(TextureFactory::getInstance().getEnemyTankSprite()))
+	EnemyTank *enemyTank = new EnemyTank();
+	if (enemyTank && enemyTank->initWithSpriteFrame(TextureFactory::getInstance().getEnemyTankSprite()))
 	{
-		tank->autorelease();
-		tank->initTank();
-		return tank;
+		enemyTank->autorelease();
+		enemyTank->initTank();
+		enemyTank->initPhysics();
+		enemyTank->getPhysicsBody()->setContactTestBitmask(0x0100);
+		return enemyTank;
 	}
 
-	CC_SAFE_DELETE(tank);
+	CC_SAFE_DELETE(enemyTank);
 	return NULL;
 }
 
@@ -26,7 +28,7 @@ void EnemyTank::initTank()
 	pMoveAnimate = TextureFactory::getInstance().getEnemyTankAnimate();
 	nX_delta = 0;
 	nY_delta = 0;
-	//eDirection = MoveDirection::UP;
+	eDirection = MoveDirection::UP;
 }
 
 /*void PlayerTank::runMoveAnimate() {

@@ -10,6 +10,14 @@ Tank::~Tank()
 	CC_SAFE_RELEASE(pMoveAnimate);
 }
 
+
+void Tank::initPhysics() {
+	PhysicsBody *physicsBody = PhysicsBody::createBox(this->getBoundingBox().size);
+	physicsBody->setDynamic(false);
+	physicsBody->setContactTestBitmask(0x0010);
+	this->setPhysicsBody(physicsBody);
+}
+
 void Tank::moveTo(MoveDirection direct) {
 	moveTo(direct, DELTA);
 }
@@ -22,7 +30,7 @@ void Tank::moveTo(MoveDirection direct, int delta) {
 	if (direct == MoveDirection::UP || direct == MoveDirection::DOWN) {
 		nX_delta = 0;
 	}
-	switch (direct) {
+	switch (eDirection) {
 	case MoveDirection::LEFT:
 		setRotation(-90.0f);
 		nX_delta = -1 * delta;
@@ -45,15 +53,14 @@ void Tank::moveTo(MoveDirection direct, int delta) {
 void Tank::update(float dt)
 {
 	if (nX_delta != 0 || nY_delta != 0) {
-		Point p = getPosition();
+		Point curPos = getPosition();
 		Size size = Director::getInstance()->getWinSize();
 
-		if (p.x + nX_delta > DELTA && p.x + nX_delta < size.width - DELTA &&
-			p.y + nY_delta > DELTA && p.y + nY_delta < size.height - DELTA)
+		if (curPos.x + nX_delta > DELTA && curPos.x + nX_delta < size.width - DELTA &&
+			curPos.y + nY_delta > DELTA && curPos.y + nY_delta < size.height - DELTA)
 		{
-			Vec2 newPos = Vec2(p.x + nX_delta, p.y + nY_delta);
-			//if (Maze::moveTankThisPosition(p, eDirection)) {
-			if (this->getBoundingBox().intersectsRect()) {
+			Vec2 newPos = Vec2(curPos.x + nX_delta, curPos.y + nY_delta);
+			if (Maze::moveTankThisPosition(curPos, newPos, this->getBoundingBox().size, eDirection)) {
 				setPosition(newPos);
 			}
 		}

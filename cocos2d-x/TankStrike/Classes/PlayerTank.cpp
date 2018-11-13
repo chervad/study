@@ -14,6 +14,7 @@ PlayerTank *PlayerTank::create()
 	{
 		playerTank->autorelease();
 		playerTank->initTank();
+		playerTank->initPhysics();
 		return playerTank;
 	}
 
@@ -26,7 +27,7 @@ void PlayerTank::initTank()
 	pMoveAnimate = TextureFactory::getInstance().getPlayerTankAnimate();
 	nX_delta = 0;
 	nY_delta = 0;
-	//eDirection = MoveDirection::UP;
+	eDirection = MoveDirection::UP;
 }
 
 void PlayerTank::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event) {
