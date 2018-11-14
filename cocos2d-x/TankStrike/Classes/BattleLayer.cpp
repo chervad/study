@@ -58,7 +58,7 @@ bool BattleLayer::init()
 		int resMask = bodyA->getContactTestBitmask() | bodyB->getContactTestBitmask();
 
 		if (resMask == 0b00000011 || resMask == 0b00000110) {
-			log("Contact begin %2x, %2x == %2x!", bodyA->getContactTestBitmask(), bodyB->getContactTestBitmask(), resMask);
+			//log("Contact begin %2x, %2x == %2x!", bodyA->getContactTestBitmask(), bodyB->getContactTestBitmask(), resMask);
 			Shot *pShot = (Shot *)(bodyA->getContactTestBitmask() == 0b00000010 ? bodyA->getNode() : bodyB->getNode());			
 			listShots.remove(pShot);
 			pShot->Boom();
