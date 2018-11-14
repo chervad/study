@@ -5,6 +5,7 @@
 #include "PlayerTank.h"
 #include "EnemyTank.h"
 #include "Maze.h"
+#include "Shot.h"
 
 using namespace cocos2d;
 
@@ -24,6 +25,8 @@ public:
 
 	virtual void update(float dt);
 
+	void addShot(Shot *pShot);
+
 	CREATE_FUNC(BattleLayer);
 private:
 	PlayerTank *pPlayerTank;
@@ -33,4 +36,6 @@ private:
 	float dt;
 	float tileWidth;
 	float tileHeight;
+
+	std::list<Shot *> listShots;
 };

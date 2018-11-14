@@ -14,8 +14,8 @@ EnemyTank *EnemyTank::create()
 	{
 		enemyTank->autorelease();
 		enemyTank->initTank();
-		enemyTank->initPhysics();
-		enemyTank->getPhysicsBody()->setContactTestBitmask(0x0100);
+		//enemyTank->initPhysics();
+		//enemyTank->getPhysicsBody()->setContactTestBitmask(0x0100);
 		return enemyTank;
 	}
 

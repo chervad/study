@@ -155,10 +155,14 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\BattleLayer.cpp" />
+    <ClCompile Include="..\Classes\Brick.cpp" />
+    <ClCompile Include="..\Classes\Eagle.cpp" />
     <ClCompile Include="..\Classes\EnemyTank.cpp" />
     <ClCompile Include="..\Classes\GameObject.cpp" />
+    <ClCompile Include="..\Classes\Ground.cpp" />
     <ClCompile Include="..\Classes\Maze.cpp" />
     <ClCompile Include="..\Classes\PlayerTank.cpp" />
+    <ClCompile Include="..\Classes\Shot.cpp" />
     <ClCompile Include="..\Classes\Tank.cpp" />
     <ClCompile Include="..\Classes\TextureFactory.cpp" />
     <ClCompile Include="..\Classes\Wall.cpp" />
@@ -167,11 +171,15 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="..\Classes\BattleLayer.h" />
+    <ClInclude Include="..\Classes\Brick.h" />
     <ClInclude Include="..\Classes\defens.h" />
+    <ClInclude Include="..\Classes\Eagle.h" />
     <ClInclude Include="..\Classes\EnemyTank.h" />
     <ClInclude Include="..\Classes\GameObject.h" />
+    <ClInclude Include="..\Classes\Ground.h" />
     <ClInclude Include="..\Classes\Maze.h" />
     <ClInclude Include="..\Classes\PlayerTank.h" />
+    <ClInclude Include="..\Classes\Shot.h" />
     <ClInclude Include="..\Classes\Tank.h" />
     <ClInclude Include="..\Classes\TextureFactory.h" />
     <ClInclude Include="..\Classes\Wall.h" />

@@ -29,7 +29,7 @@ Scene* BattleLayer::createScene()
 
 	PhysicsWorld* world = scene->getPhysicsWorld();
 	world->setGravity(Vec2(.0f, .0f));
-	//world->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+	world->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
 
     return scene;
 }
@@ -47,7 +47,7 @@ bool BattleLayer::init()
 	listener->onKeyPressed = CC_CALLBACK_2(BattleLayer::onKeyPressed, this);
 	listener->onKeyReleased = CC_CALLBACK_2(BattleLayer::onKeyReleased, this);
 
-	/*auto contactListener = EventListenerPhysicsContact::create();
+	auto contactListener = EventListenerPhysicsContact::create();
 	contactListener->onContactBegin = [](PhysicsContact &contact) {
 		PhysicsShape *shapeA = contact.getShapeA();
 		PhysicsBody *bodyA = shapeA->getBody();
@@ -60,7 +60,7 @@ bool BattleLayer::init()
 			return true;
 		}
 		return false;
-	};*/
+	};
 
 	this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
 	//this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(contactListener, this);
@@ -122,10 +122,17 @@ void BattleLayer::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event) {
 	}*/
 }
 
+void BattleLayer::addShot(Shot *pShot) { 
+	addChild(pShot); 
+	listShots.push_back(pShot); 
+}
+
 void BattleLayer::update(float dt) {
 	pPlayerTank->update(dt);
 	pEnemyTank->update(dt);
-	this->getBoundingBox();
+	for (auto pShot : listShots) {
+		pShot->update(dt);
+	}
 	/*if (this->nX_delta != 0 || this->nY_delta != 0) {
 		Point p = this->pPlayerTank->getPosition();
 		Size sceneSize = Director::getInstance()->getWinSize();

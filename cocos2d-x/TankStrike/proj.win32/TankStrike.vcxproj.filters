@@ -48,6 +48,18 @@
     <ClCompile Include="..\Classes\Wall.cpp">
       <Filter>src\Sources</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Ground.cpp">
+      <Filter>src\Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Brick.cpp">
+      <Filter>src\Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Eagle.cpp">
+      <Filter>src\Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Shot.cpp">
+      <Filter>src\Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -81,6 +93,18 @@
       <Filter>src\Headers</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Wall.h">
+      <Filter>src\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Ground.h">
+      <Filter>src\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Brick.h">
+      <Filter>src\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Eagle.h">
+      <Filter>src\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Shot.h">
       <Filter>src\Headers</Filter>
     </ClInclude>
   </ItemGroup>

@@ -8,13 +8,6 @@ using namespace cocos2d;
 
 class Tank : public Sprite {
 public:
-	enum class MoveDirection {
-		LEFT,
-		RIGHT,
-		UP,
-		DOWN
-	};
-public:
 
 	void update(float dt);
 

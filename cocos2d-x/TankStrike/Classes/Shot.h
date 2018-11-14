@@ -8,14 +8,20 @@
 
 using namespace cocos2d;
 
-class Wall : public GameObject {
+class Shot : public GameObject {
 	friend class GameObject;
 public:
-	~Wall() {}
+	~Shot() {}
+
+	static Shot *create(MoveDirection direction, const Vec2 &position);
 
 	virtual ObjType getObjectType() {
-		return ObjType::WALL;
+		return ObjType::SHOT;
 	}
+
+	void update(float dt);
 protected:
+	MoveDirection eDirection;
+
 	void initPhysics();
 };

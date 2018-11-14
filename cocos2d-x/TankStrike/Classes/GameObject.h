@@ -29,5 +29,5 @@ public:
 
 	virtual ObjType getObjectType() = 0;
 protected:
-	virtual void initObject() =0;
+	virtual void initObject() {};
 };

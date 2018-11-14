@@ -1,6 +1,8 @@
+#include "BattleLayer.h"
 #include "PlayerTank.h"
-
 #include "TextureFactory.h"
+#include "Shot.h"
+#include "EnemyTank.h"
 
 PlayerTank::~PlayerTank()
 {
@@ -14,7 +16,7 @@ PlayerTank *PlayerTank::create()
 	{
 		playerTank->autorelease();
 		playerTank->initTank();
-		playerTank->initPhysics();
+		//playerTank->initPhysics();
 		return playerTank;
 	}
 
@@ -45,7 +47,9 @@ void PlayerTank::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event) {
 		moveTo(MoveDirection::DOWN); 
 		break;
 	case EventKeyboard::KeyCode::KEY_SPACE:
-		log("Piu-Piu!");
+		Shot *pShot = Shot::create(eDirection, this->getPosition());
+		BattleLayer *parent = (BattleLayer *)(this->getParent());
+		parent->addShot(pShot);
 		break;
 	}
 }

@@ -53,14 +53,14 @@ void Tank::moveTo(MoveDirection direct, int delta) {
 void Tank::update(float dt)
 {
 	if (nX_delta != 0 || nY_delta != 0) {
-		Point curPos = getPosition();
+		Point curPos = this->getPosition();
 		Size size = Director::getInstance()->getWinSize();
 
 		if (curPos.x + nX_delta > DELTA && curPos.x + nX_delta < size.width - DELTA &&
 			curPos.y + nY_delta > DELTA && curPos.y + nY_delta < size.height - DELTA)
 		{
 			Vec2 newPos = Vec2(curPos.x + nX_delta, curPos.y + nY_delta);
-			if (Maze::moveTankThisPosition(curPos, newPos, this->getBoundingBox().size, eDirection)) {
+			if (Maze::moveTankThisPosition(curPos, newPos, this->getBoundingBox().size, this->eDirection)) {
 				setPosition(newPos);
 			}
 		}

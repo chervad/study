@@ -8,14 +8,14 @@
 
 using namespace cocos2d;
 
-class Wall : public GameObject {
+class Ground : public GameObject {
 	friend class GameObject;
 public:
-	~Wall() {}
+	~Ground() {}
 
 	virtual ObjType getObjectType() {
-		return ObjType::WALL;
+		return ObjType::GROUND;
 	}
 protected:
-	void initPhysics();
+	void initObject();
 };
