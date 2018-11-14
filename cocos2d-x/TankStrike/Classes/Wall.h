@@ -17,5 +17,6 @@ public:
 		return ObjType::WALL;
 	}
 protected:
+	void initObject();
 	void initPhysics();
 };

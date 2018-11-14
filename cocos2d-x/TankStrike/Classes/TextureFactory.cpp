@@ -27,6 +27,7 @@ TextureFactory::TextureFactory()
 
 	, pPlayerTankAnimate(nullptr)
 	, pEnemyTankAnimate(nullptr)
+	, pShotAnimate(nullptr)
 {
 	Rect rect = Rect::ZERO;
 	rect.size = pTextures->getContentSize();
@@ -59,7 +60,9 @@ TextureFactory::TextureFactory()
 	pEagle = SpriteFrame::createWithTexture(this->pTextures, TILERECT(diff2tiletype(eagleTile), TextureFactory::tileWidth, TextureFactory::tileHeight));
 	pEagle->retain();
 
-	pShot = SpriteFrame::createWithTexture(this->pTextures, TILERECT(diff2tiletype(shotTile), TextureFactory::tileWidth, TextureFactory::tileHeight));
+	auto st = diff2tiletype(shotTile);
+	auto sat = diff2tiletype(shotAnimateTile);
+	pShot = SpriteFrame::createWithTexture(this->pTextures, TILERECT(st, TextureFactory::tileWidth, TextureFactory::tileHeight));
 	pShot->retain();
 
 	auto playerTankAnimation = Animation::create();
@@ -85,6 +88,18 @@ TextureFactory::TextureFactory()
 	enemyTankAnimation->setLoops(-1);
 	pEnemyTankAnimate = Animate::create(enemyTankAnimation);
 	pEnemyTankAnimate->retain();
+
+	auto shotAnimation = Animation::create();
+	for (int i = 0; i < 3; i++) {
+		Rect rect = Rect((TX(sat) + i) * this->tileWidth, TY(sat) * this->tileHeight, this->tileWidth, this->tileHeight);
+		SpriteFrame *frame = SpriteFrame::createWithTexture(this->pTextures, rect);
+		shotAnimation->addSpriteFrame(frame);
+	}
+	shotAnimation->setDelayPerUnit(0.1f);
+	shotAnimation->setRestoreOriginalFrame(true);
+	shotAnimation->setLoops(1);
+	pShotAnimate = Animate::create(shotAnimation);
+	pShotAnimate->retain();
 }
 
 SpriteFrame *TextureFactory::getSprite(ObjType objType) {
@@ -109,9 +124,10 @@ SpriteFrame *TextureFactory::getSprite(ObjType objType) {
 Animate *TextureFactory::getAnimate(ObjType objType) {
 	if (objType == ObjType::ENEMY) {
 		return pEnemyTankAnimate;
-	}
-	else if (objType == ObjType::PLAYER) {
+	} else if (objType == ObjType::PLAYER) {
 		return pPlayerTankAnimate;
+	} else if (objType == ObjType::SHOT) {
+		return pShotAnimate->clone();
 	}
 	return nullptr;
 }

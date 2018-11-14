@@ -41,6 +41,7 @@ private:
 	static const uint16_t brickTile = 4 + 1 * 22;
 	static const uint16_t eagleTile = 0 + 2 * 22;
 	static const uint16_t shotTile = 7 + 0 * 22;
+	static const uint16_t shotAnimateTile = 0;
 
 	Texture2D *pTextures;
 
@@ -54,6 +55,7 @@ private:
 
 	Animate *pPlayerTankAnimate;
 	Animate *pEnemyTankAnimate;
+	Animate *pShotAnimate;
 
 	float tileWidth;
 	float tileHeight;

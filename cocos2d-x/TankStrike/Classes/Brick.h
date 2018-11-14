@@ -18,4 +18,5 @@ public:
 	}
 protected:
 	void initObject();
+	void initPhysics();
 };

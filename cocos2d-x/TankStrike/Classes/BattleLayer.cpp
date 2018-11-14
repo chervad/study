@@ -28,8 +28,8 @@ Scene* BattleLayer::createScene()
 	scene->addChild(layer);
 
 	PhysicsWorld* world = scene->getPhysicsWorld();
-	world->setGravity(Vec2(.0f, .0f));
-	world->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+	world->setGravity(Vec2(.0f, .0f));  
+	//world->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
 
     return scene;
 }
@@ -48,22 +48,27 @@ bool BattleLayer::init()
 	listener->onKeyReleased = CC_CALLBACK_2(BattleLayer::onKeyReleased, this);
 
 	auto contactListener = EventListenerPhysicsContact::create();
-	contactListener->onContactBegin = [](PhysicsContact &contact) {
+	contactListener->onContactBegin = [this](PhysicsContact &contact) {
 		PhysicsShape *shapeA = contact.getShapeA();
 		PhysicsBody *bodyA = shapeA->getBody();
 
 		PhysicsShape *shapeB = contact.getShapeB();
 		PhysicsBody *bodyB = shapeB->getBody();
 
-		if (!(bodyA->getContactTestBitmask() & bodyB->getContactTestBitmask())) {
-			log("Contact begin %2x, %2x!", bodyA->getContactTestBitmask(), bodyB->getContactTestBitmask());
+		int resMask = bodyA->getContactTestBitmask() | bodyB->getContactTestBitmask();
+
+		if (resMask == 0b00000011 || resMask == 0b00000110) {
+			log("Contact begin %2x, %2x == %2x!", bodyA->getContactTestBitmask(), bodyB->getContactTestBitmask(), resMask);
+			Shot *pShot = (Shot *)(bodyA->getContactTestBitmask() == 0b00000010 ? bodyA->getNode() : bodyB->getNode());			
+			listShots.remove(pShot);
+			pShot->Boom();
 			return true;
 		}
 		return false;
 	};
 
 	this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
-	//this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(contactListener, this);
+	this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(contactListener, this);
 
 	/*auto startlabel = LabelTTF::create("[$200]", "Courier New.ttf", 51);
 	const ccMenuCallback& callback = [](Object *obj) {
@@ -80,13 +85,12 @@ bool BattleLayer::init()
 	this->pMaze = Maze::create(std::get<0>(max_pos), std::get<1>(max_pos) + 1, this);
 
 	this->pPlayerTank = PlayerTank::create();
-	this->pPlayerTank->setPosition(Vec2(sceneSize.width / 2, sceneSize.height / 2));
+	this->pPlayerTank->setPosition(Vec2(sceneSize.width / 2, (sceneSize.height / 2) + 2));
 	this->addChild(this->pPlayerTank);
 
 	this->pEnemyTank = EnemyTank::create();
 	this->pEnemyTank->setPosition(EnemyTank::convertArea2Pos(10, 10));
 	this->addChild(this->pEnemyTank);
-
 
 	this->scheduleUpdate();
 

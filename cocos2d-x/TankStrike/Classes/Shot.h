@@ -11,7 +11,7 @@ using namespace cocos2d;
 class Shot : public GameObject {
 	friend class GameObject;
 public:
-	~Shot() {}
+	virtual ~Shot();
 
 	static Shot *create(MoveDirection direction, const Vec2 &position);
 
@@ -20,8 +20,12 @@ public:
 	}
 
 	void update(float dt);
+	void Boom();
 protected:
+	bool isBoom;
 	MoveDirection eDirection;
+	Animate *pBoomAnimate;
 
+	void initObject();
 	void initPhysics();
 };

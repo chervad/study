@@ -14,7 +14,7 @@ Tank::~Tank()
 void Tank::initPhysics() {
 	PhysicsBody *physicsBody = PhysicsBody::createBox(this->getBoundingBox().size);
 	physicsBody->setDynamic(false);
-	physicsBody->setContactTestBitmask(0x0010);
+	//physicsBody->setContactTestBitmask(0b00000000);
 	this->setPhysicsBody(physicsBody);
 }
 
