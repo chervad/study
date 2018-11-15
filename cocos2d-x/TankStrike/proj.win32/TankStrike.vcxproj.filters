@@ -30,9 +30,6 @@
     <ClCompile Include="..\Classes\EnemyTank.cpp">
       <Filter>src\Sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\GameObject.cpp">
-      <Filter>src\Sources</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Maze.cpp">
       <Filter>src\Sources</Filter>
     </ClCompile>

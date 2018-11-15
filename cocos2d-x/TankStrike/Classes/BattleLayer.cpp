@@ -4,6 +4,7 @@
 #include "defens.h"
 
 #include "Wall.h"
+#include "Brick.h"
 
 using namespace cocos2d;
 
@@ -13,6 +14,7 @@ BattleLayer::BattleLayer()
 	: pPlayerTank(nullptr)
 	, pEnemyTank(nullptr)
 	, pMaze(nullptr)
+	, br(nullptr)
 {}
 
 BattleLayer::~BattleLayer() {
@@ -57,11 +59,18 @@ bool BattleLayer::init()
 
 		int resMask = bodyA->getContactTestBitmask() | bodyB->getContactTestBitmask();
 
-		if (resMask == 0b00000011 || resMask == 0b00000110) {
-			//log("Contact begin %2x, %2x == %2x!", bodyA->getContactTestBitmask(), bodyB->getContactTestBitmask(), resMask);
-			Shot *pShot = (Shot *)(bodyA->getContactTestBitmask() == 0b00000010 ? bodyA->getNode() : bodyB->getNode());			
+		if (resMask == (ObjType::SHOT | ObjType::WALL) 
+			|| resMask == (ObjType::SHOT | ObjType::BRICK)) 
+		{
+			Shot *pShot = (Shot *)(bodyA->getContactTestBitmask() == ObjType::SHOT ? bodyA->getNode() : bodyB->getNode());
 			listShots.remove(pShot);
 			pShot->Boom();
+
+			if (resMask & ObjType::BRICK) {
+				Brick *pBrick = (Brick *)(bodyA->getContactTestBitmask() == ObjType::BRICK ? bodyA->getNode() : bodyB->getNode());
+				pBrick->Blast(); 
+			}
+
 			return true;
 		}
 		return false;
@@ -136,6 +145,9 @@ void BattleLayer::update(float dt) {
 	pEnemyTank->update(dt);
 	for (auto pShot : listShots) {
 		pShot->update(dt);
+	}
+	if (br != nullptr) {
+		br->update(dt);
 	}
 	/*if (this->nX_delta != 0 || this->nY_delta != 0) {
 		Point p = this->pPlayerTank->getPosition();

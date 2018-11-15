@@ -7,6 +7,6 @@ void Wall::initObject() {
 void Wall::initPhysics() {
 	PhysicsBody *physicsBody = PhysicsBody::createBox(this->getBoundingBox().size);
 	physicsBody->setDynamic(false);
-	physicsBody->setContactTestBitmask(0b00000001);
+	physicsBody->setContactTestBitmask(ObjType::WALL);
 	this->setPhysicsBody(physicsBody);
 }

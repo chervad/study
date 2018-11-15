@@ -158,7 +158,6 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Brick.cpp" />
     <ClCompile Include="..\Classes\Eagle.cpp" />
     <ClCompile Include="..\Classes\EnemyTank.cpp" />
-    <ClCompile Include="..\Classes\GameObject.cpp" />
     <ClCompile Include="..\Classes\Ground.cpp" />
     <ClCompile Include="..\Classes\Maze.cpp" />
     <ClCompile Include="..\Classes\PlayerTank.cpp" />

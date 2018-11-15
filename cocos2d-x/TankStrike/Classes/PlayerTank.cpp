@@ -26,7 +26,8 @@ PlayerTank *PlayerTank::create()
 
 void PlayerTank::initTank()
 {
-	pMoveAnimate = TextureFactory::getInstance().getPlayerTankAnimate();
+	//pMoveAnimate = TextureFactory::getInstance().getPlayerTankAnimate();
+	pMoveAnimate = TextureFactory::getInstance().getAnimate(ObjType::PLAYER);
 	nX_delta = 0;
 	nY_delta = 0;
 	eDirection = MoveDirection::UP;

@@ -8,8 +8,6 @@
 
 using namespace cocos2d;
 
-class Wall;
-
 class GameObject : public Sprite {
 public:
 	template <class T> static T *create() {
@@ -29,5 +27,5 @@ public:
 
 	virtual ObjType getObjectType() = 0;
 protected:
-	virtual void initObject() {};
+	virtual void initObject() = 0;
 };

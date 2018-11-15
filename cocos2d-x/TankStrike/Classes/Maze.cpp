@@ -109,7 +109,7 @@ void Maze::build() {
 					//this->listWall.push_back(pWall);
 					this->pParentNode->addChild(pWall);
 				} else if (block == 'b') {
-					Brick *pBrick = GameObject::create<Brick>();
+					Brick *pBrick = Brick::create(4, x, y);
 					pBrick->setPosition(EnemyTank::convertArea2Pos(x, y));
 					this->pParentNode->addChild(pBrick);
 				} else if (block == 'E') {

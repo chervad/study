@@ -9,19 +9,22 @@ Shot::~Shot()
 Shot *Shot::create(MoveDirection direction, const Vec2 &position)
 {
 	Shot *pShot = GameObject::create<Shot>();
-	pShot->retain();
+	//pShot->retain();
 
 	pShot->eDirection = direction;
 	pShot->setPosition(position);
-	pShot->initObject();
-	pShot->initPhysics();
-	pShot->isBoom = false;
+
+	//pShot->initObject();
 	return pShot;
 }
 
 void Shot::initObject() {
-	pBoomAnimate = TextureFactory::getInstance().getAnimate(getObjectType());
+	isBoom = false;
+
+	pBoomAnimate = TextureFactory::getInstance().getAnimate(getObjectType())->clone();
 	pBoomAnimate->retain();
+
+	initPhysics();
 }
 
 void Shot::initPhysics() {
@@ -30,7 +33,7 @@ void Shot::initPhysics() {
 	size.height /= 3;
 	PhysicsBody *physicsBody = PhysicsBody::createBox(size);
 	physicsBody->setDynamic(false);
-	physicsBody->setContactTestBitmask(0b00000010);
+	physicsBody->setContactTestBitmask(ObjType::SHOT);
 	this->setPhysicsBody(physicsBody);
 }
 

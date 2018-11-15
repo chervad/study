@@ -5,14 +5,14 @@
 
 #define DELTA 1
 
-enum class ObjType : uint16_t {
-	PLAYER,
-	ENEMY,
-	WALL,
-	BRICK,
+enum ObjType {
 	GROUND,
-	EAGLE,
-	SHOT
+	PLAYER = 0b00000001,
+	ENEMY  = 0b00000010,
+	WALL   = 0b00000100,
+	BRICK  = 0b00001000,
+	EAGLE  = 0b00100000,
+	SHOT   = 0b01000000
 };
 
 enum class MoveDirection {

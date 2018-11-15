@@ -6,6 +6,7 @@
 #include "EnemyTank.h"
 #include "Maze.h"
 #include "Shot.h"
+#include "Brick.h"
 
 using namespace cocos2d;
 
@@ -27,6 +28,10 @@ public:
 
 	void addShot(Shot *pShot);
 
+	void set(Brick *br) {
+		this->br = br;
+	}
+
 	CREATE_FUNC(BattleLayer);
 private:
 	PlayerTank *pPlayerTank;
@@ -36,6 +41,7 @@ private:
 	float dt;
 	float tileWidth;
 	float tileHeight;
+	Brick *br;
 
 	std::list<Shot *> listShots;
 };

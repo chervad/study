@@ -21,7 +21,6 @@ TextureFactory::TextureFactory()
 	, pEnemyTank(nullptr)
 	, pWall(nullptr)
 	, pGround(nullptr)
-	, pBrick(nullptr)
 	, pEagle(nullptr)
 	, pShot(nullptr)
 
@@ -53,9 +52,11 @@ TextureFactory::TextureFactory()
 	pGround = SpriteFrame::createWithTexture(this->pTextures, TILERECT(gt, TextureFactory::tileWidth, TextureFactory::tileHeight));
 	pGround->retain();
 
-	auto bt = diff2tiletype(brickTile);
-	pBrick = SpriteFrame::createWithTexture(this->pTextures, TILERECT(bt, TextureFactory::tileWidth, TextureFactory::tileHeight));
-	pBrick->retain();
+	for (int a = 0; a < 4; a++) {
+		auto bt = diff2tiletype(brickTiles[a]);
+		pBricks[a] = SpriteFrame::createWithTexture(this->pTextures, TILERECT(bt, TextureFactory::tileWidth, TextureFactory::tileHeight));
+		pBricks[a]->retain();
+	}
 
 	pEagle = SpriteFrame::createWithTexture(this->pTextures, TILERECT(diff2tiletype(eagleTile), TextureFactory::tileWidth, TextureFactory::tileHeight));
 	pEagle->retain();
@@ -112,7 +113,7 @@ SpriteFrame *TextureFactory::getSprite(ObjType objType) {
 	} else if (objType == ObjType::GROUND) {
 		return pGround;
 	} else if (objType == ObjType::BRICK) {
-		return pBrick;
+		return pBricks[0];
 	} else if (objType == ObjType::EAGLE) {
 		return pEagle;
 	} else if (objType == ObjType::SHOT) {
@@ -123,11 +124,11 @@ SpriteFrame *TextureFactory::getSprite(ObjType objType) {
 
 Animate *TextureFactory::getAnimate(ObjType objType) {
 	if (objType == ObjType::ENEMY) {
-		return pEnemyTankAnimate;
+		return pEnemyTankAnimate/*->clone()*/;
 	} else if (objType == ObjType::PLAYER) {
 		return pPlayerTankAnimate;
 	} else if (objType == ObjType::SHOT) {
-		return pShotAnimate->clone();
+		return pShotAnimate/*->clone()*/;
 	}
 	return nullptr;
 }
@@ -140,13 +141,13 @@ SpriteFrame *TextureFactory::getEnemyTankSprite() {
 	return pEnemyTank;
 }
 
-Animate *TextureFactory::getPlayerTankAnimate() {
+/*Animate *TextureFactory::getPlayerTankAnimate() {
 	return pPlayerTankAnimate;
 }
 
 Animate *TextureFactory::getEnemyTankAnimate() {
 	return pEnemyTankAnimate;
-}
+}*/
 
 float TextureFactory::getTileWidth() const {
 	return tileWidth;
@@ -154,4 +155,8 @@ float TextureFactory::getTileWidth() const {
 
 float TextureFactory::getTileHeight() const {
 	return tileHeight;
+}
+
+const std::array<SpriteFrame*, 4>& TextureFactory::getBricks() const {
+	return pBricks;
 }

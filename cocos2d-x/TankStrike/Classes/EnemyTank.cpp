@@ -15,7 +15,7 @@ EnemyTank *EnemyTank::create()
 		enemyTank->autorelease();
 		enemyTank->initTank();
 		//enemyTank->initPhysics();
-		//enemyTank->getPhysicsBody()->setContactTestBitmask(0b00000000);
+		//enemyTank->getPhysicsBody()->setContactTestBitmask(ObjType::ENEMY);
 		return enemyTank;
 	}
 
@@ -25,7 +25,8 @@ EnemyTank *EnemyTank::create()
 
 void EnemyTank::initTank()
 {
-	pMoveAnimate = TextureFactory::getInstance().getEnemyTankAnimate();
+	//pMoveAnimate = TextureFactory::getInstance().getEnemyTankAnimate();
+	TextureFactory::getInstance().getAnimate(ObjType::ENEMY);
 	nX_delta = 0;
 	nY_delta = 0;
 	eDirection = MoveDirection::UP;
