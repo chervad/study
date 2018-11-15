@@ -13,9 +13,6 @@ class Brick : public GameObject {
 public:
 	~Brick() {};
 
-	static Brick *create() = delete;
-	static Brick *create(uint8_t lifes, uint16_t x, uint16_t y);
-
 	virtual ObjType getObjectType() {
 		return ObjType::BRICK;
 	}
@@ -25,7 +22,5 @@ protected:
 	void initObject();
 	void initPhysics();
 
-	uint16_t x;
-	uint16_t y;
 	uint8_t lifes;
 };

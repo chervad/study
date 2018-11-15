@@ -1,25 +1,9 @@
 #include "Brick.h"
 
-#include "BattleLayer.h"
-
-Brick *Brick::create(uint8_t lifes, uint16_t x, uint16_t y)
-{
-	Brick *pBrick = new Brick();
-	if (pBrick && pBrick->initWithSpriteFrame(TextureFactory::getInstance().getBricks()[4 - lifes]))
-	{
-		pBrick->autorelease();
-		pBrick->initObject();
-		pBrick->lifes = lifes;
-		pBrick->x = x;
-		pBrick->y = y;
-		return pBrick;
-	}
-
-	CC_SAFE_DELETE(pBrick);
-	return NULL;
-}
+#include "Maze.h"
 
 void Brick::initObject() {
+	this->lifes = 4;
 	this->initPhysics();
 }
 
@@ -32,20 +16,15 @@ void Brick::initPhysics() {
 }
 
 void Brick::Blast() {
-	if (this->lifes > 0) {
+ 	if (this->lifes > 0) {
 		this->lifes--;
 		if (lifes > 0) {
-			Brick *pBrick = Brick::create(this->lifes, this->x, this->y);
-			Vec2 pos = this->getPosition();
-			pBrick->setPosition(EnemyTank::convertArea2Pos(this->x, this->y));
-			BattleLayer *parent = (BattleLayer *)(this->getParent());
-			parent->addChild(pBrick);
-			parent->set(pBrick);
+			setSpriteFrame(TextureFactory::getInstance().getBricks()[4 - lifes]);
 		}
 		else {
-			log("Bricks destroyed!");
+			Maze::setMazePlan(this->getPosition(), ' ');
+			this->removeFromParent();
+			this->release();
 		}
-		this->removeFromParent();
-		this->release();
 	}
 }

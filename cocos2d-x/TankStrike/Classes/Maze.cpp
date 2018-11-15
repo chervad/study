@@ -8,7 +8,7 @@
 
 #define AUTOGENERATE false
 
-const char mazePlan[19][26] = {
+static char mazePlan[19][26] = {
 	  "xxxxxxxxxxxxxxxxxxxxxxxxx"
 	, "x                       x"
 	, "xb  bbbb  bbbb  bbbb  bbx"
@@ -109,7 +109,7 @@ void Maze::build() {
 					//this->listWall.push_back(pWall);
 					this->pParentNode->addChild(pWall);
 				} else if (block == 'b') {
-					Brick *pBrick = Brick::create(4, x, y);
+					Brick *pBrick = GameObject::create<Brick>();
 					pBrick->setPosition(EnemyTank::convertArea2Pos(x, y));
 					this->pParentNode->addChild(pBrick);
 				} else if (block == 'E') {
@@ -122,7 +122,7 @@ void Maze::build() {
 	}
 }
 
-bool Maze::moveTankThisPosition(Vec2 curPos, Vec2 newPos, Size size, MoveDirection eDirection) {
+bool Maze::moveTankThisPosition(Vec2 newPos, Size size, MoveDirection eDirection) {
 	size.width -= 6;
 	size.height -= 6;
 
@@ -173,4 +173,14 @@ bool Maze::moveTankThisPosition(Vec2 curPos, Vec2 newPos, Size size, MoveDirecti
 	uint16_t y2 = std::get<1>(pos_2);
 
 	return mazePlan[19 - y1 - 1][x1] == ' ' && mazePlan[19 - y2 - 1][x2] == ' ' ? true : false;
+}
+
+void Maze::setMazePlan(Vec2 pos, char block) {
+   	std::tuple<uint16_t, uint16_t> post = EnemyTank::convertPos2Area(pos);
+	uint16_t x = std::get<0>(post);
+	uint16_t y = std::get<1>(post);
+	y = 19 - y - 1;
+	char old = mazePlan[y][x];
+	mazePlan[y][x] = block;
+	log("maze change [%d, %d] %c => %c", x, y, old, mazePlan[y][x]);
 }

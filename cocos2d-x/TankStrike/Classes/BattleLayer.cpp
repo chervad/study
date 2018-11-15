@@ -50,7 +50,7 @@ bool BattleLayer::init()
 	listener->onKeyReleased = CC_CALLBACK_2(BattleLayer::onKeyReleased, this);
 
 	auto contactListener = EventListenerPhysicsContact::create();
-	contactListener->onContactBegin = [this](PhysicsContact &contact) {
+	/*contactListener->onContactBegin = [this](PhysicsContact &contact) {
 		PhysicsShape *shapeA = contact.getShapeA();
 		PhysicsBody *bodyA = shapeA->getBody();
 
@@ -74,7 +74,8 @@ bool BattleLayer::init()
 			return true;
 		}
 		return false;
-	};
+	};*/
+	contactListener->onContactBegin = CC_CALLBACK_1(BattleLayer::onContactBegin, this);
 
 	this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
 	this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(contactListener, this);
@@ -135,9 +136,39 @@ void BattleLayer::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event) {
 	}*/
 }
 
+bool BattleLayer::onContactBegin(PhysicsContact &contact) 
+{
+	PhysicsShape *shapeA = contact.getShapeA();
+	PhysicsBody *bodyA = shapeA->getBody();
+
+	PhysicsShape *shapeB = contact.getShapeB();
+	PhysicsBody *bodyB = shapeB->getBody();
+
+	int resMask = bodyA->getContactTestBitmask() | bodyB->getContactTestBitmask();
+
+	if (resMask == (ObjType::SHOT | ObjType::WALL)
+		|| resMask == (ObjType::SHOT | ObjType::BRICK))
+	{
+		Shot *pShot = (Shot *)(bodyA->getContactTestBitmask() == ObjType::SHOT ? bodyA->getNode() : bodyB->getNode());
+		listShots.remove(pShot);
+		pShot->Boom();
+
+		if (resMask & ObjType::BRICK) {
+			Brick *pBrick = (Brick *)(bodyA->getContactTestBitmask() == ObjType::BRICK ? bodyA->getNode() : bodyB->getNode());
+			pBrick->Blast();
+		}
+		return true;
+	}
+	return false;
+}
+
 void BattleLayer::addShot(Shot *pShot) { 
 	addChild(pShot); 
 	listShots.push_back(pShot); 
+
+	/*Brick *pBrick = Brick::create(2, 5, 5);
+	getParent()->addChild(pBrick);
+	pBrick->setPosition(EnemyTank::convertArea2Pos(5, 5));*/
 }
 
 void BattleLayer::update(float dt) {
@@ -145,9 +176,6 @@ void BattleLayer::update(float dt) {
 	pEnemyTank->update(dt);
 	for (auto pShot : listShots) {
 		pShot->update(dt);
-	}
-	if (br != nullptr) {
-		br->update(dt);
 	}
 	/*if (this->nX_delta != 0 || this->nY_delta != 0) {
 		Point p = this->pPlayerTank->getPosition();

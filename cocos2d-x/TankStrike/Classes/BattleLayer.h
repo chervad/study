@@ -21,8 +21,8 @@ public:
     virtual bool init();
 
 	void onKeyPressed(EventKeyboard::KeyCode keyCode, Event * event);
-
 	void onKeyReleased(EventKeyboard::KeyCode keyCode, Event * event);
+	bool onContactBegin(PhysicsContact &contact);
 
 	virtual void update(float dt);
 
