@@ -11,10 +11,10 @@ using namespace cocos2d;
 class GameObject : public Sprite {
 public:
 	template <class T> static T *create() {
-		T *pObj = new T();
+ 		T *pObj = new T();
 		if (pObj && pObj->initWithSpriteFrame(TextureFactory::getInstance().getSprite(pObj->getObjectType())))
 		{
-			pObj->autorelease();
+			//pObj->autorelease();//почему-то в релизной версии из-за этого метода происходит memmory::bad_alloc
 			pObj->initObject();
 			return pObj;
 		}
