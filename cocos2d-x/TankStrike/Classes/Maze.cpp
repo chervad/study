@@ -1,32 +1,32 @@
-#include <array>
 #include "Maze.h"
 #include "EnemyTank.h"
 #include "Ground.h"
 #include "Brick.h"
 #include "Wall.h"
 #include "Eagle.h"
+#include "BattleLayer.h"
 
 #define AUTOGENERATE false
 
 static char mazePlan[19][26] = {
 	  "xxxxxxxxxxxxxxxxxxxxxxxxx"
-	, "x                       x"
-	, "xb  bbbb  bbbb  bbbb  bbx"
-	, "x                       x"
-	, "xbbbb  bbbb  bbbb  bbbbbx"
-	, "x                       x"
-	, "xb  bbbb  bbbb  bbbb  bbx"
+	, "xT                     Tx"
+	, "xx  xxxx  xxxx  xxxx  xxx"
 	, "x                       x"
 	, "xbbbb  bbbb  bbbb  bbbbbx"
 	, "x                       x"
-	, "xb  bbbb  bbbb  bbbb  bbx"
+	, "xx  xxxx  xxxx  xxxx  xxx"
 	, "x                       x"
 	, "xbbbb  bbbb  bbbb  bbbbbx"
 	, "x                       x"
-	, "xb  bbbb  bbbb  bbbb  bbx"
+	, "xx  xxxx  xxxx  xxxx  xxx"
 	, "x                       x"
-	, "x   b     bbb     b     x"
-	, "x   b     bEb     b     x"
+	, "xbbbb  bbbb  bbbb  bbbbbx"
+	, "x                       x"
+	, "xx  bbbb  xxxx  bbbb  xxx"
+	, "x                       x"
+	, "x   x     bbb     x     x"
+	, "x   x     bEb     x     x"
 	, "xxxxxxxxxxxxxxxxxxxxxxxxx"
 };
 
@@ -116,19 +116,18 @@ void Maze::build() {
 					Eagle *pEagle = GameObject::create<Eagle>();
 					pEagle->setPosition(EnemyTank::convertArea2Pos(x, y));
 					this->pParentNode->addChild(pEagle);
+				} if (block == 'T') {
+					EnemyTank *pEnemyTank = EnemyTank::create();
+					pEnemyTank->setPosition(EnemyTank::convertArea2Pos(x, y));
+					BattleLayer *pBattleLayer = (BattleLayer *)this->pParentNode;
+					pBattleLayer->addEnemyTank(pEnemyTank);
 				}
 			}
 		}
 	}
 }
 
-bool Maze::moveTankThisPosition(Vec2 newPos, Size size, MoveDirection eDirection) {
-	size.width -= 6;
-	size.height -= 6;
-
-	float width = size.width / 2;
-	float height = size.height / 2;
-
+bool Maze::moveTankThisPosition(Vec2 newPos, float width, float height, MoveDirection eDirection) {
 	Vec2 checkPos_leftTrack = newPos;
 	Vec2 checkPos_rightTrack = newPos;
 
@@ -182,5 +181,4 @@ void Maze::setMazePlan(Vec2 pos, char block) {
 	y = 19 - y - 1;
 	char old = mazePlan[y][x];
 	mazePlan[y][x] = block;
-	log("maze change [%d, %d] %c => %c", x, y, old, mazePlan[y][x]);
 }

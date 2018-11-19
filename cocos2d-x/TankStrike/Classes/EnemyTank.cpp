@@ -12,7 +12,7 @@ EnemyTank *EnemyTank::create()
 	EnemyTank *enemyTank = new EnemyTank();
 	if (enemyTank && enemyTank->initWithSpriteFrame(TextureFactory::getInstance().getEnemyTankSprite()))
 	{
-		enemyTank->autorelease();
+		//enemyTank->autorelease();
 		enemyTank->initTank();
 		//enemyTank->initPhysics();
 		//enemyTank->getPhysicsBody()->setContactTestBitmask(ObjType::ENEMY);
@@ -25,8 +25,9 @@ EnemyTank *EnemyTank::create()
 
 void EnemyTank::initTank()
 {
+	Tank::initTank();
 	//pMoveAnimate = TextureFactory::getInstance().getEnemyTankAnimate();
-	TextureFactory::getInstance().getAnimate(ObjType::ENEMY);
+	pMoveAnimate = TextureFactory::getInstance().getAnimate(ObjType::ENEMY);
 	nX_delta = 0;
 	nY_delta = 0;
 	eDirection = MoveDirection::UP;

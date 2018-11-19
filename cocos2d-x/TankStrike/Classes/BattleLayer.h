@@ -27,21 +27,17 @@ public:
 	virtual void update(float dt);
 
 	void addShot(Shot *pShot);
-
-	void set(Brick *br) {
-		this->br = br;
-	}
+	void addEnemyTank(EnemyTank *pEnemyTank);
 
 	CREATE_FUNC(BattleLayer);
 private:
 	PlayerTank *pPlayerTank;
-	EnemyTank *pEnemyTank;
 	Maze *pMaze;
 
 	float dt;
 	float tileWidth;
 	float tileHeight;
-	Brick *br;
 
 	std::list<Shot *> listShots;
+	std::list<EnemyTank *>listEnemyTanks;
 };

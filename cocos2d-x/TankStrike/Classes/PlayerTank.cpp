@@ -14,7 +14,7 @@ PlayerTank *PlayerTank::create()
 	PlayerTank *playerTank = new PlayerTank();
 	if (playerTank && playerTank->initWithSpriteFrame(TextureFactory::getInstance().getPlayerTankSprite()))
 	{
-		playerTank->autorelease();
+		//playerTank->autorelease();
 		playerTank->initTank();
 		//playerTank->initPhysics();
 		return playerTank;
@@ -26,6 +26,7 @@ PlayerTank *PlayerTank::create()
 
 void PlayerTank::initTank()
 {
+	Tank::initTank();
 	//pMoveAnimate = TextureFactory::getInstance().getPlayerTankAnimate();
 	pMoveAnimate = TextureFactory::getInstance().getAnimate(ObjType::PLAYER);
 	nX_delta = 0;
@@ -53,6 +54,14 @@ void PlayerTank::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event) {
 		parent->addShot(pShot);
 		break;
 	}
+	if (nX_delta != 0 || nY_delta != 0) {
+		if (pMoveAnimate->getTarget() != nullptr) {
+			getActionManager()->resumeTarget(this);
+		}
+		else {
+			auto a = runAction(RepeatForever::create(pMoveAnimate));
+		}
+	}
 }
 
 void PlayerTank::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event) {
@@ -72,6 +81,9 @@ void PlayerTank::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event) {
 		{
 			nY_delta = 0;
 		}
+	}
+	if (nX_delta == 0 && nY_delta == 0) {
+		getActionManager()->pauseTarget(this);
 	}
 }
 

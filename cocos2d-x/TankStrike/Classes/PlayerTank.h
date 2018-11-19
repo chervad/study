@@ -17,7 +17,7 @@ public:
 	//void stopMove();
 	//void moveTo(int deltaX, int deltaY);
 	virtual ~PlayerTank();
-private:
+protected:
 	void initTank();
 
 	//void runMoveAnimate();

@@ -18,10 +18,14 @@ public:
 protected:
 	int nX_delta;
 	int nY_delta;
+	Size winSize;
+	int width;
+	int height;
 
 	MoveDirection eDirection;
 
 	Animate *pMoveAnimate;
 
+	void initTank();
 	void initPhysics();
 };
