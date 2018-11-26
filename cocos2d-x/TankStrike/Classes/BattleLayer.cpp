@@ -1,3 +1,6 @@
+#include <thread>
+#include <chrono>
+
 #include "BattleLayer.h"
 #include "SimpleAudioEngine.h"
 
@@ -9,6 +12,11 @@
 using namespace cocos2d;
 
 //https://github.com/war1oc/cocos2d-x-player/tree/master/Classes
+
+void mainGameLoop() {
+	std::this_thread::sleep_for(std::chrono::seconds{ 5 });
+	log("Ta-da!");
+}
 
 BattleLayer::BattleLayer()
 	: pPlayerTank(nullptr)
@@ -69,6 +77,9 @@ bool BattleLayer::init()
 	this->addChild(this->pPlayerTank);
 
 	this->scheduleUpdate();
+
+	std::thread gameCycle(mainGameLoop);
+	gameCycle.detach();
 
     return true;
 }

@@ -31,20 +31,8 @@ void EnemyTank::initTank()
 	nX_delta = 0;
 	nY_delta = 0;
 	eDirection = MoveDirection::UP;
+	this->moveTo(MoveDirection::RIGHT);
 }
-
-/*void PlayerTank::runMoveAnimate() {
-if (!pCurrentMoveAction) {
-stopAction(pCurrentMoveAction);
-}
-pCurrentMoveAction = runAction(RepeatForever::create(pMoveAnimate));
-}*/
-
-/*void PlayerTank::stopMoveAnimate() {
-if (!pCurrentMoveAction) {
-stopAction(pCurrentMoveAction);
-}
-}*/
 
 std::tuple<uint16_t, uint16_t> EnemyTank::convertPos2Area(Vec2 pos) {
 	Size sceneSize = Director::getInstance()->getWinSize();
@@ -65,6 +53,6 @@ Vec2 EnemyTank::convertArea2Pos(std::tuple<uint16_t, uint16_t> area) {
 	return convertArea2Pos(std::get<0>(area), std::get<1>(area));
 }
 
-void EnemyTank::moveToArea(MoveDirection direct, int deltaArea) {
-	
+void EnemyTank::update(float dt) {
+	Tank::update(dt);
 }

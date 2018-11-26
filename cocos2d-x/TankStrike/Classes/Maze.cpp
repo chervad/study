@@ -116,11 +116,12 @@ void Maze::build() {
 					Eagle *pEagle = GameObject::create<Eagle>();
 					pEagle->setPosition(EnemyTank::convertArea2Pos(x, y));
 					this->pParentNode->addChild(pEagle);
-				} if (block == 'T') {
-					EnemyTank *pEnemyTank = EnemyTank::create();
-					pEnemyTank->setPosition(EnemyTank::convertArea2Pos(x, y));
+				} else if (block == 'T') {
+					/*EnemyTank *pEnemyTank = EnemyTank::create();
+					pEnemyTank->setPosition(EnemyTank::convertArea2Pos(x, y));*/
 					BattleLayer *pBattleLayer = (BattleLayer *)this->pParentNode;
-					pBattleLayer->addEnemyTank(pEnemyTank);
+					//pBattleLayer->addEnemyTank(pEnemyTank);
+					pBattleLayer->addEnemyBase(EnemyTank::convertArea2Pos(x, y));
 				}
 			}
 		}
@@ -171,7 +172,9 @@ bool Maze::moveTankThisPosition(Vec2 newPos, float width, float height, MoveDire
 	uint16_t x2 = std::get<0>(pos_2);
 	uint16_t y2 = std::get<1>(pos_2);
 
-	return mazePlan[19 - y1 - 1][x1] == ' ' && mazePlan[19 - y2 - 1][x2] == ' ' ? true : false;
+	return (mazePlan[19 - y1 - 1][x1] == ' ' || mazePlan[19 - y1 - 1][x1] == 'T') 
+		&& (mazePlan[19 - y2 - 1][x2] == ' ' || mazePlan[19 - y2 - 1][x2] == 'T')
+		? true : false;
 }
 
 void Maze::setMazePlan(Vec2 pos, char block) {

@@ -23,6 +23,7 @@ public:
 	void Boom();
 protected:
 	bool isBoom;
+	uint16_t damage = 20.f;
 	MoveDirection eDirection;
 	Animate *pBoomAnimate;
 

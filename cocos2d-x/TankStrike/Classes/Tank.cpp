@@ -56,6 +56,23 @@ void Tank::moveTo(MoveDirection direct, int delta) {
 	}
 }
 
+void Tank::playAnimation() {
+	if (nX_delta != 0 || nY_delta != 0) {
+		if (pMoveAnimate->getTarget() != nullptr) {
+			getActionManager()->resumeTarget(this);
+		}
+		else {
+			auto a = runAction(RepeatForever::create(pMoveAnimate));
+		}
+	}
+}
+
+void Tank::pauseAnimation() {
+	if (nX_delta == 0 && nY_delta == 0) {
+		getActionManager()->pauseTarget(this);
+	}
+}
+
 void Tank::update(float dt)
 {
 	if (nX_delta != 0 || nY_delta != 0) {

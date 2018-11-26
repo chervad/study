@@ -18,9 +18,11 @@ public:
 protected:
 	int nX_delta;
 	int nY_delta;
-	Size winSize;
+	Size winSize;//пока как костыль для убыстрения работы update(), но как-то не красиво сделано
 	int width;
 	int height;
+	float life = 100.f;
+	float damage_koef = .75f;
 
 	MoveDirection eDirection;
 
@@ -28,4 +30,6 @@ protected:
 
 	void initTank();
 	void initPhysics();
+	virtual void playAnimation();
+	virtual void pauseAnimation();
 };

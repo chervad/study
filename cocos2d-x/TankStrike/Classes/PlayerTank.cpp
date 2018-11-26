@@ -32,6 +32,8 @@ void PlayerTank::initTank()
 	nX_delta = 0;
 	nY_delta = 0;
 	eDirection = MoveDirection::UP;
+	life = 250.f;
+	damage_koef = 1.25f;
 }
 
 void PlayerTank::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event) {
@@ -54,14 +56,7 @@ void PlayerTank::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event) {
 		parent->addShot(pShot);
 		break;
 	}
-	if (nX_delta != 0 || nY_delta != 0) {
-		if (pMoveAnimate->getTarget() != nullptr) {
-			getActionManager()->resumeTarget(this);
-		}
-		else {
-			auto a = runAction(RepeatForever::create(pMoveAnimate));
-		}
-	}
+	this->playAnimation();
 }
 
 void PlayerTank::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event) {
@@ -82,9 +77,7 @@ void PlayerTank::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event) {
 			nY_delta = 0;
 		}
 	}
-	if (nX_delta == 0 && nY_delta == 0) {
-		getActionManager()->pauseTarget(this);
-	}
+	this->pauseAnimation();
 }
 
 /*void PlayerTank::runMoveAnimate() {

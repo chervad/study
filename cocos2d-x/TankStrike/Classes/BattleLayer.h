@@ -28,6 +28,7 @@ public:
 
 	void addShot(Shot *pShot);
 	void addEnemyTank(EnemyTank *pEnemyTank);
+	void addEnemyBase(Vec2 position) { enemyBase.push_back(position); };
 
 	CREATE_FUNC(BattleLayer);
 private:
@@ -40,4 +41,5 @@ private:
 
 	std::list<Shot *> listShots;
 	std::list<EnemyTank *>listEnemyTanks;
+	std::list<Vec2> enemyBase;
 };
