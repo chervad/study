@@ -16,6 +16,18 @@
     <Filter Include="src\Sources">
       <UniqueIdentifier>{79425eb3-eeaf-49a3-bcdb-48ef3aa7b309}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Headers\Objectives">
+      <UniqueIdentifier>{e20751ab-c53d-44d0-907b-cabff3f376aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Sources\Objectives">
+      <UniqueIdentifier>{3592999d-9364-4869-a51e-d018bd90e93f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Headers\GameObjects">
+      <UniqueIdentifier>{6bdbdcbe-74c8-4d7b-82e3-1a7eddcdd484}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Sources\GameObjects">
+      <UniqueIdentifier>{4e8f0da4-e929-4526-bad0-5cdb6004d76d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -27,35 +39,44 @@
     <ClCompile Include="..\Classes\BattleLayer.cpp">
       <Filter>src\Sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\EnemyTank.cpp">
-      <Filter>src\Sources</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Maze.cpp">
-      <Filter>src\Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\PlayerTank.cpp">
-      <Filter>src\Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Tank.cpp">
       <Filter>src\Sources</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\TextureFactory.cpp">
       <Filter>src\Sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Wall.cpp">
-      <Filter>src\Sources</Filter>
+    <ClCompile Include="..\Classes\Objectives\IObjective.cpp">
+      <Filter>src\Sources\Objectives</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Ground.cpp">
+    <ClCompile Include="..\Classes\Objectives\Patrol.cpp">
+      <Filter>src\Sources\Objectives</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Utils.cpp">
       <Filter>src\Sources</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Brick.cpp">
-      <Filter>src\Sources</Filter>
+      <Filter>src\Sources\GameObjects</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Eagle.cpp">
-      <Filter>src\Sources</Filter>
+      <Filter>src\Sources\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\EnemyTank.cpp">
+      <Filter>src\Sources\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Ground.cpp">
+      <Filter>src\Sources\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\PlayerTank.cpp">
+      <Filter>src\Sources\GameObjects</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Shot.cpp">
-      <Filter>src\Sources</Filter>
+      <Filter>src\Sources\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Tank.cpp">
+      <Filter>src\Sources\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Wall.cpp">
+      <Filter>src\Sources\GameObjects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -71,37 +92,46 @@
     <ClInclude Include="..\Classes\defens.h">
       <Filter>src\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\GameObject.h">
-      <Filter>src\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\EnemyTank.h">
-      <Filter>src\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Maze.h">
-      <Filter>src\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\PlayerTank.h">
-      <Filter>src\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Tank.h">
-      <Filter>src\Headers</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\TextureFactory.h">
       <Filter>src\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Wall.h">
-      <Filter>src\Headers</Filter>
+    <ClInclude Include="..\Classes\Objectives\IObjective.h">
+      <Filter>src\Headers\Objectives</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Ground.h">
+    <ClInclude Include="..\Classes\Objectives\Patrol.h">
+      <Filter>src\Headers\Objectives</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Utils.h">
       <Filter>src\Headers</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Brick.h">
-      <Filter>src\Headers</Filter>
+      <Filter>src\Headers\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Eagle.h">
-      <Filter>src\Headers</Filter>
+      <Filter>src\Headers\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameObject.h">
+      <Filter>src\Headers\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\EnemyTank.h">
+      <Filter>src\Headers\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Ground.h">
+      <Filter>src\Headers\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\PlayerTank.h">
+      <Filter>src\Headers\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Tank.h">
+      <Filter>src\Headers\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Shot.h">
+      <Filter>src\Headers\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Wall.h">
+      <Filter>src\Headers\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Maze.h">
       <Filter>src\Headers</Filter>
     </ClInclude>
   </ItemGroup>

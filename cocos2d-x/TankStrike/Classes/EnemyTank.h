@@ -4,6 +4,7 @@
 
 #include "defens.h"
 #include "Tank.h"
+#include "Objectives/IObjective.h"
 
 using namespace cocos2d;
 
@@ -18,6 +19,7 @@ public:
 	virtual ~EnemyTank();
 
 	void update(float dt);
+	void setObjective(IObjective *pObjctv);
 private:
 	uint16_t targetAreaX;
 	uint16_t targetAreaY;

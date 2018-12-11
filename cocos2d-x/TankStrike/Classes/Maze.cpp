@@ -117,10 +117,7 @@ void Maze::build() {
 					pEagle->setPosition(EnemyTank::convertArea2Pos(x, y));
 					this->pParentNode->addChild(pEagle);
 				} else if (block == 'T') {
-					/*EnemyTank *pEnemyTank = EnemyTank::create();
-					pEnemyTank->setPosition(EnemyTank::convertArea2Pos(x, y));*/
 					BattleLayer *pBattleLayer = (BattleLayer *)this->pParentNode;
-					//pBattleLayer->addEnemyTank(pEnemyTank);
 					pBattleLayer->addEnemyBase(EnemyTank::convertArea2Pos(x, y));
 				}
 			}

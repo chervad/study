@@ -13,11 +13,6 @@ using namespace cocos2d;
 
 //https://github.com/war1oc/cocos2d-x-player/tree/master/Classes
 
-void mainGameLoop() {
-	std::this_thread::sleep_for(std::chrono::seconds{ 5 });
-	log("Ta-da!");
-}
-
 BattleLayer::BattleLayer()
 	: pPlayerTank(nullptr)
 	, pMaze(nullptr)
@@ -78,8 +73,8 @@ bool BattleLayer::init()
 
 	this->scheduleUpdate();
 
-	std::thread gameCycle(mainGameLoop);
-	gameCycle.detach();
+	std::thread gameCycle(BattleLayer::mainGameLoopProxy, this);
+	//?gameCycle.detach();
 
     return true;
 }
@@ -129,6 +124,10 @@ void BattleLayer::addEnemyTank(EnemyTank *pEnemyTank) {
 	listEnemyTanks.push_back(pEnemyTank);
 }
 
+void BattleLayer::addEnemyBase(Vec2 position) {
+	enemyBase.push_back(position); 
+}
+
 void BattleLayer::update(float dt) {
 	pPlayerTank->update(dt);
 	for (auto pEnemyTank : listEnemyTanks) {
@@ -136,5 +135,19 @@ void BattleLayer::update(float dt) {
 	}
 	for (auto pShot : listShots) {
 		pShot->update(dt);
+	}
+}
+
+void BattleLayer::mainGameLoopProxy(BattleLayer *ptr) {
+	ptr->mainGameLoop();
+}
+
+void BattleLayer::mainGameLoop() {
+	std::this_thread::sleep_for(std::chrono::seconds{ 3 });
+	log("Ta-da!");
+	for (const auto & base_pos : enemyBase) {
+		EnemyTank *pEnemyTank = EnemyTank::create();
+		pEnemyTank->setPosition(base_pos);
+		addEnemyTank(pEnemyTank);
 	}
 }

@@ -2,6 +2,8 @@
 
 #include "TextureFactory.h"
 
+#include "Objectives/Patrol.h"
+
 EnemyTank::~EnemyTank()
 {
 	CC_SAFE_RELEASE(pMoveAnimate);
@@ -31,7 +33,6 @@ void EnemyTank::initTank()
 	nX_delta = 0;
 	nY_delta = 0;
 	eDirection = MoveDirection::UP;
-	this->moveTo(MoveDirection::RIGHT);
 }
 
 std::tuple<uint16_t, uint16_t> EnemyTank::convertPos2Area(Vec2 pos) {
@@ -55,4 +56,8 @@ Vec2 EnemyTank::convertArea2Pos(std::tuple<uint16_t, uint16_t> area) {
 
 void EnemyTank::update(float dt) {
 	Tank::update(dt);
+}
+
+void EnemyTank::setObjective(IObjective *pObjctv) {
+	Patrol patrol(10, 10);
 }
