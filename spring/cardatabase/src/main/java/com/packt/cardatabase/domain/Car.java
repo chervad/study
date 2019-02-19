@@ -18,7 +18,7 @@ public class Car {
     private int year;
     private int price;
 
-    @ManyToOne( fetch = FetchType.LAZY)
+    @ManyToOne( fetch = FetchType.EAGER)
     @JoinColumn( name = "owner" )
     private Owner owner;
 
