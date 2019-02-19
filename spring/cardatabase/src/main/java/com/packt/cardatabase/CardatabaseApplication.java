@@ -24,8 +24,8 @@ public class CardatabaseApplication {
 	private OwnerRepository ownerRepository;
 
 	public static void main(String[] args) {
+		logger.info("Java version: " + System.getProperty("java.version"));
 		SpringApplication.run(CardatabaseApplication.class, args);
-		logger.info("Hello world!");
 	}
 
 	@Bean
