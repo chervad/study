@@ -1,9 +1,6 @@
 package com.packt.cardatabase;
 
-import com.packt.cardatabase.domain.Car;
-import com.packt.cardatabase.domain.CarRepository;
-import com.packt.cardatabase.domain.Owner;
-import com.packt.cardatabase.domain.OwnerRepository;
+import com.packt.cardatabase.domain.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +20,14 @@ public class CardatabaseApplication {
 	@Autowired
 	private OwnerRepository ownerRepository;
 
+	@Autowired
+	private UserRepository userRepository;
+
 	public static void main(String[] args) {
+		String s1 = "str1";
+		String s2 = "str1";
+		System.out.println("Result: " + s1 == s2);
+
 		logger.info("Java version: " + System.getProperty("java.version"));
 		SpringApplication.run(CardatabaseApplication.class, args);
 	}
@@ -40,6 +44,9 @@ public class CardatabaseApplication {
 			carRepository.save(new Car("Ford", "Mustang", "Red", "ADF-1211", 2017, 59000, owner0));
 			carRepository.save(new Car("Nissan", "Leaf", "White", "SSJ-3002", 2014, 29000, owner1));
 			carRepository.save(new Car("Toyota", "Prius", "Silver", "KKO-0212", 2018, 39000, owner1));
+
+			userRepository.save(new User("user", "$2a$04$3BLS.vo78qRv9OuePgwwYewv4yrqzGP5U8KxQntp/Dl4VCaJMkeAK", "USER"));
+			userRepository.save(new User("admin", "$2a$04$yQFwfEe.vVC.wLPMrOqStuI3WbI6S4hZrMwUDvMz8Av4v/wuBgGzC", "ADMIN"));
 		};
 	}
 }
