@@ -24,10 +24,6 @@ public class CardatabaseApplication {
 	private UserRepository userRepository;
 
 	public static void main(String[] args) {
-		String s1 = "str1";
-		String s2 = "str1";
-		System.out.println("Result: " + s1 == s2);
-
 		logger.info("Java version: " + System.getProperty("java.version"));
 		SpringApplication.run(CardatabaseApplication.class, args);
 	}
