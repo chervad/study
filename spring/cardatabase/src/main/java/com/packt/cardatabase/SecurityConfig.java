@@ -35,10 +35,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http)
             throws Exception
     {
-        http.cors().and()
-                .authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/login")
-                .permitAll()
+        http.csrf().disable().cors().and().authorizeRequests()
+                .antMatchers(HttpMethod.POST, "/login").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 //Filter for the api/login requests
@@ -46,7 +44,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                                 , authenticationManager())
                         , UsernamePasswordAuthenticationFilter.class)
                 //Filter for other requests to check JWT in header
-                .addFilterBefore(new AuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(new AuthenticationFilter()
+                            , UsernamePasswordAuthenticationFilter.class);
     }
 
     @Bean

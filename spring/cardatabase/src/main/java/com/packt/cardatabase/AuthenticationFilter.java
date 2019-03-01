@@ -18,7 +18,8 @@ public class AuthenticationFilter extends GenericFilterBean {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain)
             throws IOException, ServletException
     {
-        Authentication authentication = AuthenticationService.getAuthentication((HttpServletRequest)request);
+        Authentication authentication
+                = AuthenticationService.getAuthentication((HttpServletRequest)request);
         SecurityContextHolder.getContext().setAuthentication(authentication);
         filterChain.doFilter(request, response);
     }
