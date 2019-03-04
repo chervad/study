@@ -3,7 +3,6 @@ package com.packt.cardatabase;
 import com.packt.cardatabase.domain.Car;
 import com.packt.cardatabase.domain.CarRepository;
 import com.packt.cardatabase.domain.Owner;
-import com.packt.cardatabase.domain.OwnerRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +21,6 @@ public class CarRepositoryTest {
 
     @Autowired
     private CarRepository repository;
-
-    @Autowired
-    private OwnerRepository ownerRepository;
 
     @Test
     public void saveCar() {
