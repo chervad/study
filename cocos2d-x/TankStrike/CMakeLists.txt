@@ -53,30 +53,37 @@ include_directories(
         ${COCOS2DX_ROOT_PATH}/cocos/audio/include/
 )
 # add cross-platforms source files and header files 
+
 list(APPEND GAME_SOURCE
      Classes/AppDelegate.cpp
-     Classes/BattleScene.cpp  
+     Classes/BattleLayer.cpp  
+     Classes/Brick.cpp
      Classes/EnemyTank.cpp  
-     Classes/GameObject.cpp  
-     Classes/ObjectFactory.cpp  
+     Classes/Eagle.cpp
+     Classes/Ground.cpp
+     Classes/Maze.cpp
      Classes/PlayerTank.cpp  
+     Classes/Shot.cpp
      Classes/Tank.cpp  
      Classes/TextureFactory.cpp  
+     Classes/Utils.cpp
      Classes/Wall.cpp
-     Classes/Maze.cpp	
      )
 list(APPEND GAME_HEADER
      Classes/AppDelegate.h
-     Classes/AppDelegate.h  
-     Classes/BattleScene.h  
+     Classes/BattleLayer.h  
+     Classes/Brick.h
+     Classes/Eagle.h
      Classes/EnemyTank.h  
      Classes/GameObject.h  
-     Classes/ObjectFactory.h  
+     Classes/Ground.h
+     Classes/Maze.h
      Classes/PlayerTank.h  
+     Classes/Shot.h
      Classes/Tank.h  
      Classes/TextureFactory.h  
+     Classes/Utils.h
      Classes/Wall.h  
-     Classes/Maze.h
      Classes/defens.h
      )
 

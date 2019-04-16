@@ -18,3 +18,6 @@
 /cocos2d-x/TankStrike/proj.win32/Release.win32
 /cocos2d-x/TankStrike/cocos2d/cocos/2d/Release.win32
 /spring/cardatabase/bin/*
+/cocos2d-x/TankStrike/bin/*
+/cocos2d-x/TankStrike/linux-build/*
+/cocos2d-x/TankStrike/linux-build-release/*

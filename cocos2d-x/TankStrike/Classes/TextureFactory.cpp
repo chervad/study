@@ -7,7 +7,7 @@
 inline tiletype diff2tiletype(uint16_t d) {
 	uint8_t x = d % TextureFactory::maxXTile;
 	uint8_t y = d / TextureFactory::maxXTile;
-	return {x, y};
+	return std::tuple<uint8_t, uint8_t>(x, y);
 }
 
 TextureFactory &TextureFactory::getInstance() {

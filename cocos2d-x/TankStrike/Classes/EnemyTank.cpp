@@ -2,7 +2,7 @@
 
 #include "TextureFactory.h"
 
-#include "Objectives/Patrol.h"
+//#include "Objectives/Patrol.h"
 
 EnemyTank::~EnemyTank()
 {
@@ -40,7 +40,7 @@ std::tuple<uint16_t, uint16_t> EnemyTank::convertPos2Area(Vec2 pos) {
 	uint16_t x = pos.x / TextureFactory::getInstance().getTileWidth();
 	uint16_t y = pos.y / TextureFactory::getInstance().getTileHeight();
 
-	return { x, y };
+	return std::tuple<uint16_t, uint16_t>(x, y);
 }
 
 Vec2 EnemyTank::convertArea2Pos(uint16_t areaX, uint16_t areaY) {
@@ -59,5 +59,5 @@ void EnemyTank::update(float dt) {
 }
 
 void EnemyTank::setObjective(IObjective *pObjctv) {
-	Patrol patrol(10, 10);
+	//Patrol patrol(10, 10);
 }
