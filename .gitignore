@@ -24,3 +24,5 @@
 /cocos2d-x/TankStrike/.idea/
 /cocos2d-x/TankStrike/cmake-build-debug/
 /cocos2d-x/_build/*
+/cocos2d-x/TankStrike/libs/pathfinder/cmake-build-debug/
+/cocos2d-x/TankStrike/libs/pathfinder/src/main/cmake-build-debug/
