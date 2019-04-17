@@ -21,3 +21,6 @@
 /cocos2d-x/TankStrike/bin/*
 /cocos2d-x/TankStrike/linux-build/*
 /cocos2d-x/TankStrike/linux-build-release/*
+/cocos2d-x/TankStrike/.idea/
+/cocos2d-x/TankStrike/cmake-build-debug/
+/cocos2d-x/_build/*

@@ -6,6 +6,7 @@ set BUILD_TYPE=Debug
 rmdir %BUILD_PATH% /q /s
 mkdir %BUILD_PATH%
 cd %BUILD_PATH%
-cmake -G "Visual Studio 15" %SRC_PATH%
+@rem cmake -G "Visual Studio 15" %SRC_PATH%
+cmake -G "MinGW Makefiles" %SRC_PATH%
 cmake --build . --target TankStrike --config %BUILD_TYPE%
 pause
