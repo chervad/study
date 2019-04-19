@@ -6,6 +6,8 @@
 #include <iostream>
 #include <map>
 
+using namespace pathfinder;
+
 const int mapWidth = 9;
 const int mapHeight = 11;
 const char *mapEtalon[mapHeight] =
@@ -23,42 +25,46 @@ const char *mapEtalon[mapHeight] =
         };
 char mapPath[mapHeight][mapWidth + 1] = {};
 
-/*TEST(TEST_pathfinder, test_pathfinder) {
-    std::pair<int, int> posA, posB;
-    for (int i = 0; i < mapHeight; ++i) {
-        for (int j = 0; j < mapWidth; ++j) {
-            if (map[i][j] == '%') {
-                posB = std::make_pair(i, j);
-            } else if (map[i][j] == '@') {
-                posA = std::make_pair(i, j);
-            }
-        }
-    }
-
-    //finder(posA.first, posA.second, map, mapPath, 1);
-    pathfinder::finderAdvance(posA.first, posA.second, map, mapPath);
-
-    std::cout << std::endl;
-    for (int i = 0; i < mapHeight; ++i) {
-        for (int j = 0; j < mapWidth; ++j) {
-            if ((int) mapPath[i][j] != 0)
-                printf("%2d", (int) mapPath[i][j]);
-            else
-                printf("%2c", map[i][j]);
-        }
-        std::cout << std::endl;
-    }
-}*/
-
-TEST(TEST_pathfinder, tmap) {
-    pathfinder::TMap mazeMap = pathfinder::TMap::create(mapEtalon, mapWidth, mapHeight);
-    mazeMap.print();
+TEST(TEST_pathfinder, TMap_create_and_print) {
+    TMap map = TMap::create(mapEtalon, mapWidth, mapHeight);
+    map.print();
 }
 
-TEST(TEST_pathfinder, _getter) {
-    pathfinder::TMap mazeMap = pathfinder::TMap::create(mapEtalon, mapWidth, mapHeight);
+TEST(TEST_pathfinder, TMap_getter) {
+    TMap map = TMap::create(mapEtalon, mapWidth, mapHeight);
 
-    EXPECT_EQ(mazeMap.getCell(1, 1), '%');
+    EXPECT_EQ(map.getCell(1, 1), '%');
+    EXPECT_EQ(map.getCell(7, 1), '%');
+    EXPECT_EQ(map.getCell(1, 7), '@');
+    EXPECT_EQ(map.getCell(7, 6), '%');
+    EXPECT_EQ(map.getCell(4, 9), '#');
+}
+
+TEST(TEST_pathfinder, TMap_searchFirstCell) {
+    TMap map = TMap::create(mapEtalon, mapWidth, mapHeight);
+    TPoint p = map.searchFirstCell('@');
+
+    EXPECT_EQ(p, TPoint(1, 7));
+}
+
+TEST(TEST_pathfinder, TMap_searchAllCells) {
+    TMap map = TMap::create(mapEtalon, mapWidth, mapHeight);
+    std::list<TPoint> plist = map.searchAllCells('%');
+
+    EXPECT_EQ(plist.size(), 3);
+    uint8_t found = 0b00000000;
+    for (const auto &item : plist) {
+        if (item == TPoint(1, 1)) {
+            found = found | 0b00000001;
+        }
+        if (item == TPoint(7, 1)) {
+            found = found | 0b00000010;
+        }
+        if (item == TPoint(7, 6)) {
+            found = found | 0b00000100;
+        }
+    }
+    EXPECT_EQ(found, 0b00000111);
 }
 
 int main(int argc, char **argv) {

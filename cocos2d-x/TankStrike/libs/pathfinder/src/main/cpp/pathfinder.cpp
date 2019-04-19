@@ -8,15 +8,21 @@
 
 using namespace pathfinder;
 
+size_t TMap::offset(uint32_t x, uint32_t y) const {
+    return _width * y + x;//9 * 7 + 1 = 63 + 1 = 64
+}
+
 TMap::TMap(const char *data[], uint32_t width, uint32_t height)
 : _width(width)
 , _height(height)
 , _size(width * height)
 , _data((char *) malloc(width * height))
 {
+    size_t offset = 0;
     for (int i = 0; i < height; ++i) {
         for (int j = 0; j < width; ++j) {
-            _data[width * i + j] = data[i][j];
+            _data[offset] = data[i][j];
+            offset++;
         }
     }
 }
@@ -27,23 +33,54 @@ TMap TMap::create(const char *data[], uint32_t width, uint32_t height) {
 }
 
 char TMap::getCell(uint32_t x, uint32_t y) const {
-    return _data[_width * x + y];
+    return _data[offset(x, y)];
 };
 
 void TMap::setCell(uint32_t x, uint32_t y, char value) {
-    _data[_width * x + y] = value;
+    _data[offset(x, y)] = value;
 }
 
 void TMap::print() {
-    for (int i = 0; i < _height; ++i) {
-        for (int j = 0; j < _width; ++j) {
+    printf("TMap(0x%x)[%d x %d] size %d\n", this, _width, _height, _size);
+    for (int j = 0; j < _height; ++j) {
+        for (int i = 0; i < _width; ++i) {
             printf("%c", getCell(i, j));
         }
         printf("\n");
     }
+    printf("_data [%s]\n", _data);
 }
 
-void finder_advance(uint32_t pX, uint32_t pY, const char *map[10], char *mapPath[10]) {
+TPoint TMap::searchFirstCell(char val) const {
+    TPoint pos;
+    for (int i = 0; i < _width; ++i) {
+        for (int j = 0; j < _height; ++j) {
+            if (getCell(i, j) == val) {
+                pos._x = i;
+                pos._y = j;
+                break;
+            }
+        }
+    }
+    return pos;
+}
+
+std::list<TPoint> TMap::searchAllCells(char val) const {
+    std::list<TPoint> res;
+    for (int i = 0; i < _width; ++i) {
+        for (int j = 0; j < _height; ++j) {
+            if (getCell(i, j) == val) {
+                TPoint pos;
+                pos._x = i;
+                pos._y = j;
+                res.push_back(pos);
+            }
+        }
+    }
+    return res;
+}
+
+void pathfinderAdvance(uint32_t pX, uint32_t pY, const char *map[10], char *mapPath[10]) {
     struct tnode {
         int posX;
         int posY;
@@ -82,21 +119,21 @@ void finder_advance(uint32_t pX, uint32_t pY, const char *map[10], char *mapPath
     }
 }
 
-void finder(uint32_t posX, uint32_t posY, const char map[11][10], char mapPath[11][10], int loop) {
+void pathfinderRecurse(uint32_t posX, uint32_t posY, const char map[11][10], char mapPath[11][10], int loop) {
     if (map[posX - 1][posY] == ' ' && mapPath[posX - 1][posY] == 0) {
         mapPath[posX - 1][posY] = loop;
-        finder(posX - 1, posY, map, mapPath, loop + 1);
+        pathfinderRecurse(posX - 1, posY, map, mapPath, loop + 1);
     }
     if (map[posX][posY - 1] == ' ' && mapPath[posX][posY - 1] == 0) {
         mapPath[posX][posY - 1] = loop;
-        finder(posX, posY - 1, map, mapPath, loop + 1);
+        pathfinderRecurse(posX, posY - 1, map, mapPath, loop + 1);
     }
     if (map[posX + 1][posY] == ' ' && mapPath[posX + 1][posY] == 0) {
         mapPath[posX + 1][posY] = loop;
-        finder(posX + 1, posY, map, mapPath, loop + 1);
+        pathfinderRecurse(posX + 1, posY, map, mapPath, loop + 1);
     }
     if (map[posX][posY + 1] == ' ' && mapPath[posX][posY + 1] == 0) {
         mapPath[posX][posY + 1] = loop;
-        finder(posX, posY + 1, map, mapPath, loop + 1);
+        pathfinderRecurse(posX, posY + 1, map, mapPath, loop + 1);
     }
 }
