@@ -2,9 +2,9 @@
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
-      <config projectName="pathfinder" targetName="pathfinder_test" />
       <config projectName="pathfinder" targetName="gtest" />
       <config projectName="pathfinder" targetName="gtest_main" />
+      <config projectName="pathfinder" targetName="pathfinder_test" />
       <config projectName="pathfinder" targetName="pathfinderlib" />
     </generated>
   </component>
@@ -15,9 +15,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d1477de0-dedb-41a2-9664-ee602cb96296" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/cpp/pathfinder.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/cpp/pathfinder.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/public/pathfinder.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/public/pathfinder.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/cpp/pathfinder_test.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/cpp/pathfinder_test.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../build.cmd" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -39,7 +38,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/public/pathfinder.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="262">
+            <state relative-caret-position="680">
               <caret line="34" column="21" selection-start-line="34" selection-start-column="21" selection-end-line="34" selection-end-column="21" />
               <folding>
                 <element signature="e#414#432#0" expanded="true" />
@@ -53,7 +52,7 @@
         <entry file="file://$PROJECT_DIR$/src/test/cpp/pathfinder_test.cpp">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="292">
-              <caret line="27" column="43" selection-start-line="27" selection-start-column="43" selection-end-line="27" selection-end-column="43" />
+              <caret line="27" column="46" lean-forward="true" selection-start-line="27" selection-start-column="46" selection-end-line="27" selection-end-column="46" />
               <folding>
                 <element signature="e#44#68#0" expanded="true" />
               </folding>
@@ -64,8 +63,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/cpp/pathfinder.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="307">
-              <caret line="75" column="35" lean-forward="true" selection-start-line="75" selection-start-column="35" selection-end-line="75" selection-end-column="35" />
+            <state relative-caret-position="1500">
+              <caret line="75" column="35" selection-start-line="75" selection-start-column="35" selection-end-line="75" selection-end-column="35" />
               <folding>
                 <element signature="e#0#23#0" expanded="true" />
               </folding>
@@ -117,6 +116,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -166,7 +166,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -218,8 +217,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17662753" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17982924" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -329,7 +329,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/public/pathfinder.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="262">
+        <state relative-caret-position="680">
           <caret line="34" column="21" selection-start-line="34" selection-start-column="21" selection-end-line="34" selection-end-column="21" />
           <folding>
             <element signature="e#414#432#0" expanded="true" />
@@ -340,8 +340,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/cpp/pathfinder.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="307">
-          <caret line="75" column="35" lean-forward="true" selection-start-line="75" selection-start-column="35" selection-end-line="75" selection-end-column="35" />
+        <state relative-caret-position="1500">
+          <caret line="75" column="35" selection-start-line="75" selection-start-column="35" selection-end-line="75" selection-end-column="35" />
           <folding>
             <element signature="e#0#23#0" expanded="true" />
           </folding>
@@ -351,7 +351,7 @@
     <entry file="file://$PROJECT_DIR$/src/test/cpp/pathfinder_test.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="292">
-          <caret line="27" column="43" selection-start-line="27" selection-start-column="43" selection-end-line="27" selection-end-column="43" />
+          <caret line="27" column="46" lean-forward="true" selection-start-line="27" selection-start-column="46" selection-end-line="27" selection-end-column="46" />
           <folding>
             <element signature="e#44#68#0" expanded="true" />
           </folding>
