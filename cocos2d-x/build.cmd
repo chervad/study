@@ -1,3 +1,6 @@
+call ..\..\setvars.cmd
+call D:\work\EWDK\SetupBuildEnv.cmd
+
 set APP_ROOT=%CD%
 set BUILD_PATH=%APP_ROOT%\_build
 set SRC_PATH=%APP_ROOT%\TankStrike
