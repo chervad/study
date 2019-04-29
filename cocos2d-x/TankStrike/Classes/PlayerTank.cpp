@@ -31,7 +31,7 @@ void PlayerTank::initTank()
 	pMoveAnimate = TextureFactory::getInstance().getAnimate(ObjType::PLAYER);
 	nX_delta = 0;
 	nY_delta = 0;
-	eDirection = MoveDirection::UP;
+	direction = eDirection::UP;
 	life = 250.f;
 	damage_koef = 1.25f;
 }
@@ -39,19 +39,19 @@ void PlayerTank::initTank()
 void PlayerTank::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event) {
 	switch (keyCode) {
 	case EventKeyboard::KeyCode::KEY_LEFT_ARROW: 
-		moveTo(MoveDirection::LEFT); 
+		moveTo(eDirection::LEFT);
 		break;
 	case EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
-		moveTo(MoveDirection::RIGHT); 
+		moveTo(eDirection::RIGHT);
 		break;
 	case EventKeyboard::KeyCode::KEY_UP_ARROW:
-		moveTo(MoveDirection::UP); 
+		moveTo(eDirection::UP);
 		break;
 	case EventKeyboard::KeyCode::KEY_DOWN_ARROW:
-		moveTo(MoveDirection::DOWN); 
+		moveTo(eDirection::DOWN);
 		break;
 	case EventKeyboard::KeyCode::KEY_SPACE:
-		Shot *pShot = Shot::create(eDirection, this->getPosition());
+		Shot *pShot = Shot::create(direction, this->getPosition());
 		BattleLayer *parent = (BattleLayer *)(this->getParent());
 		parent->addShot(pShot);
 		break;

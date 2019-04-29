@@ -11,11 +11,11 @@ enum ObjType {
 	ENEMY  = 0b00000010,
 	WALL   = 0b00000100,
 	BRICK  = 0b00001000,
-	EAGLE  = 0b00100000,
-	SHOT   = 0b01000000
+	EAGLE  = 0b00010000,
+	SHOT   = 0b00100000
 };
 
-enum class MoveDirection {
+enum class eDirection {
 	LEFT,
 	RIGHT,
 	UP,

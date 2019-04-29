@@ -1,5 +1,6 @@
 #include "Tank.h"
 #include "Maze.h"
+#include "EnemyTank.h"
 
 #include "TextureFactory.h"
 
@@ -24,32 +25,32 @@ void Tank::initPhysics() {
 	this->setPhysicsBody(physicsBody);
 }
 
-void Tank::moveTo(MoveDirection direct) {
+void Tank::moveTo(eDirection direct) {
 	moveTo(direct, DELTA);
 }
 
-void Tank::moveTo(MoveDirection direct, int delta) {
-	eDirection = direct;
-	if (direct == MoveDirection::LEFT || direct == MoveDirection::RIGHT) {
+void Tank::moveTo(eDirection direct, int delta) {
+	direction = direct;
+	if (direct == eDirection::LEFT || direct == eDirection::RIGHT) {
 		nY_delta = 0;
 	}
-	if (direct == MoveDirection::UP || direct == MoveDirection::DOWN) {
+	if (direct == eDirection::UP || direct == eDirection::DOWN) {
 		nX_delta = 0;
 	}
-	switch (eDirection) {
-	case MoveDirection::LEFT:
+	switch (direction) {
+	case eDirection::LEFT:
 		setRotation(-90.0f);
 		nX_delta = -1 * delta;
 		break;
-	case MoveDirection::RIGHT:
+	case eDirection::RIGHT:
 		setRotation(90.0f);
 		nX_delta = delta;
 		break;
-	case  MoveDirection::UP:
+	case  eDirection::UP:
 		setRotation(0.0f);
 		nY_delta = delta;
 		break;
-	case  MoveDirection::DOWN:
+	case  eDirection::DOWN:
 		setRotation(180.0f);
 		nY_delta = -1 * delta;
 		break;
@@ -82,8 +83,12 @@ void Tank::update(float dt)
 			curPos.y + nY_delta > DELTA && curPos.y + nY_delta < winSize.height - DELTA)
 		{
 			Vec2 newPos = Vec2(curPos.x + nX_delta, curPos.y + nY_delta);
-			if (Maze::moveTankThisPosition(newPos, this->width, this->height, this->eDirection)) {
+			if (Maze::moveTankThisPosition(newPos, this->width, this->height, this->direction)) {
 				this->setPosition(newPos);
+
+                std::tuple<uint16_t, uint16_t> post = EnemyTank::convertPos2Area(newPos);
+                this->posX = std::get<0>(post);
+                this->posY = 19 - std::get<1>(post) - 1;
 			}
 		}
 	}

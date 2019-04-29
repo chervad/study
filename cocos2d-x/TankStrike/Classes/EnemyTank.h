@@ -18,11 +18,13 @@ public:
 
 	virtual ~EnemyTank();
 
-	void update(float dt);
+	//void update(float dt);
 	void setObjective(IObjective *pObjctv);
+protected:
+    void calculateMove();
 private:
 	uint16_t targetAreaX;
 	uint16_t targetAreaY;
 
-	void initTank();
+	void initTank(int posX, int posY);
 };

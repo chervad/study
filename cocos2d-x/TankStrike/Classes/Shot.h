@@ -13,7 +13,7 @@ class Shot : public GameObject {
 public:
 	virtual ~Shot();
 
-	static Shot *create(MoveDirection direction, const Vec2 &position);
+	static Shot *create(eDirection direction, const Vec2 &position);
 
 	virtual ObjType getObjectType() {
 		return ObjType::SHOT;
@@ -24,7 +24,7 @@ public:
 protected:
 	bool isBoom;
 	uint16_t damage = 20.f;
-	MoveDirection eDirection;
+    eDirection direction;
 	Animate *pBoomAnimate;
 
 	void initObject();

@@ -125,33 +125,33 @@ void Maze::build() {
 	}
 }
 
-bool Maze::moveTankThisPosition(Vec2 newPos, float width, float height, MoveDirection eDirection) {
+bool Maze::moveTankThisPosition(Vec2 newPos, float width, float height, eDirection direction) {
 	Vec2 checkPos_leftTrack = newPos;
 	Vec2 checkPos_rightTrack = newPos;
 
-	switch (eDirection) {
-	case MoveDirection::LEFT:
+	switch (direction) {
+	case eDirection::LEFT:
 		checkPos_leftTrack.x += -1 * width;
 		checkPos_leftTrack.y += -1 * height;
 
 		checkPos_rightTrack.x += -1 * width;
 		checkPos_rightTrack.y += height;
 		break;
-	case MoveDirection::RIGHT:
+	case eDirection::RIGHT:
 		checkPos_leftTrack.x += width;
 		checkPos_leftTrack.y += height;
 
 		checkPos_rightTrack.x += width;
 		checkPos_rightTrack.y += -1 * height;
 		break;
-	case MoveDirection::UP:
+	case eDirection::UP:
 		checkPos_leftTrack.x += -1 * width;
 		checkPos_leftTrack.y += height;
 
 		checkPos_rightTrack.x += width;
 		checkPos_rightTrack.y += height;
 		break;
-	case MoveDirection::DOWN:
+	case eDirection::DOWN:
 		checkPos_leftTrack.x += width;
 		checkPos_leftTrack.y += -1 * height;
 
@@ -168,7 +168,7 @@ bool Maze::moveTankThisPosition(Vec2 newPos, float width, float height, MoveDire
 
 	uint16_t x2 = std::get<0>(pos_2);
 	uint16_t y2 = std::get<1>(pos_2);
-
+    // T - вражеский танк, разве можно на него заезжать?
 	return (mazePlan[19 - y1 - 1][x1] == ' ' || mazePlan[19 - y1 - 1][x1] == 'T') 
 		&& (mazePlan[19 - y2 - 1][x2] == ' ' || mazePlan[19 - y2 - 1][x2] == 'T')
 		? true : false;
@@ -181,4 +181,12 @@ void Maze::setMazePlan(Vec2 pos, char block) {
 	y = 19 - y - 1;
 	char old = mazePlan[y][x];
 	mazePlan[y][x] = block;
+}
+
+char Maze::getMazePlan(Vec2 pos) {
+    std::tuple<uint16_t, uint16_t> post = EnemyTank::convertPos2Area(pos);
+    uint16_t x = std::get<0>(post);
+    uint16_t y = std::get<1>(post);
+    y = 19 - y - 1;
+    return mazePlan[y][x];
 }

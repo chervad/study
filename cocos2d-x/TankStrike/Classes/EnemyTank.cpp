@@ -32,7 +32,7 @@ void EnemyTank::initTank()
 	pMoveAnimate = TextureFactory::getInstance().getAnimate(ObjType::ENEMY);
 	nX_delta = 0;
 	nY_delta = 0;
-	eDirection = MoveDirection::UP;
+	direction = eDirection::UP;
 }
 
 std::tuple<uint16_t, uint16_t> EnemyTank::convertPos2Area(Vec2 pos) {
@@ -54,10 +54,14 @@ Vec2 EnemyTank::convertArea2Pos(std::tuple<uint16_t, uint16_t> area) {
 	return convertArea2Pos(std::get<0>(area), std::get<1>(area));
 }
 
-void EnemyTank::update(float dt) {
+/*void EnemyTank::update(float dt) {
 	Tank::update(dt);
-}
+}*/
 
 void EnemyTank::setObjective(IObjective *pObjctv) {
 	//Patrol patrol(10, 10);
+}
+
+void EnemyTank::calculateMove(int posX, int posY) {
+    
 }

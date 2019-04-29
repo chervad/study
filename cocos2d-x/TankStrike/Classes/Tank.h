@@ -11,8 +11,8 @@ public:
 
 	void update(float dt);
 
-	void moveTo(MoveDirection direct);
-	void moveTo(MoveDirection direct, int delta);
+	void moveTo(eDirection direct);
+	void moveTo(eDirection direct, int delta);
 
 	virtual ~Tank();
 protected:
@@ -23,8 +23,10 @@ protected:
 	int height;
 	float life = 100.f;
 	float damage_koef = .75f;
+	int posX;
+	int posY;
 
-	MoveDirection eDirection;
+	eDirection direction;
 
 	Animate *pMoveAnimate;
 

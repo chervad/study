@@ -10,11 +10,11 @@ class Tank;
 class Maze {
 public:
 	static Maze *create(uint16_t width, uint16_t height, Node *pParentNode);
-	static bool moveTankThisPosition(Vec2 newPos, float width, float height, MoveDirection eDirection);
+	static bool moveTankThisPosition(Vec2 newPos, float width, float height, eDirection direction);
 	~Maze();
 
-	void build();
 	static void setMazePlan(Vec2 pos, char block);
+	static char getMazePlan(Vec2 pos);
 private:
 	uint16_t width;
 	uint16_t height;
@@ -22,4 +22,5 @@ private:
 	bool isAutogenerate;
 
 	//std::list<Wall *> listWall;
+    void build();
 };

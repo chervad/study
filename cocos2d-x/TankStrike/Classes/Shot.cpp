@@ -6,12 +6,12 @@ Shot::~Shot()
 }
 
 
-Shot *Shot::create(MoveDirection direction, const Vec2 &position)
+Shot *Shot::create(eDirection direction, const Vec2 &position)
 {
 	Shot *pShot = GameObject::create<Shot>();
 	//pShot->retain();
 
-	pShot->eDirection = direction;
+	pShot->direction = direction;
 	pShot->setPosition(position);
 
 	//pShot->initObject();
@@ -40,17 +40,17 @@ void Shot::initPhysics() {
 void Shot::update(float dt) {
 	if (!isBoom) {
 		Vec2 position = getPosition();
-		switch (eDirection) {
-		case MoveDirection::LEFT:
+		switch (direction) {
+		case eDirection::LEFT:
 			position.x -= 4;
 			break;
-		case MoveDirection::RIGHT:
+		case eDirection::RIGHT:
 			position.x += 4;
 			break;
-		case MoveDirection::UP:
+		case eDirection::UP:
 			position.y += 4;
 			break;
-		case MoveDirection::DOWN:
+		case eDirection::DOWN:
 			position.y -= 4;
 			break;
 		}
