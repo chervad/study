@@ -72,9 +72,7 @@ bool BattleLayer::init()
 	this->addChild(this->pPlayerTank);
 
 	this->scheduleUpdate();
-
-	std::thread gameCycle(BattleLayer::mainGameLoopProxy, this);
-	//?gameCycle.detach();
+	mainGameLoop();
 
     return true;
 }
@@ -143,11 +141,12 @@ void BattleLayer::mainGameLoopProxy(BattleLayer *ptr) {
 }
 
 void BattleLayer::mainGameLoop() {
-	std::this_thread::sleep_for(std::chrono::seconds{ 3 });
+	//std::this_thread::sleep_for(std::chrono::seconds{ 3 });
 	log("Ta-da!");
 	for (const auto & base_pos : enemyBase) {
 		EnemyTank *pEnemyTank = EnemyTank::create();
 		pEnemyTank->setPosition(base_pos);
 		addEnemyTank(pEnemyTank);
+		pEnemyTank->startGameLoop();
 	}
 }

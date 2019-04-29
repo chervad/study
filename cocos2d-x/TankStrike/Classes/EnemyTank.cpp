@@ -1,3 +1,5 @@
+#include <thread>
+
 #include "EnemyTank.h"
 
 #include "TextureFactory.h"
@@ -23,6 +25,11 @@ EnemyTank *EnemyTank::create()
 
 	CC_SAFE_DELETE(enemyTank);
 	return NULL;
+}
+
+void EnemyTank::startGameLoop() {
+	std::thread gameLoop(&EnemyTank::calculateMove, this, 0, 0);
+	gameLoop.detach();
 }
 
 void EnemyTank::initTank()
@@ -63,5 +70,5 @@ void EnemyTank::setObjective(IObjective *pObjctv) {
 }
 
 void EnemyTank::calculateMove(int posX, int posY) {
-    
+	this->moveTo(eDirection::RIGHT);
 }

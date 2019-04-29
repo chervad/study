@@ -55,6 +55,8 @@ void Tank::moveTo(eDirection direct, int delta) {
 		nY_delta = -1 * delta;
 		break;
 	}
+	this->playAnimation();
+	pauseAnimation();
 }
 
 void Tank::playAnimation() {

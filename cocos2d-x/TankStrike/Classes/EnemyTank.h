@@ -11,6 +11,7 @@ using namespace cocos2d;
 class EnemyTank : public Tank {
 public:
 	static EnemyTank *create();
+	void startGameLoop();
 
 	static std::tuple<uint16_t, uint16_t> convertPos2Area(Vec2 pos);
 	static Vec2 convertArea2Pos(uint16_t areaX, uint16_t areaY);
@@ -21,10 +22,10 @@ public:
 	//void update(float dt);
 	void setObjective(IObjective *pObjctv);
 protected:
-    void calculateMove();
+    void calculateMove(int posX, int posY);
 private:
 	uint16_t targetAreaX;
 	uint16_t targetAreaY;
 
-	void initTank(int posX, int posY);
+	void initTank();
 };

@@ -79,8 +79,14 @@ TextureFactory::TextureFactory()
 	pPlayerTankAnimate->retain();
 
 	auto enemyTankAnimation = Animation::create();
-	for (int i = 0; i < 8; i++) {
+	for (int i = 0; i < 7; i++) {
 		Rect rect = Rect((TX(eat) + i) * this->tileWidth, TY(eat) * this->tileHeight, this->tileWidth, this->tileHeight);
+		SpriteFrame *frame = SpriteFrame::createWithTexture(this->pTextures, rect);
+		enemyTankAnimation->addSpriteFrame(frame);
+	}
+	{
+		// в тайлах вражеских танков подрят идут 7 картинок, а восьмая в левом месте, пришлось закостылить
+		Rect rect = Rect(TX(et) * this->tileWidth, TY(et) * this->tileHeight, this->tileWidth, this->tileHeight);
 		SpriteFrame *frame = SpriteFrame::createWithTexture(this->pTextures, rect);
 		enemyTankAnimation->addSpriteFrame(frame);
 	}
@@ -124,7 +130,7 @@ SpriteFrame *TextureFactory::getSprite(ObjType objType) {
 
 Animate *TextureFactory::getAnimate(ObjType objType) {
 	if (objType == ObjType::ENEMY) {
-		return pEnemyTankAnimate/*->clone()*/;
+		return pEnemyTankAnimate->clone();
 	} else if (objType == ObjType::PLAYER) {
 		return pPlayerTankAnimate;
 	} else if (objType == ObjType::SHOT) {
