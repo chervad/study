@@ -5,6 +5,7 @@
 #include "Wall.h"
 #include "Eagle.h"
 #include "BattleLayer.h"
+#include "pathfinder.h"
 
 #define AUTOGENERATE false
 
@@ -168,10 +169,9 @@ bool Maze::moveTankThisPosition(Vec2 newPos, float width, float height, eDirecti
 
 	uint16_t x2 = std::get<0>(pos_2);
 	uint16_t y2 = std::get<1>(pos_2);
-    // T - вражеский танк, разве можно на него заезжать?
-	return (mazePlan[19 - y1 - 1][x1] == ' ' || mazePlan[19 - y1 - 1][x1] == 'T') //по танкам ездить нельзя 
-		&& (mazePlan[19 - y2 - 1][x2] == ' ' || mazePlan[19 - y2 - 1][x2] == 'T')
-		? true : false;
+    //TODO T - вражеский танк, разве можно на него заезжать?
+	return mazePlan[19 - y1 - 1][x1] == ' ' || mazePlan[19 - y1 - 1][x1] == 'T'
+		&& mazePlan[19 - y2 - 1][x2] == ' ' || mazePlan[19 - y2 - 1][x2] == 'T';
 }
 
 void Maze::setMazePlan(Vec2 pos, char block) {

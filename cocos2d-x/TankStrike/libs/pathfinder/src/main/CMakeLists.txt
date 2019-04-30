@@ -6,3 +6,4 @@ set(CMAKE_CXX_STANDARD 14)
 add_library(pathfinderlib cpp/pathfinder.cpp public/pathfinder.h)
 
 include_directories(../main/public)
+include_directories(../main/headers)

@@ -35,25 +35,28 @@ namespace pathfinder {
         char * const _data;
         size_t _size;
 
-        uint32_t _width;
-        uint32_t _height;
+        const uint32_t _width;
+        const uint32_t _height;
 
         TMap(const char *data[], uint32_t width, uint32_t height);
+        TMap(uint32_t width, uint32_t height);
 
         size_t offset(uint32_t x, uint32_t y) const;
     public:
         static TMap create(const char *data[], uint32_t width, uint32_t height);
+        bool operator==(const TMap &b) const;
 
         char getCell(uint32_t x, uint32_t y) const;
         void setCell(uint32_t x, uint32_t y, char value);
 
-        TPoint searchFirstCell(char val) const;
-        std::list<TPoint> searchAllCells(char val) const;
+        TPoint searchFirstCell(char etalon) const;
+        std::list<TPoint> searchAllCells(char etalon) const;
+
+        //void findAllPath(uint32_t pBeginX, uint32_t pBeginY, char **mapPath);
+        TMap findAllPath(const TPoint &begin);
 
         void print();
     };
-
-    void pathfinderAdvance(uint32_t pX, uint32_t pY, const char **map, char **mapPath);
 
     void pathfinderRecurse(uint32_t posX, uint32_t posY, const char map[11][10], char mapPath[11][10], uint32_t loop);
 

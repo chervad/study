@@ -1,4 +1,4 @@
-@rem call ..\..\setvars.cmd
+call ..\..\setvars.cmd
 @rem call D:\work\EWDK\SetupBuildEnv.cmd
 
 set APP_ROOT=%CD%
@@ -8,8 +8,8 @@ set SRC_PATH=%APP_ROOT%\TankStrike
 @rem set BUILD_TYPE=Release
 set BUILD_TYPE=Debug
 
-rmdir %BUILD_PATH% /q /s
-mkdir %BUILD_PATH%
+@rem rmdir %BUILD_PATH% /q /s
+@rem mkdir %BUILD_PATH%
 cd %BUILD_PATH%
 cmake -G "Visual Studio 15 2017" %SRC_PATH%
-@rem cmake --build . --target TankStrike --config %BUILD_TYPE%
+cmake --build . --target TankStrike --config %BUILD_TYPE%

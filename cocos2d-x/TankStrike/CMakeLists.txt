@@ -37,6 +37,8 @@ if(NOT USE_COCOS_PREBUILT)
     add_subdirectory(${COCOS2DX_ROOT_PATH}/cocos ${ENGINE_BINARY_PATH}/cocos/core)
 endif()
 
+add_subdirectory(libs/pathfinder/src/main)
+
 # record sources, headers, resources...
 set(GAME_SOURCE)
 set(GAME_HEADER)
@@ -51,6 +53,7 @@ endif()
 include_directories(
         Classes
         ${COCOS2DX_ROOT_PATH}/cocos/audio/include/
+        libs/pathfinder/src/main/public
 )
 # add cross-platforms source files and header files 
 
@@ -149,6 +152,8 @@ cocos_build_app(${APP_NAME}
                 DEPEND_COMMON_LIBS "cocos2d"
                 DEPEND_ANDROID_LIBS "cocos2d_android"
                 )
+
+target_link_libraries(${APP_NAME} pathfinderlib)
 
 if(APPLE)
     set_target_properties(${APP_NAME} PROPERTIES RESOURCE "${APP_UI_RES}")
