@@ -4,13 +4,14 @@
 
 #include "defens.h"
 #include "Tank.h"
+#include "Maze.h"
 #include "Objectives/IObjective.h"
 
 using namespace cocos2d;
 
 class EnemyTank : public Tank {
 public:
-	static EnemyTank *create();
+	static EnemyTank *create(Maze *pMaze);
 	void startGameLoop();
 
 	static std::tuple<uint16_t, uint16_t> convertPos2Area(Vec2 pos);
@@ -26,6 +27,7 @@ protected:
 private:
 	uint16_t targetAreaX;
 	uint16_t targetAreaY;
+    Maze *pMaze;
 
-	void initTank();
+	void initTank(Maze *pMaze);
 };

@@ -34,7 +34,7 @@ TMap::TMap(uint32_t width, uint32_t height)
 , _size(width * height)
 , _data((char *) malloc(width * height))
 {
-    memset(_data, 0, _size);
+    memset(_data, 0xFF, _size);
 }
 
 TMap TMap::create(const char *data[], uint32_t width, uint32_t height) {
@@ -53,6 +53,8 @@ bool TMap::operator==(const TMap &b) const {
 }
 
 char TMap::getCell(uint32_t x, uint32_t y) const {
+    if (x < 0 || x > _width) return 0xFF;
+    if (y < 0 || y > _height) return 0xFF;
     return _data[offset(x, y)];
 };
 

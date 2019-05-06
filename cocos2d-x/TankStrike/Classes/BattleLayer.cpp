@@ -72,6 +72,7 @@ bool BattleLayer::init()
 	this->addChild(this->pPlayerTank);
 
 	this->scheduleUpdate();
+
 	mainGameLoop();
 
     return true;
@@ -126,6 +127,10 @@ void BattleLayer::addEnemyBase(Vec2 position) {
 	enemyBase.push_back(position); 
 }
 
+PlayerTank *BattleLayer::getPlayerTank() const {
+    return this->pPlayerTank;
+}
+
 void BattleLayer::update(float dt) {
 	pPlayerTank->update(dt);
 	for (auto pEnemyTank : listEnemyTanks) {
@@ -136,15 +141,15 @@ void BattleLayer::update(float dt) {
 	}
 }
 
-void BattleLayer::mainGameLoopProxy(BattleLayer *ptr) {
+/*void BattleLayer::mainGameLoopProxy(BattleLayer *ptr) {
 	ptr->mainGameLoop();
-}
+}*/
 
 void BattleLayer::mainGameLoop() {
 	//std::this_thread::sleep_for(std::chrono::seconds{ 3 });
 	log("Ta-da!");
 	for (const auto & base_pos : enemyBase) {
-		EnemyTank *pEnemyTank = EnemyTank::create();
+		EnemyTank *pEnemyTank = EnemyTank::create(pMaze);
 		pEnemyTank->setPosition(base_pos);
 		addEnemyTank(pEnemyTank);
 		pEnemyTank->startGameLoop();

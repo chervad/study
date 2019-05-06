@@ -29,11 +29,12 @@ public:
 	void addShot(Shot *pShot);
 	void addEnemyTank(EnemyTank *pEnemyTank);
 	void addEnemyBase(Vec2 position);
+    PlayerTank *getPlayerTank() const;
 
 	CREATE_FUNC(BattleLayer);
 protected:
 	void mainGameLoop();
-	static void mainGameLoopProxy(BattleLayer *ptr);
+	//static void mainGameLoopProxy(BattleLayer *ptr);
 private:
 	PlayerTank *pPlayerTank;
 	Maze *pMaze;

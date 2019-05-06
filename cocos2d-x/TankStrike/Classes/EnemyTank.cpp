@@ -11,13 +11,13 @@ EnemyTank::~EnemyTank()
 	CC_SAFE_RELEASE(pMoveAnimate);
 }
 
-EnemyTank *EnemyTank::create()
+EnemyTank *EnemyTank::create(Maze *pMaze)
 {
 	EnemyTank *enemyTank = new EnemyTank();
 	if (enemyTank && enemyTank->initWithSpriteFrame(TextureFactory::getInstance().getEnemyTankSprite()))
 	{
 		//enemyTank->autorelease();
-		enemyTank->initTank();
+		enemyTank->initTank(pMaze);
 		//enemyTank->initPhysics();
 		//enemyTank->getPhysicsBody()->setContactTestBitmask(ObjType::ENEMY);
 		return enemyTank;
@@ -32,7 +32,7 @@ void EnemyTank::startGameLoop() {
 	gameLoop.detach();
 }
 
-void EnemyTank::initTank()
+void EnemyTank::initTank(Maze *pMaze)
 {
 	Tank::initTank();
 	//pMoveAnimate = TextureFactory::getInstance().getEnemyTankAnimate();
@@ -40,6 +40,7 @@ void EnemyTank::initTank()
 	nX_delta = 0;
 	nY_delta = 0;
 	direction = eDirection::UP;
+    this->pMaze = pMaze;
 }
 
 std::tuple<uint16_t, uint16_t> EnemyTank::convertPos2Area(Vec2 pos) {
@@ -70,5 +71,20 @@ void EnemyTank::setObjective(IObjective *pObjctv) {
 }
 
 void EnemyTank::calculateMove(int posX, int posY) {
-	this->moveTo(eDirection::RIGHT);
+    pathfinder::TMap map = pMaze->getPath();
+    std::tuple<uint16_t, uint16_t> curpos = EnemyTank::convertPos2Area(this->getPosition());
+    uint32_t curPosX = std::get<0>(curpos);
+    uint32_t curPosY = std::get<1>(curpos);
+    char c[4], c_min = 0xFF;
+    c[0] = map.getCell(curPosX - 1, curPosY);
+    c[1] = map.getCell(curPosX + 1, curPosY);
+    c[2] = map.getCell(curPosX, curPosY - 1);
+    c[3] = map.getCell(curPosX, curPosY + 1);
+
+    eDirection dir[4] = {eDirection::LEFT, eDirection::RIGHT, eDirection::DOWN, eDirection::UP};
+    for (int i = 0; i < 4; i++) {
+        if (c[i] < c_min) {
+            this->moveTo(dir[i]);
+        }
+    }
 }
