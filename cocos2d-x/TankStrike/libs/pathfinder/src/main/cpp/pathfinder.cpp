@@ -10,7 +10,7 @@
 using namespace pathfinder;
 
 size_t TMap::offset(uint32_t x, uint32_t y) const {
-    return _width * y + x;//26 * 23 + 16 = 598 + 16 = 614
+    return _width * y + x;//26 * 16 + 23 = 416 + 16 = 432
 }
 
 TMap::TMap(const char *data[], uint32_t width, uint32_t height)
@@ -53,8 +53,8 @@ bool TMap::operator==(const TMap &b) const {
 }
 
 char TMap::getCell(uint32_t x, uint32_t y) const {
-    if (x < 0 || x > _width) return 0;
-    if (y < 0 || y > _height) return 0;
+    if (x > _width) return 0;
+    if (y > _height) return 0;
     return _data[offset(x, y)];
 };
 
@@ -80,6 +80,7 @@ void TMap::fprintc(FILE *fl) {
         }
         fprintf(fl, "\n");
     }
+    fprintf(fl, "\n");
 }
 
 void TMap::fprintd(FILE *fl) {
@@ -89,6 +90,10 @@ void TMap::fprintd(FILE *fl) {
             fprintf(fl, "%2d", getCell(i, j));
         }
         fprintf(fl, "\n");
+    }
+    fprintf(fl, "\n");
+    for (int i = 0; i < _size; ++i) {
+        fprintf(fl, "%2d : %2d\n", i, _data[i]);
     }
 }
 

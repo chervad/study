@@ -85,16 +85,16 @@ void EnemyTank::calculateMove(int posX, int posY) {
     unsigned char c[4], c_min = 0xFF;
 
     c[0] = map.getCell(curPosX - 1, curPosY);
-    fprintf(fl, "%d;%d: %d\n", curPosX - 1, curPosY, c[0]);
+    fprintf(fl, "%d;%d: %d %d\n", curPosX - 1, curPosY, map.offset(curPosX - 1, curPosY), map._data[map.offset(curPosX - 1, curPosY)]);
 
     c[1] = map.getCell(curPosX + 1, curPosY);
-    fprintf(fl, "%d;%d: %d\n", curPosX + 1, curPosY, c[1]);
+    fprintf(fl, "%d;%d: %d %d\n", curPosX + 1, curPosY, map.offset(curPosX + 1, curPosY), map._data[map.offset(curPosX + 1, curPosY)]);
 
     c[2] = map.getCell(curPosX, curPosY - 1);
-    fprintf(fl, "%d;%d: %d\n", curPosX, curPosY - 1, c[2]);
+    fprintf(fl, "%d;%d: %d %d\n", curPosX, curPosY - 1, map.offset(curPosX, curPosY - 1), map._data[map.offset(curPosX, curPosY - 1)]);
 
     c[3] = map.getCell(curPosX, curPosY + 1);
-    fprintf(fl, "%d;%d: %d\n", curPosX, curPosY + 1, c[3]);
+    fprintf(fl, "%d;%d: %d %d\n", curPosX, curPosY + 1, map.offset(curPosX, curPosY + 1), map._data[map.offset(curPosX, curPosY + 1)]);
 
     eDirection dir[4] = {eDirection::LEFT, eDirection::RIGHT, eDirection::DOWN, eDirection::UP};
     for (int i = 0; i < 4; i++) {

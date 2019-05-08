@@ -30,7 +30,7 @@ namespace pathfinder {
     };
 
     class DECLSPEC TMap {
-    private:
+    public:
         //Можно заменить на Boost.MultiArray
         // https://www.boost.org/doc/libs/1_70_0/libs/multi_array/doc/index.html
         char * const _data;

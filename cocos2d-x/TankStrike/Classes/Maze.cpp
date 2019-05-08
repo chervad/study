@@ -135,14 +135,9 @@ pathfinder::TMap Maze::getPath() {
     for (int i = 0; i < 19; ++i) {
         pplan[i] = mazePlan[i];
     }
-    FILE *fl = fopen("cocos.maps", "w");
-    assert(fl != nullptr);
     pathfinder::TMap map = pathfinder::TMap::create(pplan, 26, 19);//TODO Карта не так часто изменяется, сделать через кэшь и добавить в событие инвалидации
-    map.fprintc(fl);
     pathfinder::TPoint p(destPosX, destPosY);
     pathfinder::TMap result = map.findAllPath(p);
-    result.fprintd(fl);
-    fclose(fl);
     return result;
 }
 
