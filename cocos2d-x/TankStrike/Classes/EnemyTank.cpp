@@ -71,20 +71,39 @@ void EnemyTank::setObjective(IObjective *pObjctv) {
 }
 
 void EnemyTank::calculateMove(int posX, int posY) {
+    FILE *fl = fopen("cocos.log", "w");
+    assert(fl != nullptr);
+
     pathfinder::TMap map = pMaze->getPath();
-    std::tuple<uint16_t, uint16_t> curpos = EnemyTank::convertPos2Area(this->getPosition());
+    map.fprintd(fl);
+    Vec2 curPos = this->getPosition();
+    std::tuple<uint16_t, uint16_t> curpos = EnemyTank::convertPos2Area(curPos);
     uint32_t curPosX = std::get<0>(curpos);
     uint32_t curPosY = std::get<1>(curpos);
-    char c[4], c_min = 0xFF;
+    fprintf(fl, "curPos %d:%d\n", curPosX, curPosY);
+
+    unsigned char c[4], c_min = 0xFF;
+
     c[0] = map.getCell(curPosX - 1, curPosY);
+    fprintf(fl, "%d;%d: %d\n", curPosX - 1, curPosY, c[0]);
+
     c[1] = map.getCell(curPosX + 1, curPosY);
+    fprintf(fl, "%d;%d: %d\n", curPosX + 1, curPosY, c[1]);
+
     c[2] = map.getCell(curPosX, curPosY - 1);
+    fprintf(fl, "%d;%d: %d\n", curPosX, curPosY - 1, c[2]);
+
     c[3] = map.getCell(curPosX, curPosY + 1);
+    fprintf(fl, "%d;%d: %d\n", curPosX, curPosY + 1, c[3]);
 
     eDirection dir[4] = {eDirection::LEFT, eDirection::RIGHT, eDirection::DOWN, eDirection::UP};
     for (int i = 0; i < 4; i++) {
-        if (c[i] < c_min) {
+        fprintf(fl, "%d: %d\n", i, c[i]);
+        if (c[i] <= c_min && c[i] != 0) {
             this->moveTo(dir[i]);
+            fprintf(fl, "moveTo: %d\n", dir[i]);
+            c_min = c[i];
         }
     }
+    fclose(fl);
 }

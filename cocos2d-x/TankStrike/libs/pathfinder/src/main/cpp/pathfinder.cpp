@@ -10,7 +10,7 @@
 using namespace pathfinder;
 
 size_t TMap::offset(uint32_t x, uint32_t y) const {
-    return _width * y + x;//9 * 7 + 1 = 63 + 1 = 64
+    return _width * y + x;//26 * 23 + 16 = 598 + 16 = 614
 }
 
 TMap::TMap(const char *data[], uint32_t width, uint32_t height)
@@ -34,7 +34,7 @@ TMap::TMap(uint32_t width, uint32_t height)
 , _size(width * height)
 , _data((char *) malloc(width * height))
 {
-    memset(_data, 0xFF, _size);
+    memset(_data, 0, _size);
 }
 
 TMap TMap::create(const char *data[], uint32_t width, uint32_t height) {
@@ -53,8 +53,8 @@ bool TMap::operator==(const TMap &b) const {
 }
 
 char TMap::getCell(uint32_t x, uint32_t y) const {
-    if (x < 0 || x > _width) return 0xFF;
-    if (y < 0 || y > _height) return 0xFF;
+    if (x < 0 || x > _width) return 0;
+    if (y < 0 || y > _height) return 0;
     return _data[offset(x, y)];
 };
 
@@ -66,9 +66,29 @@ void TMap::print() {
     printf("TMap(0x%x)[%d x %d] size %d\n", this, _width, _height, _size);
     for (int j = 0; j < _height; ++j) {
         for (int i = 0; i < _width; ++i) {
-            printf("%2d", getCell(i, j));
+            printf("%c", getCell(i, j));
         }
         printf("\n");
+    }
+}
+
+void TMap::fprintc(FILE *fl) {
+    fprintf(fl, "TMap(0x%x)[%d x %d] size %d\n", this, _width, _height, _size);
+    for (int j = 0; j < _height; ++j) {
+        for (int i = 0; i < _width; ++i) {
+            fprintf(fl, "%c", getCell(i, j));
+        }
+        fprintf(fl, "\n");
+    }
+}
+
+void TMap::fprintd(FILE *fl) {
+    fprintf(fl, "TMap(0x%x)[%d x %d] size %d\n", this, _width, _height, _size);
+    for (int j = 0; j < _height; ++j) {
+        for (int i = 0; i < _width; ++i) {
+            fprintf(fl, "%2d", getCell(i, j));
+        }
+        fprintf(fl, "\n");
     }
 }
 

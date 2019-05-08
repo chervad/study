@@ -12,9 +12,9 @@ const int mapWidth = 9;
 const int mapHeight = 11;
 const char *mapEtalon[mapHeight] =
         {"#########",
-         "#%# # #%#",
-         "#   #   #",
-         "# #   ###",
+         "#%#1# #%#",
+         "# 235   #",
+         "# #4  ###",
          "# ###  ##",
          "#   ## ##",
          "###    %#",
@@ -26,6 +26,7 @@ const char *mapEtalon[mapHeight] =
 
 TEST(TEST_pathfinder, TMap_create_and_print) {
     TMap map = TMap::create(mapEtalon, mapWidth, mapHeight);
+    map.print();
 }
 
 TEST(TEST_pathfinder, TMap_getter) {
@@ -36,6 +37,24 @@ TEST(TEST_pathfinder, TMap_getter) {
     EXPECT_EQ(map.getCell(1, 7), '@');
     EXPECT_EQ(map.getCell(7, 6), '%');
     EXPECT_EQ(map.getCell(4, 9), '#');
+
+    EXPECT_EQ(map.getCell(3, 2), '3');
+    EXPECT_EQ(map.getCell(2, 2), '2');
+    EXPECT_EQ(map.getCell(4, 2), '5');
+    EXPECT_EQ(map.getCell(3, 1), '1');
+    EXPECT_EQ(map.getCell(3, 3), '4');
+}
+
+
+TEST(TEST_pathfinder, TMap_setter) {
+    TMap map = TMap::create(mapEtalon, mapWidth, mapHeight);
+    map.print();
+    map.setCell(3, 2, ' ');
+    map.setCell(2, 2, ' ');
+    map.setCell(4, 2, ' ');
+    map.setCell(3, 1, ' ');
+    map.setCell(3, 3, ' ');
+    map.print();
 }
 
 TEST(TEST_pathfinder, TMap_searchFirstCell) {
@@ -80,7 +99,7 @@ TEST(TEST_pathfinder, TMap_getPath) {
     , {0, 1, 0, 5, 6, 7, 0, 11, 0}
     , {0, 2, 3, 4, 0, 8, 9, 10, 0}
     , {0, 0, 0, 0, 0, 0, 0, 0, 0}};
-    char *etalon[mapHeight];// = (char **)malloc(mapHeight);
+    char *etalon[mapHeight];
     for (int a = 0; a < mapHeight; ++a) {
         char *line = (char *)malloc(mapWidth);
         for (int b = 0; b < mapWidth; ++b) {
@@ -90,6 +109,7 @@ TEST(TEST_pathfinder, TMap_getPath) {
     }
 
     TMap expct = TMap::create((const char **)etalon, mapWidth, mapHeight);
+    result.print();
     expct.print();
     EXPECT_EQ(result, expct);
     for (int a = 0; a < mapHeight; ++a) {
