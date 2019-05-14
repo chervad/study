@@ -71,39 +71,37 @@ void EnemyTank::setObjective(IObjective *pObjctv) {
 }
 
 void EnemyTank::calculateMove(int posX, int posY) {
-    FILE *fl = fopen("cocos.log", "w");
-    assert(fl != nullptr);
-
+	std::this_thread::sleep_for(std::chrono::seconds{ 3 });
+    
     pathfinder::TMap map = pMaze->getPath();
-    map.fprintd(fl);
+    map.print();
     Vec2 curPos = this->getPosition();
     std::tuple<uint16_t, uint16_t> curpos = EnemyTank::convertPos2Area(curPos);
     uint32_t curPosX = std::get<0>(curpos);
     uint32_t curPosY = std::get<1>(curpos);
-    fprintf(fl, "curPos %d:%d\n", curPosX, curPosY);
+    cocos2d::log("curPos %d:%d\n", curPosX, curPosY);
 
     unsigned char c[4], c_min = 0xFF;
 
     c[0] = map.getCell(curPosX - 1, curPosY);
-    fprintf(fl, "%d;%d: %d %d\n", curPosX - 1, curPosY, map.offset(curPosX - 1, curPosY), map._data[map.offset(curPosX - 1, curPosY)]);
+    cocos2d::log("%d;%d: %d %d\n", curPosX - 1, curPosY, map.offset(curPosX - 1, curPosY), map._data[map.offset(curPosX - 1, curPosY)]);
 
     c[1] = map.getCell(curPosX + 1, curPosY);
-    fprintf(fl, "%d;%d: %d %d\n", curPosX + 1, curPosY, map.offset(curPosX + 1, curPosY), map._data[map.offset(curPosX + 1, curPosY)]);
+	cocos2d::log("%d;%d: %d %d\n", curPosX + 1, curPosY, map.offset(curPosX + 1, curPosY), map._data[map.offset(curPosX + 1, curPosY)]);
 
     c[2] = map.getCell(curPosX, curPosY - 1);
-    fprintf(fl, "%d;%d: %d %d\n", curPosX, curPosY - 1, map.offset(curPosX, curPosY - 1), map._data[map.offset(curPosX, curPosY - 1)]);
+	cocos2d::log("%d;%d: %d %d\n", curPosX, curPosY - 1, map.offset(curPosX, curPosY - 1), map._data[map.offset(curPosX, curPosY - 1)]);
 
     c[3] = map.getCell(curPosX, curPosY + 1);
-    fprintf(fl, "%d;%d: %d %d\n", curPosX, curPosY + 1, map.offset(curPosX, curPosY + 1), map._data[map.offset(curPosX, curPosY + 1)]);
+	cocos2d::log("%d;%d: %d %d\n", curPosX, curPosY + 1, map.offset(curPosX, curPosY + 1), map._data[map.offset(curPosX, curPosY + 1)]);
 
     eDirection dir[4] = {eDirection::LEFT, eDirection::RIGHT, eDirection::DOWN, eDirection::UP};
     for (int i = 0; i < 4; i++) {
-        fprintf(fl, "%d: %d\n", i, c[i]);
+		cocos2d::log("%d: %d\n", dir[i], c[i]);
         if (c[i] <= c_min && c[i] != 0) {
             this->moveTo(dir[i]);
-            fprintf(fl, "moveTo: %d\n", dir[i]);
+			cocos2d::log("moveTo: %d\n", dir[i]);
             c_min = c[i];
         }
     }
-    fclose(fl);
 }

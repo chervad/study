@@ -1,38 +1,31 @@
 <!DOCTYPE html>
-<html lang="ru">
-  <head>
-    <base href="https://toster.ru/">
-<title>MinGW или MSVC: какой компилятор выбрать для приложений на Qt под Windows? &mdash; Toster.ru</title><meta charset="utf-8">
+<!-- saved from url=(0122)https://toster.ru/answer?answer_id=282071&_ga=2.189380651.1475396415.1557378422-1549461210.1557378422#comments_list_282071 -->
+<html lang="ru" class="js no-touch svg inlinesvg"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!--<base href="https://toster.ru/">--><base href=".">
+<title>MinGW или MSVC: какой компилятор выбрать для приложений на Qt под Windows? — Toster.ru</title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<meta name="description" content="В основном пишу десктоп-приложения под Windows на Qt (компилятор MSVC2012,  Windows7).  Иногда их нужно собрать под Android.
-Стоит ли для дескопных приложений перейти на MinGW (чтобы для Андроида и винды писать под один компилятор)?
-При переходе на MinGW какой отладчик использовать? Придется обязательно перейти на GDB? 
-Использую boost, стараюсь задействовать возможности C++11.
-Какие проблемы меня ожидают?">
-<meta property="og:image" content="https://habrastorage.org/webt/5b/0d/67/5b0d6718e4b6b295356228.png">
-<meta property="og:image" content="http://habrastorage.org/files/964/953/80f/96495380f6d9484792ec05815386d0e2.jpg">
-<meta property="og:image" content="https://habrastorage.org/files/390/88f/bff/39088fbff7ed466581391c0e5b33b8f2.png">
-<meta property="og:image" content="https://habrastorage.org/webt/5a/80/ee/5a80eee835721314512847.png">
+<meta name="description" content="Я за MinGW, хотя бы потому, что он использует собственный Runtime, работающий на ВСЕХ MS Windows OS, начиная с Win95. В случае с Qt - начиная с 2000/XP. Без всяких установок Visual C++ Redistributable/Visual C++ Runtime и дополнительных библиотек. Просто добавляем в проектный файл такие строки: QMAKE_LFLAGS +=-static-libgcc -static-libstdc++">
+<meta name="keywords" content="android, программирование, qt, cpp">
+<meta property="og:image" content="http://habrastorage.org/getpro/toster/avatars/1bd/356/5a2/1bd3565a296f09c7222fc7bb5a127207.jpg">
 <meta property="og:title" content="MinGW или MSVC: какой компилятор выбрать для приложений на Qt под Windows?">
-<meta property="og:description" content="Ответили на вопрос 2 человека. Оцените лучшие ответы! И подпишитесь на вопрос, чтобы узнавать о появлении новых ответов.">
+<meta property="og:description" content="Оцените ответ от EXL. Я за MinGW, хотя бы потому, что он использует собственный Runtime, работающий на ВСЕХ MS Windows OS, начиная с Win95. В случае с Qt - начиная с 2000/XP. Без всяких установок Visual C++ Redistributable/Visual C++ Runtime и дополнительных библиотек. Просто добавляем в проектный файл такие строки: QMAKE_LFLAGS +=-static-libgcc -static-libstdc++">
 <meta property="og:keywords" content="android, программирование, qt, cpp">
-<meta property="og:url" content="https://toster.ru/q/88501">
+<meta property="og:url" content="https://toster.ru/answer?answer_id=282071&amp;_ga=2.189380651.1475396415.1557378422-1549461210.1557378422">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:domain" content="toster.ru">
 <meta name="twitter:site" content="@toster_ru">
 <meta name="twitter:creator" content="@toster_ru">
 <meta name="twitter:title" content="MinGW или MSVC: какой компилятор выбрать для приложений на Qt под Windows?">
-<meta name="twitter:description" content="Ответили на вопрос 2 человека. Оцените лучшие ответы! И подпишитесь на вопрос, чтобы узнавать о появлении новых ответов.">
-<meta name="twitter:url" content="https://toster.ru/q/88501">
-<meta name="keywords" content="Тостер, вопросы, ответы, ИТ, информационные технологии, toster, toster.ru, IT">
+<meta name="twitter:description" content="Оцените ответ от EXL. Я за MinGW, хотя бы потому, что он использует собственный Runtime, работающий на ВСЕХ MS Windows OS, начиная с Win95. В случае с Qt - начиная с 2000/XP. Без всяких установок Visual C++ Redistributable/Visual C++ Runtime и дополнительных библиотек. Просто добавляем в проектный файл такие строки: QMAKE_LFLAGS +=-static-libgcc -static-libstdc++">
+<meta name="twitter:url" content="https://toster.ru/answer?answer_id=282071&amp;_ga=2.189380651.1475396415.1557378422-1549461210.1557378422">
 <meta property="og:site_name" content="«Тостер» — вопросы и ответы">
 <meta property="og:type" content="website">
 <meta name="HandheldFriendly" content="True">
 <meta name="MobileOptimized" content="320">
 <meta http-equiv="cleartype" content="on">
 <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic&amp;subset=latin,cyrillic">
-<link rel="stylesheet" href="https://dr.habracdn.net/toster/frontend.791dd21b-da2b-4de2-b9ed-3a84a35ddfbb.css">
+<link rel="stylesheet" href="./MinGW или MSVC_ какой компилятор выбрать для приложений на Qt под Windows_ — Toster.ru_files/css">
+<link rel="stylesheet" href="./MinGW или MSVC_ какой компилятор выбрать для приложений на Qt под Windows_ — Toster.ru_files/frontend.3be5542c-603c-4672-85ff-11b36598cb99.css">
 
 <link rel="icon" href="https://dr.habracdn.net/toster/images/favicons/favicon.ico" type="image/x-icon">
 <link href="https://dr.habracdn.net/toster/images/favicons/apple-touch-icon-57x57.png" rel="apple-touch-icon" sizes="57x57">
@@ -53,27 +46,27 @@
 <meta content="https://dr.habracdn.net/toster/images/favicons/mstile-144x144.png" name="msapplication-TileImage">
 <meta content="Тостер" name="application-name">
 <meta content="Тостер" name="apple-mobile-web-app-title">
-<script src="https://dr.habracdn.net/toster/js/lib/modernizr.custom.js" async="async"></script>
-  </head>
-  <body>
+<script type="text/javascript" async="" src="./MinGW или MSVC_ какой компилятор выбрать для приложений на Qt под Windows_ — Toster.ru_files/js"></script><script type="text/javascript" async="" src="./MinGW или MSVC_ какой компилятор выбрать для приложений на Qt под Windows_ — Toster.ru_files/watch.js.загружено"></script><script async="" src="./MinGW или MSVC_ какой компилятор выбрать для приложений на Qt под Windows_ — Toster.ru_files/analytics.js.загружено"></script><script src="./MinGW или MSVC_ какой компилятор выбрать для приложений на Qt под Windows_ — Toster.ru_files/modernizr.custom.js.загружено" async="async"></script>
+  <script type="text/javascript" async="" src="./MinGW или MSVC_ какой компилятор выбрать для приложений на Qt под Windows_ — Toster.ru_files/openapi.js.загружено"></script></head>
+  <body style="">
     <div class="tmservices-panel" role="tm_panel">
   <ul class="tmenu-mservices">
     <li class="tmenu-mservices__item">
-      <a class="tmenu-mservices__item-link" href="https://habr.com?utm_source=tm_toster&utm_medium=tm_top_panel&utm_campaign=tm_promo">Хабр</a>
+      <a class="tmenu-mservices__item-link" href="https://habr.com/?utm_source=tm_toster&amp;utm_medium=tm_top_panel&amp;utm_campaign=tm_promo">Хабр</a>
     </li>
     <li class="tmenu-mservices__item">
-      <a class="tmenu-mservices__item-link" href="https://habr.com/flows/geektimes/?utm_source=tm_toster&utm_medium=tm_top_panel&utm_campaign=tm_promo">Geektimes</a>
+      <a class="tmenu-mservices__item-link" href="https://habr.com/flows/geektimes/?utm_source=tm_toster&amp;utm_medium=tm_top_panel&amp;utm_campaign=tm_promo">Geektimes</a>
     </li>
     <li class="tmenu-mservices__item">
-      <a class="tmenu-mservices__item-link tmenu-mservices__item-link_current" href="https://toster.ru?utm_source=tm_toster&utm_medium=tm_top_panel&utm_campaign=tm_promo">Тостер</a>
+      <a class="tmenu-mservices__item-link tmenu-mservices__item-link_current" href="https://toster.ru/?utm_source=tm_toster&amp;utm_medium=tm_top_panel&amp;utm_campaign=tm_promo">Тостер</a>
     </li>
     <li class="tmenu-mservices__item">
-      <a class="tmenu-mservices__item-link" href="https://moikrug.ru?utm_source=tm_toster&utm_medium=tm_top_panel&utm_campaign=tm_promo">Мой круг</a>
+      <a class="tmenu-mservices__item-link" href="https://moikrug.ru/?utm_source=tm_toster&amp;utm_medium=tm_top_panel&amp;utm_campaign=tm_promo">Мой круг</a>
     </li>
     <li class="tmenu-mservices__item last-item">
-      <a class="tmenu-mservices__item-link" href="https://freelansim.ru/?utm_source=tm_toster&utm_medium=tm_top_panel&utm_campaign=tm_promo">Фрилансим</a>
+      <a class="tmenu-mservices__item-link" href="https://freelansim.ru/?utm_source=tm_toster&amp;utm_medium=tm_top_panel&amp;utm_campaign=tm_promo">Фрилансим</a>
     </li>
-    <li class="tmenu-mservices__item tmspecials"></li>
+    <li class="tmenu-mservices__item tmspecials"><span style="font-size: 12px; color: #999">Мегапосты:</span><a href="https://u.tmtm.ru/huawei_wifi6_glagne" target="_blank" class="tmspecials__item-link" style="color: #3c86ee!important">Вскрываем Wi-Fi 6</a><a href="https://u.tmtm.ru/u-inno-q-050419" target="_blank" class="tmspecials__item-link" style="color: #31B007!important">Иннополис-квест</a><a href="https://u.tmtm.ru/Kaspersky_Sadovnikov_04_2019_glagne" target="_blank" class="tmspecials__item-link" style="color: #00008B!important">С++страдание</a></li>
   </ul>
 </div>
     <div class="layout">
@@ -89,12 +82,12 @@
       <svg class="icon_svg icon_menu_lock" viewBox="0 0 32 32">
         <use xlink:href="https://toster.ru/images/sprite_0.1.svg#icon_menu_lock"></use>
       </svg>
-      <a class="user-panel__login-link" href="auth/tmid?ret=@referer">Войти на сайт</a>
+      <a class="user-panel__login-link" href="https://toster.ru/auth/tmid?ret=@referer">Войти на сайт</a>
     </div>
     </section>
 <ul class="main-menu">
     <li class="main-menu__item">
-    <a class="main-menu__link " id="item_questions" href="questions">
+    <a class="main-menu__link " id="item_questions" href="https://toster.ru/questions">
       <svg class="icon_svg icon_menu_questions" viewBox="0 0 32 32">
         <use xlink:href="https://toster.ru/images/sprite_0.1.svg#icon_menu_question"></use>
       </svg>
@@ -102,7 +95,7 @@
     </a>
   </li>
   <li class="main-menu__item">
-    <a class="main-menu__link " href="tags">
+    <a class="main-menu__link " href="https://toster.ru/tags">
       <svg class="icon_svg icon_menu_tags" viewBox="0 0 32 32">
         <use xlink:href="https://toster.ru/images/sprite_0.1.svg#icon_menu_tags"></use>
       </svg>
@@ -110,7 +103,7 @@
     </a>
   </li>
   <li class="main-menu__item">
-    <a class="main-menu__link " href="users">
+    <a class="main-menu__link " href="https://toster.ru/users">
       <svg class="icon_svg icon_menu_users" viewBox="0 0 34 32">
         <use xlink:href="https://toster.ru/images/sprite_0.1.svg#icon_menu_users"></use>
       </svg>
@@ -119,19 +112,19 @@
   </li>
   </ul>
   <section class="promo-block promo-block_sticky-bottom">
-    <h3 class="promo-block__title">Тостер&nbsp;&mdash; вопросы и&nbsp;ответы для IT-специалистов</h3>
+    <h3 class="promo-block__title">Тостер&nbsp;— вопросы и&nbsp;ответы для IT-специалистов</h3>
     <p class="promo-block__desc">Получайте ответы на&nbsp;вопросы по&nbsp;любой теме из&nbsp;области&nbsp;IT от&nbsp;специалистов в&nbsp;этой теме.</p>
-    <a class="btn btn_green" href="/help/about">Узнать больше</a>
+    <a class="btn btn_green" href="https://toster.ru/help/about">Узнать больше</a>
   </section>
         </aside>
         <div class="layout__body">
           <header class="layout__topbar">
             <div class="layout__topbar_suggest">
               <div class="layout__topbar_wrap">
-                <form class="suggest" action="search" method="get" id="header_search_form">
+                <form class="suggest" action="https://toster.ru/search" method="get" id="header_search_form">
   <div class="suggest__field_wrap">
     <div class="suggest__wrap_fluid">
-      <input class="suggest__field" type="search" autocomplete="off" name="q" placeholder="Найти вопрос, ответ, тег или пользователя" value="">
+      <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input class="suggest__field ui-autocomplete-input" type="search" autocomplete="off" name="q" placeholder="Найти вопрос, ответ, тег или пользователя" value="">
     </div>
     <button class="btn btn_link" type="button" role="btn_suggest_close">
       <span>Закрыть</span>
@@ -144,7 +137,7 @@
   </button>
 </form>
                 <div class="layout__topbar_add-question">
-                  <a class="btn btn_green btn_add-question" href="question/new" role="auth_popup_trigger" data-value="Чтобы задать вопрос и&nbsp;получить на&nbsp;него квалифицированный ответ." data-title="" data-auth-ret="question/new" data-no-button="">
+                  <a class="btn btn_green btn_add-question" href="https://toster.ru/question/new" role="auth_popup_trigger" data-value="Чтобы задать вопрос и получить на него квалифицированный ответ." data-title="" data-auth-ret="question/new" data-no-button="">
                     <svg class="icon_svg icon_plus" viewBox="0 0 32 32">
                       <use xlink:href="https://toster.ru/images/sprite_0.1.svg#icon_plus"></use>
                     </svg>
@@ -169,14 +162,13 @@
           <div class="column column_wrap" role="wrap_section">
             <div class="column_main">
               <div class="page">
-                <div class="flash-notices" role="notices_container_flash"></div>
+                <div class="flash-notices" role="notices_container_flash" style=""></div>
                 <div class="notices-container" role="notice_container">
                                   </div>
-                    <div class="page__qa-wrapper" itemscope itemtype="http://schema.org/QAPage">
-  <div class="page__body" id="question_show" itemscope itemprop="mainEntity" itemtype="http://schema.org/Question">
-    <div class="question question_full">
-      <div class="question-head">
-  <div class="user-summary user-summary_question" itemprop="author creator" itemscope itemtype="http://schema.org/Person">
+                    <div class="page__body" id="page_answer">
+  <div class="question question_full" itemscope="" itemtype="http://schema.org/Question">
+    <div class="question-head">
+  <div class="user-summary user-summary_question" itemprop="author creator" itemscope="" itemtype="http://schema.org/Person">
   <a class="user-summary__avatar" href="https://toster.ru/user/tugo">
     <meta itemprop="image" content="https://toster.ru/images/no_avatar.png">
       <svg class="icon_userpic" viewBox="0 0 32 32">
@@ -187,19 +179,19 @@
     <a class="user-summary__name" href="https://toster.ru/user/tugo" itemprop="url"><meta itemprop="name" content="tugo">tugo</a>
     <span class="user-summary__nickname">
       <meta itemprop="alternateName" content="tugo">
-      @tugo                </span>
+      @tugo                                  </span>
       </div>
 </div>
         <div class="question-head_subscribers">
       <ul class="subscribers-list subscribers-list_short">
                   <li class="subscribers-list__item" title="Fesor подписан">
             <a class="subscribers-list__user-avatar" href="https://toster.ru/user/Fesor">
-                <img src="//www.gravatar.com/avatar/7d36bab963d4eaf384e653b2ad2e1c16?d=wavatar&s=60" alt="Fesor">
+                <img src="./MinGW или MSVC_ какой компилятор выбрать для приложений на Qt под Windows_ — Toster.ru_files/7d36bab963d4eaf384e653b2ad2e1c16.jpeg" alt="Fesor">
             </a>
           </li>
                           <li class="subscribers-list__item" title="EXL подписан">
             <a class="subscribers-list__user-avatar" href="https://toster.ru/user/EXL">
-                <img src="https://habrastorage.org/r/w60/getpro/toster/avatars/1bd/356/5a2/1bd3565a296f09c7222fc7bb5a127207.jpg" alt="EXL">
+                <img src="./MinGW или MSVC_ какой компилятор выбрать для приложений на Qt под Windows_ — Toster.ru_files/1bd3565a296f09c7222fc7bb5a127207.jpg" alt="EXL">
             </a>
           </li>
                           <li class="subscribers-list__item" title="DvLpb подписан">
@@ -211,16 +203,16 @@
           </li>
                           <li class="subscribers-list__item" title="peleron подписан">
             <a class="subscribers-list__user-avatar" href="https://toster.ru/user/peleron">
-                <img src="//www.gravatar.com/avatar/02e73f9bc092556875ea5c4489dd2259?d=wavatar&s=60" alt="peleron">
+                <img src="./MinGW или MSVC_ какой компилятор выбрать для приложений на Qt под Windows_ — Toster.ru_files/02e73f9bc092556875ea5c4489dd2259.jpeg" alt="peleron">
             </a>
           </li>
                           <li class="subscribers-list__item" title="TrueBers подписан">
             <a class="subscribers-list__user-avatar" href="https://toster.ru/user/TrueBers">
-                <img src="https://habrastorage.org/r/w60/files/168/161/ea3/168161ea3be743bea2c7118af6a6ba2f.jpg" alt="TrueBers">
+                <img src="./MinGW или MSVC_ какой компилятор выбрать для приложений на Qt под Windows_ — Toster.ru_files/168161ea3be743bea2c7118af6a6ba2f.jpg" alt="TrueBers">
             </a>
           </li>
                         <li class="subscribers-list__item subscribers-list__item_more" title="Все подписчики на вопрос">
-          <a role="link_subscribers" href="question/subscribers?question_id=88501#question_subscribers">
+          <a role="link_subscribers" href="https://toster.ru/question/subscribers?question_id=88501#question_subscribers">
             <svg class="icon_svg icon_dots" viewBox="0 0 131 32">
               <use xlink:href="https://toster.ru/images/sprite_0.1.svg#icon_dots"></use>
             </svg>
@@ -229,9 +221,9 @@
       </ul>
     </div>
     </div>
-      <div class="question__tags">
+    <div class="question__tags">
       <a class="question__tags-image" href="https://toster.ru/tag/android">
-            <img class="tag__image tag__image_bg" src="https://habrastorage.org/r/w32/webt/5b/0d/67/5b0d6718e4b6b295356228.png" alt="android">
+            <img class="tag__image tag__image_bg" src="./MinGW или MSVC_ какой компилятор выбрать для приложений на Qt под Windows_ — Toster.ru_files/5b0d6718e4b6b295356228.png" alt="android">
     </a>
       <ul class="tags-list">
               <li class="tags-list__item  tag_405" data-tagname="android">
@@ -239,7 +231,7 @@
             Android          </a>
         </li>
                     <li class="tags-list__item  tag_152707" data-tagname="программирование">
-          <a href="https://toster.ru/tag/программирование">
+          <a href="https://toster.ru/tag/%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5">
             Программирование          </a>
         </li>
                     <li class="tags-list__item  tag_153293" data-tagname="qt">
@@ -256,10 +248,10 @@
   MinGW или MSVC: какой компилятор выбрать для приложений на Qt под Windows?</h1>
 <div class="question__body">
   <div class="question__text js-question-text" itemprop="text description">
-    В основном пишу десктоп-приложения под Windows на Qt (компилятор MSVC2012,  Windows7).  Иногда их нужно собрать под Android.<br/>
-Стоит ли для дескопных приложений перейти на MinGW (чтобы для Андроида и винды писать под один компилятор)?<br/>
-При переходе на MinGW какой отладчик использовать? Придется обязательно перейти на GDB? <br/><br/>
-Использую boost, стараюсь задействовать возможности C++11.<br/><br/>
+    В основном пишу десктоп-приложения под Windows на Qt (компилятор MSVC2012,  Windows7).  Иногда их нужно собрать под Android.<br>
+Стоит ли для дескопных приложений перейти на MinGW (чтобы для Андроида и винды писать под один компилятор)?<br>
+При переходе на MinGW какой отладчик использовать? Придется обязательно перейти на GDB? <br><br>
+Использую boost, стараюсь задействовать возможности C++11.<br><br>
 Какие проблемы меня ожидают?  </div>
       <ul class="question__attrs inline-list">
       <li class="inline-list__item inline-list__item_bullet">
@@ -271,33 +263,33 @@
       </li>
               <li class="inline-list__item inline-list__item_bullet">
           <span class="question__views-count question__views-count_full">
-            <meta itemprop="interactionCount" content="15820 views">
-            15820             просмотров          </span>
+            <meta itemprop="interactionCount" content="15956 views">
+            15956             просмотров          </span>
         </li>
                 </ul>
     </div>
-      <div class="question__comments-link">
-          <a class="btn btn_link btn_comments-toggle" href="javascript:void(0)" role="auth_popup_trigger" title="Необходимо авторизоваться на сайте" data-value="Чтобы написать комментарий">
+    <div class="question__comments-link">
+        <a class="btn btn_link btn_comments-toggle" href="javascript:void(0)" role="auth_popup_trigger" title="Необходимо авторизоваться на сайте" data-value="Чтобы написать комментарий">
     <span>Комментировать</span>
   </a>
-      </div>
-      <div class="buttons-group buttons-group_question">
-          <a class="btn btn_subscribe" href="#" role="auth_popup_trigger" title="Подписаться на вопрос" data-value="Чтобы получать уведомления о&nbsp;новых ответах на&nbsp;вопрос.">
+    </div>
+    <div class="buttons-group">
+        <a class="btn btn_subscribe" href="https://toster.ru/#" role="auth_popup_trigger" title="Подписаться на вопрос" data-value="Чтобы получать уведомления о новых ответах на вопрос.">
     Подписаться
           <span class="btn__counter" role="subscribers_count">
         <meta itemprop="interactionCount" content="8 UserSubscriptions">
         8      </span>
           </a>
-          <span class="btn btn_outline_grey btn_complexity" title="Проголосовало: 0" disabled="true">
+        <span class="btn btn_outline_grey btn_complexity" title="Проголосовало: 0" disabled="true">
     <span class="svg-icon_level svg-icon_level-0">
-      <svg class="svg-icon" width="51" height="32" viewBox="0 0 51 32"><path d="M20.806 24.295c-1.767 2.88-.575 5.249 1.874 6.579s5.227 1.116 6.994-1.763 12.92-28.574 11.95-29.102c-.971-.526-19.051 21.406-20.818 24.285zm4.794-18.301c1.119 0 2.213.091 3.279.261 1.122-1.32 2.377-2.776 3.599-4.159-2.182-.594-4.486-.917-6.878-.917-14.355 0-25.6 11.386-25.6 25.921 0 .894.042 1.789.125 2.66.126 1.325 1.383 2.3 2.777 2.185 1.409-.118 2.448-1.288 2.322-2.613-.069-.73-.104-1.48-.104-2.232 0-11.835 8.996-21.105 20.48-21.105zm18.479 3.008c-.714 1.805-1.47 3.646-2.135 5.237 2.603 3.537 4.135 7.979 4.135 12.859 0 .763-.036 1.529-.109 2.276-.128 1.324.91 2.496 2.318 2.617l.235.01c1.309 0 2.425-.94 2.546-2.189.086-.891.13-1.804.13-2.712 0-7.108-2.694-13.458-7.121-18.096z"/></svg>
+      <svg class="svg-icon" width="51" height="32" viewBox="0 0 51 32"><path d="M20.806 24.295c-1.767 2.88-.575 5.249 1.874 6.579s5.227 1.116 6.994-1.763 12.92-28.574 11.95-29.102c-.971-.526-19.051 21.406-20.818 24.285zm4.794-18.301c1.119 0 2.213.091 3.279.261 1.122-1.32 2.377-2.776 3.599-4.159-2.182-.594-4.486-.917-6.878-.917-14.355 0-25.6 11.386-25.6 25.921 0 .894.042 1.789.125 2.66.126 1.325 1.383 2.3 2.777 2.185 1.409-.118 2.448-1.288 2.322-2.613-.069-.73-.104-1.48-.104-2.232 0-11.835 8.996-21.105 20.48-21.105zm18.479 3.008c-.714 1.805-1.47 3.646-2.135 5.237 2.603 3.537 4.135 7.979 4.135 12.859 0 .763-.036 1.529-.109 2.276-.128 1.324.91 2.496 2.318 2.617l.235.01c1.309 0 2.425-.94 2.546-2.189.086-.891.13-1.804.13-2.712 0-7.108-2.694-13.458-7.121-18.096z"></path></svg>
     </span>
           Оценить
           </span>
-          <a class="btn btn_link btn_comments-toggle" href="javascript:void(0)" role="auth_popup_trigger" title="Необходимо авторизоваться на сайте" data-value="Чтобы написать комментарий">
+        <a class="btn btn_link btn_comments-toggle" href="javascript:void(0)" role="auth_popup_trigger" title="Необходимо авторизоваться на сайте" data-value="Чтобы написать комментарий">
     <span>Комментировать</span>
   </a>
-                <div class="dropdown dropdown_share" role="dropdown">
+            <div class="dropdown dropdown_share" role="dropdown">
   <button class="btn btn_share" role="dropdown_trigger" data-toggle="dropdown" type="button" title=" Поделиться вопросом">
     <svg class="icon_svg icon_sharing" viewBox="0 0 32 32">
       <use xlink:href="https://toster.ru/images/sprite_0.1.svg#icon_sharing"></use>
@@ -306,56 +298,63 @@
   <div class="dropdown__menu">
         <ul class="menu menu_dropdown">
   <li class="menu__item">
-    <a class="menu__item-link link_fb" href="https://www.facebook.com/sharer/sharer.php?u=https://toster.ru/q/88501" title="Опубликовать ссылку в Facebook" onclick="window.open(this.href, 'Опубликовать ссылку в Facebook', 'width=640,height=436,toolbar=0,status=0'); ga('send', 'social', 'facebook', 'share', 'https://toster.ru/q/88501'); return false" target="_blank">
+    <a class="menu__item-link link_fb" href="https://www.facebook.com/sharer/sharer.php?u=https://toster.ru/q/88501" title="Опубликовать ссылку в Facebook" onclick="window.open(this.href, &#39;Опубликовать ссылку в Facebook&#39;, &#39;width=640,height=436,toolbar=0,status=0&#39;); ga(&#39;send&#39;, &#39;social&#39;, &#39;facebook&#39;, &#39;share&#39;, &#39;https://toster.ru/q/88501&#39;); return false" target="_blank">
       Facebook
     </a>
   </li>
   <li class="menu__item menu__item">
-    <a class="menu__item-link link_vk" href="http://vk.com/share.php?url=https://toster.ru/q/88501" title="Опубликовать ссылку во ВКонтакте" onclick="window.open(this.href, 'Опубликовать ссылку во Вконтакте', 'width=800,height=300'); pages.clearCache(this.href); ga('send', 'social' 'vkontakte', 'share', 'https://toster.ru/q/88501'); return false" target="_blank">
+    <a class="menu__item-link link_vk" href="http://vk.com/share.php?url=https://toster.ru/q/88501" title="Опубликовать ссылку во ВКонтакте" onclick="window.open(this.href, &#39;Опубликовать ссылку во Вконтакте&#39;, &#39;width=800,height=300&#39;); pages.clearCache(this.href); ga(&#39;send&#39;, &#39;social&#39; &#39;vkontakte&#39;, &#39;share&#39;, &#39;https://toster.ru/q/88501&#39;); return false" target="_blank">
       Вконтакте
     </a>
   </li>
   <li class="menu__item">
-                  <a class="menu__item-link link_tw" href="http://twitter.com/intent/tweet?text=tugo спрашивает «MinGW+%D0%B8%D0%BB%D0%B8+MSVC%3A+%D0%BA%D0%B0%D0%BA%D0%BE%D0%B9+%D0%BA%D0%BE%D0%BC%D0%BF%D0%B8%D0%BB%D1%8F%D1%82%D0%BE%D1%80+%D0%B2%D1%8B%D0%B1%D1%80%D0%B0%D1%82%D1%8C+%D0%B4%D0%BB%D1%8F+%D0%BF%D1%80%D0%B8%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D0%B9+%D0%BD%D0%B0+Qt+%D0%BF%D0%BE%D0%B4+Windows%3F» https://toster.ru/q/88501+via+@toster_ru+%23toster" onclick="ga('send', 'social', 'twitter', 'tweet', 'https://toster.ru/q/88501');" title="Опубликовать ссылку в Twitter" target="_blank">
+                  <a class="menu__item-link link_tw" href="http://twitter.com/intent/tweet?text=tugo%20%D1%81%D0%BF%D1%80%D0%B0%D1%88%D0%B8%D0%B2%D0%B0%D0%B5%D1%82%20%C2%ABMinGW+%D0%B8%D0%BB%D0%B8+MSVC%3A+%D0%BA%D0%B0%D0%BA%D0%BE%D0%B9+%D0%BA%D0%BE%D0%BC%D0%BF%D0%B8%D0%BB%D1%8F%D1%82%D0%BE%D1%80+%D0%B2%D1%8B%D0%B1%D1%80%D0%B0%D1%82%D1%8C+%D0%B4%D0%BB%D1%8F+%D0%BF%D1%80%D0%B8%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D0%B9+%D0%BD%D0%B0+Qt+%D0%BF%D0%BE%D0%B4+Windows%3F%C2%BB%20https://toster.ru/q/88501+via+@toster_ru+%23toster" onclick="ga(&#39;send&#39;, &#39;social&#39;, &#39;twitter&#39;, &#39;tweet&#39;, &#39;https://toster.ru/q/88501&#39;);" title="Опубликовать ссылку в Twitter" target="_blank">
       Twitter
     </a>
   </li>
   <li class="menu__item">
-    <a class="menu__item-link link_gp" href="https://plus.google.com/share?url=https://toster.ru/q/88501" onclick="window.open(this.href, 'Опубликовать ссылку в Google Plus', 'width=800,height=300'); ga('send', 'social', 'gplus', 'share', 'https://toster.ru/q/88501'); return false" target="_blank">
+    <a class="menu__item-link link_gp" href="https://plus.google.com/share?url=https://toster.ru/q/88501" onclick="window.open(this.href, &#39;Опубликовать ссылку в Google Plus&#39;, &#39;width=800,height=300&#39;); ga(&#39;send&#39;, &#39;social&#39;, &#39;gplus&#39;, &#39;share&#39;, &#39;https://toster.ru/q/88501&#39;); return false" target="_blank">
       Google
     </a>
   </li>
 </ul>
   </div>
 </div>
-      </div>
-      <div class="question__comments hidden" role="question_comments">
+    </div>
+    <div class="question__comments hidden" role="question_comments">
   <ul class="content-list content-list_comments empty" role="question_comments_list">
           </ul>
 </div>
-    </div>
-    <div class="question__additionals">
-                        <div class="section section_solutions  " id="solutions" role="solutions_section">
-                        <header class="section-header">
+  </div>
+  <div class="section section_answers section_answers_expand" id="answers_list_answer">
+            <header class="section-header">
   <strong class="section-header__title">
-    Решения вопроса          <span class="section-header__counter" role="answers_counter">2</span>
-          </strong>
+    <span class="section-header__material-type" role="material_type">
+      Решение    </span>
+    пользователя
+    <span class="section-header__author">EXL</span>
+  </strong>
+  <a class="section-header__link_all" href="https://toster.ru/q/88501">
+    К ответам
+    <span class="unvisible_mobile">на вопрос</span>
+    (2)
+  </a>
 </header>
-        <div class="content-list content-list_answers" id="solutions_list">
+    <div class="content-list content-list_answers" id="answers_list">
         <div class="content-list__item" role="answer_item " id="answer_item_282071">
-    <div class="answer_wrapper " id="answer_282071" role="toggle_delete_answer" itemprop="suggestedAnswer acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+    <div class="answer_wrapper " id="answer_282071" role="toggle_delete_answer" itemprop="suggestedAnswer acceptedAnswer" itemscope="" itemtype="http://schema.org/Answer">
       <div class="answer answer_solution" data-created_at="1398113770">
   <div class="answer__header">
-    <div class="user-summary " itemprop="author creator" itemscope itemtype="http://schema.org/Person">
+    <div class="user-summary " itemprop="author creator" itemscope="" itemtype="http://schema.org/Person">
   <a class="user-summary__avatar" href="https://toster.ru/user/EXL">
     <meta itemprop="image" content="//habrastorage.org/getpro/toster/avatars/1bd/356/5a2/1bd3565a296f09c7222fc7bb5a127207.jpg">
-      <img src="https://habrastorage.org/r/w60/getpro/toster/avatars/1bd/356/5a2/1bd3565a296f09c7222fc7bb5a127207.jpg" alt="EXL">
+      <img src="./MinGW или MSVC_ какой компилятор выбрать для приложений на Qt под Windows_ — Toster.ru_files/1bd3565a296f09c7222fc7bb5a127207.jpg" alt="EXL">
   </a>
   <div class="user-summary__desc">
     <a class="user-summary__name" href="https://toster.ru/user/EXL" itemprop="url"><meta itemprop="name" content="EXL">EXL</a>
     <span class="user-summary__nickname">
       <meta itemprop="alternateName" content="EXL">
-      @EXL                </span>
+      @EXL                                  </span>
           <div class="user-summary__about" itemprop="description">
         Энтузиаст      </div>
           </div>
@@ -364,7 +363,7 @@
   <div class="answer__body">
         <div class="answer__body_inner">
       <div class="answer__text js-answer-text" itemprop="text">
-        Я за MinGW, хотя бы потому, что он использует собственный Runtime, работающий на <b>ВСЕХ</b> MS Windows OS, начиная с Win95. В случае с Qt - начиная с 2000/XP. Без всяких установок Visual C++ Redistributable/Visual C++ Runtime и дополнительных библиотек. Просто добавляем в проектный файл такие строки: <code>QMAKE_LFLAGS +=-static-libgcc -static-libstdc++</code>      </div>
+        Я за MinGW, хотя бы потому, что он использует собственный Runtime, работающий на <b>ВСЕХ</b> MS Windows OS, начиная с Win95. В случае с Qt - начиная с 2000/XP. Без всяких установок Visual C++ Redistributable/Visual C++ Runtime и дополнительных библиотек. Просто добавляем в проектный файл такие строки: <code class="hljs">QMAKE_LFLAGS +=-static-libgcc -static-libstdc++</code>      </div>
       <div class="answer__date">
         Ответ написан
         <meta itemprop="url" content="https://toster.ru/answer?answer_id=282071#answers_list_answer">
@@ -409,22 +408,22 @@
   <div class="dropdown__menu">
         <ul class="menu menu_dropdown">
   <li class="menu__item">
-    <a class="menu__item-link link_fb" href="https://www.facebook.com/sharer/sharer.php?u=https://toster.ru/answer?answer_id=282071" title="Опубликовать ссылку в Facebook" onclick="window.open(this.href, 'Опубликовать ссылку в Facebook', 'width=640,height=436,toolbar=0,status=0'); ga('send', 'social', 'facebook', 'share', 'https://toster.ru/answer?answer_id=282071'); return false" target="_blank">
+    <a class="menu__item-link link_fb" href="https://www.facebook.com/sharer/sharer.php?u=https://toster.ru/answer?answer_id=282071" title="Опубликовать ссылку в Facebook" onclick="window.open(this.href, &#39;Опубликовать ссылку в Facebook&#39;, &#39;width=640,height=436,toolbar=0,status=0&#39;); ga(&#39;send&#39;, &#39;social&#39;, &#39;facebook&#39;, &#39;share&#39;, &#39;https://toster.ru/answer?answer_id=282071&#39;); return false" target="_blank">
       Facebook
     </a>
   </li>
   <li class="menu__item menu__item">
-    <a class="menu__item-link link_vk" href="http://vk.com/share.php?url=https://toster.ru/answer?answer_id=282071" title="Опубликовать ссылку во ВКонтакте" onclick="window.open(this.href, 'Опубликовать ссылку во Вконтакте', 'width=800,height=300'); pages.clearCache(this.href); ga('send', 'social' 'vkontakte', 'share', 'https://toster.ru/answer?answer_id=282071'); return false" target="_blank">
+    <a class="menu__item-link link_vk" href="http://vk.com/share.php?url=https://toster.ru/answer?answer_id=282071" title="Опубликовать ссылку во ВКонтакте" onclick="window.open(this.href, &#39;Опубликовать ссылку во Вконтакте&#39;, &#39;width=800,height=300&#39;); pages.clearCache(this.href); ga(&#39;send&#39;, &#39;social&#39; &#39;vkontakte&#39;, &#39;share&#39;, &#39;https://toster.ru/answer?answer_id=282071&#39;); return false" target="_blank">
       Вконтакте
     </a>
   </li>
   <li class="menu__item">
-                      <a class="menu__item-link link_tw" href="http://twitter.com/intent/tweet?text=EXL ответил на вопрос «MinGW+%D0%B8%D0%BB%D0%B8+MSVC%3A+%D0%BA%D0%B0%D0%BA%D0%BE%D0%B9+%D0%BA%D0%BE%D0%BC%D0%BF%D0%B8%D0%BB%D1%8F%D1%82%D0%BE%D1%80+%D0%B2%D1%8B%D0%B1%D1%80%D0%B0%D1%82%D1%8C+%D0%B4%D0%BB%D1%8F+%D0%BF%D1%80%D0%B8%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D0%B9+%D0%BD%D0%B0+Qt+%D0%BF%D0%BE%D0%B4+Windows%3F» https://toster.ru/answer?answer_id=282071+via+@toster_ru+%23toster" onclick="ga('send', 'social', 'twitter', 'tweet', 'https://toster.ru/answer?answer_id=282071');" title="Опубликовать ссылку в Twitter" target="_blank">
+                      <a class="menu__item-link link_tw" href="http://twitter.com/intent/tweet?text=EXL%20%D0%BE%D1%82%D0%B2%D0%B5%D1%82%D0%B8%D0%BB%20%D0%BD%D0%B0%20%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%20%C2%ABMinGW+%D0%B8%D0%BB%D0%B8+MSVC%3A+%D0%BA%D0%B0%D0%BA%D0%BE%D0%B9+%D0%BA%D0%BE%D0%BC%D0%BF%D0%B8%D0%BB%D1%8F%D1%82%D0%BE%D1%80+%D0%B2%D1%8B%D0%B1%D1%80%D0%B0%D1%82%D1%8C+%D0%B4%D0%BB%D1%8F+%D0%BF%D1%80%D0%B8%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D0%B9+%D0%BD%D0%B0+Qt+%D0%BF%D0%BE%D0%B4+Windows%3F%C2%BB%20https://toster.ru/answer?answer_id=282071+via+@toster_ru+%23toster" onclick="ga(&#39;send&#39;, &#39;social&#39;, &#39;twitter&#39;, &#39;tweet&#39;, &#39;https://toster.ru/answer?answer_id=282071&#39;);" title="Опубликовать ссылку в Twitter" target="_blank">
       Twitter
     </a>
   </li>
   <li class="menu__item">
-    <a class="menu__item-link link_gp" href="https://plus.google.com/share?url=https://toster.ru/answer?answer_id=282071" onclick="window.open(this.href, 'Опубликовать ссылку в Google Plus', 'width=800,height=300'); ga('send', 'social', 'gplus', 'share', 'https://toster.ru/answer?answer_id=282071'); return false" target="_blank">
+    <a class="menu__item-link link_gp" href="https://plus.google.com/share?url=https://toster.ru/answer?answer_id=282071" onclick="window.open(this.href, &#39;Опубликовать ссылку в Google Plus&#39;, &#39;width=800,height=300&#39;); ga(&#39;send&#39;, &#39;social&#39;, &#39;gplus&#39;, &#39;share&#39;, &#39;https://toster.ru/answer?answer_id=282071&#39;); return false" target="_blank">
       Google
     </a>
   </li>
@@ -432,21 +431,21 @@
   </div>
 </div>
       </div>
-            <div class="answer__comments hidden" id="answer_comments_282071" role="answer_comments">
-      <ul class="content-list content-list_comments " role="answer_comments_list" id="comments_list_282071" itemscope itemtype="http://schema.org/Comment">
+            <div class="answer__comments" id="answer_comments_282071" role="answer_comments">
+      <ul class="content-list content-list_comments " role="answer_comments_list" id="comments_list_282071" itemscope="" itemtype="http://schema.org/Comment">
                     <li class="content-list__item" role="comments_item">
-    <div class="comment " id="comment_338341" role="comment toggle_delete_comment" itemscope itemtype="http://schema.org/Comment">
+    <div class="comment " id="comment_338341" role="comment toggle_delete_comment" itemscope="" itemtype="http://schema.org/Comment">
       <div class="comment__header">
-        <div class="user-summary user-summary_comment" itemprop="author creator" itemscope itemtype="http://schema.org/Person">
+        <div class="user-summary user-summary_comment" itemprop="author creator" itemscope="" itemtype="http://schema.org/Person">
   <a class="user-summary__avatar" href="https://toster.ru/user/TrueBers">
     <meta itemprop="image" content="//habrastorage.org/files/168/161/ea3/168161ea3be743bea2c7118af6a6ba2f.jpg">
-      <img src="https://habrastorage.org/r/w60/files/168/161/ea3/168161ea3be743bea2c7118af6a6ba2f.jpg" alt="TrueBers">
+      <img src="./MinGW или MSVC_ какой компилятор выбрать для приложений на Qt под Windows_ — Toster.ru_files/168161ea3be743bea2c7118af6a6ba2f.jpg" alt="TrueBers">
   </a>
   <div class="user-summary__desc">
     <a class="user-summary__name" href="https://toster.ru/user/TrueBers" itemprop="url"><meta itemprop="name" content="Дмитрий">Дмитрий</a>
     <span class="user-summary__nickname">
       <meta itemprop="alternateName" content="TrueBers">
-      @TrueBers                </span>
+      @TrueBers                                  </span>
       </div>
 </div>
       </div>
@@ -466,18 +465,18 @@
           </div>
   </li>
                             <li class="content-list__item" role="comments_item">
-    <div class="comment " id="comment_338385" role="comment toggle_delete_comment" itemscope itemtype="http://schema.org/Comment">
+    <div class="comment " id="comment_338385" role="comment toggle_delete_comment" itemscope="" itemtype="http://schema.org/Comment">
       <div class="comment__header">
-        <div class="user-summary user-summary_comment" itemprop="author creator" itemscope itemtype="http://schema.org/Person">
+        <div class="user-summary user-summary_comment" itemprop="author creator" itemscope="" itemtype="http://schema.org/Person">
   <a class="user-summary__avatar" href="https://toster.ru/user/Fesor">
     <meta itemprop="image" content="//www.gravatar.com/avatar/7d36bab963d4eaf384e653b2ad2e1c16?d=wavatar&amp;s=256">
-      <img src="//www.gravatar.com/avatar/7d36bab963d4eaf384e653b2ad2e1c16?d=wavatar&s=60" alt="Fesor">
+      <img src="./MinGW или MSVC_ какой компилятор выбрать для приложений на Qt под Windows_ — Toster.ru_files/7d36bab963d4eaf384e653b2ad2e1c16.jpeg" alt="Fesor">
   </a>
   <div class="user-summary__desc">
     <a class="user-summary__name" href="https://toster.ru/user/Fesor" itemprop="url"><meta itemprop="name" content="Сергей Протько">Сергей Протько</a>
     <span class="user-summary__nickname">
       <meta itemprop="alternateName" content="Fesor">
-      @Fesor                </span>
+      @Fesor                                  </span>
       </div>
 </div>
       </div>
@@ -497,9 +496,9 @@
           </div>
   </li>
                             <li class="content-list__item" role="comments_item">
-    <div class="comment " id="comment_338399" role="comment toggle_delete_comment" itemscope itemtype="http://schema.org/Comment">
+    <div class="comment " id="comment_338399" role="comment toggle_delete_comment" itemscope="" itemtype="http://schema.org/Comment">
       <div class="comment__header">
-        <div class="user-summary user-summary_comment" itemprop="author creator" itemscope itemtype="http://schema.org/Person">
+        <div class="user-summary user-summary_comment" itemprop="author creator" itemscope="" itemtype="http://schema.org/Person">
   <a class="user-summary__avatar" href="https://toster.ru/user/Free_ze">
     <meta itemprop="image" content="https://toster.ru/images/no_avatar.png">
       <svg class="icon_userpic" viewBox="0 0 32 32">
@@ -510,7 +509,7 @@
     <a class="user-summary__name" href="https://toster.ru/user/Free_ze" itemprop="url"><meta itemprop="name" content="Толстый Лорри">Толстый Лорри</a>
     <span class="user-summary__nickname">
       <meta itemprop="alternateName" content="Free_ze">
-      @Free_ze                </span>
+      @Free_ze                                  </span>
       </div>
 </div>
       </div>
@@ -530,18 +529,18 @@
           </div>
   </li>
                             <li class="content-list__item" role="comments_item">
-    <div class="comment " id="comment_338417" role="comment toggle_delete_comment" itemscope itemtype="http://schema.org/Comment">
+    <div class="comment " id="comment_338417" role="comment toggle_delete_comment" itemscope="" itemtype="http://schema.org/Comment">
       <div class="comment__header">
-        <div class="user-summary user-summary_comment" itemprop="author creator" itemscope itemtype="http://schema.org/Person">
+        <div class="user-summary user-summary_comment" itemprop="author creator" itemscope="" itemtype="http://schema.org/Person">
   <a class="user-summary__avatar" href="https://toster.ru/user/TrueBers">
     <meta itemprop="image" content="//habrastorage.org/files/168/161/ea3/168161ea3be743bea2c7118af6a6ba2f.jpg">
-      <img src="https://habrastorage.org/r/w60/files/168/161/ea3/168161ea3be743bea2c7118af6a6ba2f.jpg" alt="TrueBers">
+      <img src="./MinGW или MSVC_ какой компилятор выбрать для приложений на Qt под Windows_ — Toster.ru_files/168161ea3be743bea2c7118af6a6ba2f.jpg" alt="TrueBers">
   </a>
   <div class="user-summary__desc">
     <a class="user-summary__name" href="https://toster.ru/user/TrueBers" itemprop="url"><meta itemprop="name" content="Дмитрий">Дмитрий</a>
     <span class="user-summary__nickname">
       <meta itemprop="alternateName" content="TrueBers">
-      @TrueBers                </span>
+      @TrueBers                                  </span>
       </div>
 </div>
       </div>
@@ -561,18 +560,18 @@
           </div>
   </li>
                             <li class="content-list__item" role="comments_item">
-    <div class="comment " id="comment_338457" role="comment toggle_delete_comment" itemscope itemtype="http://schema.org/Comment">
+    <div class="comment " id="comment_338457" role="comment toggle_delete_comment" itemscope="" itemtype="http://schema.org/Comment">
       <div class="comment__header">
-        <div class="user-summary user-summary_comment" itemprop="author creator" itemscope itemtype="http://schema.org/Person">
+        <div class="user-summary user-summary_comment" itemprop="author creator" itemscope="" itemtype="http://schema.org/Person">
   <a class="user-summary__avatar" href="https://toster.ru/user/Fesor">
     <meta itemprop="image" content="//www.gravatar.com/avatar/7d36bab963d4eaf384e653b2ad2e1c16?d=wavatar&amp;s=256">
-      <img src="//www.gravatar.com/avatar/7d36bab963d4eaf384e653b2ad2e1c16?d=wavatar&s=60" alt="Fesor">
+      <img src="./MinGW или MSVC_ какой компилятор выбрать для приложений на Qt под Windows_ — Toster.ru_files/7d36bab963d4eaf384e653b2ad2e1c16.jpeg" alt="Fesor">
   </a>
   <div class="user-summary__desc">
     <a class="user-summary__name" href="https://toster.ru/user/Fesor" itemprop="url"><meta itemprop="name" content="Сергей Протько">Сергей Протько</a>
     <span class="user-summary__nickname">
       <meta itemprop="alternateName" content="Fesor">
-      @Fesor                </span>
+      @Fesor                                  </span>
       </div>
 </div>
       </div>
@@ -592,9 +591,9 @@
           </div>
   </li>
                             <li class="content-list__item" role="comments_item">
-    <div class="comment " id="comment_338479" role="comment toggle_delete_comment" itemscope itemtype="http://schema.org/Comment">
+    <div class="comment " id="comment_338479" role="comment toggle_delete_comment" itemscope="" itemtype="http://schema.org/Comment">
       <div class="comment__header">
-        <div class="user-summary user-summary_comment" itemprop="author creator" itemscope itemtype="http://schema.org/Person">
+        <div class="user-summary user-summary_comment" itemprop="author creator" itemscope="" itemtype="http://schema.org/Person">
   <a class="user-summary__avatar" href="https://toster.ru/user/Free_ze">
     <meta itemprop="image" content="https://toster.ru/images/no_avatar.png">
       <svg class="icon_userpic" viewBox="0 0 32 32">
@@ -605,7 +604,7 @@
     <a class="user-summary__name" href="https://toster.ru/user/Free_ze" itemprop="url"><meta itemprop="name" content="Толстый Лорри">Толстый Лорри</a>
     <span class="user-summary__nickname">
       <meta itemprop="alternateName" content="Free_ze">
-      @Free_ze                </span>
+      @Free_ze                                  </span>
       </div>
 </div>
       </div>
@@ -625,25 +624,25 @@
           </div>
   </li>
                             <li class="content-list__item" role="comments_item">
-    <div class="comment " id="comment_1551237" role="comment toggle_delete_comment" itemscope itemtype="http://schema.org/Comment">
+    <div class="comment " id="comment_1551237" role="comment toggle_delete_comment" itemscope="" itemtype="http://schema.org/Comment">
       <div class="comment__header">
-        <div class="user-summary user-summary_comment" itemprop="author creator" itemscope itemtype="http://schema.org/Person">
+        <div class="user-summary user-summary_comment" itemprop="author creator" itemscope="" itemtype="http://schema.org/Person">
   <a class="user-summary__avatar" href="https://toster.ru/user/Wohlstand">
     <meta itemprop="image" content="https://habrastorage.org/webt/5b/cb/1e/5bcb1ec770976461688888.png">
-      <img src="https://habrastorage.org/r/w60/webt/5b/cb/1e/5bcb1ec770976461688888.png" alt="Wohlstand">
+      <img src="./MinGW или MSVC_ какой компилятор выбрать для приложений на Qt под Windows_ — Toster.ru_files/5bcb1ec770976461688888.png" alt="Wohlstand">
   </a>
   <div class="user-summary__desc">
     <a class="user-summary__name" href="https://toster.ru/user/Wohlstand" itemprop="url"><meta itemprop="name" content="Виталий">Виталий</a>
     <span class="user-summary__nickname">
       <meta itemprop="alternateName" content="Wohlstand">
-      @Wohlstand                </span>
+      @Wohlstand                                  </span>
       </div>
 </div>
       </div>
       <div class="comment__body">
                 <div class="comment__body_inner">
           <div class="comment__text js-comment-text" itemprop="about text">
-            За всю историю стандантов C++ лишь GCC и CLang оперативно следуют самым новым стандартам в то время как всё остальное сильно отсаёт в этом плане и MSVC не исключение. Первый, Карл, Первый MSVC который боле-менее поддерживает C++11 это 2015 (и то, иногда встречаются шняги с шаблонами, взаимно несовместимые между GCC и MSVC). Всё что старее 2015-го - лажа а не поддержка стандартов.<br/><br/>
+            За всю историю стандантов C++ лишь GCC и CLang оперативно следуют самым новым стандартам в то время как всё остальное сильно отсаёт в этом плане и MSVC не исключение. Первый, Карл, Первый MSVC который боле-менее поддерживает C++11 это 2015 (и то, иногда встречаются шняги с шаблонами, взаимно несовместимые между GCC и MSVC). Всё что старее 2015-го - лажа а не поддержка стандартов.<br><br>
 MinGW как уже очевидно, это нативный порт под Windows того самого GCC.          </div>
           <div class="comment__date">
             Написано
@@ -660,666 +659,31 @@ MinGW как уже очевидно, это нативный порт под Wi
     </div>
         </div>
   </div>
-          <div class="content-list__item" role="answer_item " id="answer_item_282037">
-    <div class="answer_wrapper " id="answer_282037" role="toggle_delete_answer" itemprop="suggestedAnswer acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
-      <div class="answer answer_solution" data-created_at="1398109383">
-  <div class="answer__header">
-    <div class="user-summary " itemprop="author creator" itemscope itemtype="http://schema.org/Person">
-  <a class="user-summary__avatar" href="https://toster.ru/user/peleron">
-    <meta itemprop="image" content="//www.gravatar.com/avatar/02e73f9bc092556875ea5c4489dd2259?d=wavatar&amp;s=256">
-      <img src="//www.gravatar.com/avatar/02e73f9bc092556875ea5c4489dd2259?d=wavatar&s=60" alt="peleron">
-  </a>
-  <div class="user-summary__desc">
-    <a class="user-summary__name" href="https://toster.ru/user/peleron" itemprop="url"><meta itemprop="name" content="peleron">peleron</a>
-    <span class="user-summary__nickname">
-      <meta itemprop="alternateName" content="peleron">
-      @peleron                </span>
-      </div>
-</div>
-  </div>
-  <div class="answer__body">
-        <div class="answer__body_inner">
-      <div class="answer__text js-answer-text" itemprop="text">
-        Не знаю как для Андроида, но MSVC компилятор стоит использовать только если нужно статически линковаться с библиотеками, им собранными. В остальных случаях удобнее использовать MinGW.<br/>
-В нём и поддержка C++11 гораздо шире. И под Андроида возможно используется компилятор на базе gcc, т.е. схожий с MinGW.<br/>
-А насчёт страха использования GDB - то в QtCreator не заметно какой отладчик используется.      </div>
-      <div class="answer__date">
-        Ответ написан
-        <meta itemprop="url" content="https://toster.ru/answer?answer_id=282037#answers_list_answer">
-        <a class="date" href="https://toster.ru/answer?answer_id=282037#answers_list_answer">
-          <time itemprop="dateCreated" datetime="2014-04-21 22:43:03" title="Дата публикации: 21 апр. 2014, в 22:43">
-            более трёх лет назад          </time>
-        </a>
-              </div>
-      <div class="answer__comments-link" role="mobile_answers_link">
-          <a class="btn btn_link btn_comments-toggle" href="javascript:void(0)" role="auth_popup_trigger" title="Необходимо авторизоваться на сайте" data-value="Чтобы написать комментарий">
-    <span>Комментировать</span>
-  </a>
-      </div>
-                </div>
-    <svg class="icon_svg icon_check_answer" viewBox="0 0 45 32">
-      <use xlink:href="https://toster.ru/images/sprite_0.1.svg#icon_check"></use>
-    </svg>
-  </div>
-</div>
-      <div class="buttons-group buttons-group_answer" role="desktop_answers_link">
-                          <a class="btn btn_like" href="javascript:void(0);" role="auth_popup_trigger" title="Необходимо авторизоваться на сайте" data-value="Чтобы поблагодарить автора ответа.">
-    Нравится
-    <meta itemprop="upvoteCount" content="4">
-    <span class="btn__counter" role="likes_count">4</span>  </a>
-          <a class="btn btn_link btn_comments-toggle" href="javascript:void(0)" role="auth_popup_trigger" title="Необходимо авторизоваться на сайте" data-value="Чтобы написать комментарий">
-    <span>Комментировать</span>
-  </a>
-                <div class="dropdown dropdown_share" role="dropdown">
-  <button class="btn btn_share" role="dropdown_trigger" data-toggle="dropdown" type="button" title=" Поделиться ответом">
-    <svg class="icon_svg icon_sharing" viewBox="0 0 32 32">
-      <use xlink:href="https://toster.ru/images/sprite_0.1.svg#icon_sharing"></use>
-    </svg>
-  </button>
-  <div class="dropdown__menu">
-        <ul class="menu menu_dropdown">
-  <li class="menu__item">
-    <a class="menu__item-link link_fb" href="https://www.facebook.com/sharer/sharer.php?u=https://toster.ru/answer?answer_id=282037" title="Опубликовать ссылку в Facebook" onclick="window.open(this.href, 'Опубликовать ссылку в Facebook', 'width=640,height=436,toolbar=0,status=0'); ga('send', 'social', 'facebook', 'share', 'https://toster.ru/answer?answer_id=282037'); return false" target="_blank">
-      Facebook
-    </a>
-  </li>
-  <li class="menu__item menu__item">
-    <a class="menu__item-link link_vk" href="http://vk.com/share.php?url=https://toster.ru/answer?answer_id=282037" title="Опубликовать ссылку во ВКонтакте" onclick="window.open(this.href, 'Опубликовать ссылку во Вконтакте', 'width=800,height=300'); pages.clearCache(this.href); ga('send', 'social' 'vkontakte', 'share', 'https://toster.ru/answer?answer_id=282037'); return false" target="_blank">
-      Вконтакте
-    </a>
-  </li>
-  <li class="menu__item">
-                      <a class="menu__item-link link_tw" href="http://twitter.com/intent/tweet?text=peleron ответил на вопрос «MinGW+%D0%B8%D0%BB%D0%B8+MSVC%3A+%D0%BA%D0%B0%D0%BA%D0%BE%D0%B9+%D0%BA%D0%BE%D0%BC%D0%BF%D0%B8%D0%BB%D1%8F%D1%82%D0%BE%D1%80+%D0%B2%D1%8B%D0%B1%D1%80%D0%B0%D1%82%D1%8C+%D0%B4%D0%BB%D1%8F+%D0%BF%D1%80%D0%B8%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D0%B9+%D0%BD%D0%B0+Qt+%D0%BF%D0%BE%D0%B4+Windows%3F» https://toster.ru/answer?answer_id=282037+via+@toster_ru+%23toster" onclick="ga('send', 'social', 'twitter', 'tweet', 'https://toster.ru/answer?answer_id=282037');" title="Опубликовать ссылку в Twitter" target="_blank">
-      Twitter
-    </a>
-  </li>
-  <li class="menu__item">
-    <a class="menu__item-link link_gp" href="https://plus.google.com/share?url=https://toster.ru/answer?answer_id=282037" onclick="window.open(this.href, 'Опубликовать ссылку в Google Plus', 'width=800,height=300'); ga('send', 'social', 'gplus', 'share', 'https://toster.ru/answer?answer_id=282037'); return false" target="_blank">
-      Google
-    </a>
-  </li>
-</ul>
-  </div>
-</div>
-      </div>
-          </div>
-  </div>
-    </div>
-      </div>
-      <a class="question__invate-expert" href="#" role="auth_popup_trigger" data-value="Чтобы пригласить эксперта, который сможет ответить на вопрос" data-question="88501">
-        Пригласить эксперта
-      </a>
-                              <div class="section section_answers  hidden" id="answers" role="answers_section ">
-        <meta itemprop="answerCount" content="2">
-                        <header class="section-header">
-  <strong class="section-header__title">
-    Ответы на вопрос          <span class="section-header__counter" role="answers_counter">0</span>
-          </strong>
-</header>
-        <div class="content-list content-list_answers" id="answers_list">
-  </div>
-      </div>
-      <div class="section section_form-answers" id="answer-form">
-                <header class="section-header">
-  <strong class="section-header__title">
-    Ваш ответ на вопрос      </strong>
-</header>
-              <div class="empty-block">
-  <div class="empty-block__inner">
-    <h3 class="empty-block__title icon_unauthorized" role="title_replace">
-      Войдите, чтобы написать ответ    </h3>
-              <a class="empty-block__button" href="auth/tmid?ret=@referer">
-        Войти через центр авторизации      </a>
-          </div>
-</div>
-      </div>
-                      <header class="section-header">
-  <strong class="section-header__title">
-    Похожие вопросы      </strong>
-</header>
-          <ul class="content-list" id="related_questions_88501">
-            <li class="content-list__item" role="content-list_item">
-  <div class="question question_short">
-    <div class="question__content">
-      <div class="question__content_fluid">
-                <div class="question__tags">
-                      <a class="question__tags-image" href="https://toster.ru/tag/android">
-                      <img class="tag__image tag__image_bg" src="https://habrastorage.org/r/w32/webt/5b/0d/67/5b0d6718e4b6b295356228.png" alt="android">
-              </a>
-                                          <ul class="tags-list tags-list_short">
-                            <li class="tags-list__item  tag_405">
-                <a href="https://toster.ru/tag/android">
-                  Android                </a>
-              </li>
-                              <li class="tags-list__item tags-list__item_more">
-                  +3                  ещё
-                </li>
-                                        </ul>
-                                          <span class="question__complexity">
-              <span class="svg-icon_level svg-icon_level-2">
-                <svg class="svg-icon" width="51" height="32" viewBox="0 0 51 32"><path d="M20.806 24.295c-1.767 2.88-.575 5.249 1.874 6.579s5.227 1.116 6.994-1.763 12.92-28.574 11.95-29.102c-.971-.526-19.051 21.406-20.818 24.285zm4.794-18.301c1.119 0 2.213.091 3.279.261 1.122-1.32 2.377-2.776 3.599-4.159-2.182-.594-4.486-.917-6.878-.917-14.355 0-25.6 11.386-25.6 25.921 0 .894.042 1.789.125 2.66.126 1.325 1.383 2.3 2.777 2.185 1.409-.118 2.448-1.288 2.322-2.613-.069-.73-.104-1.48-.104-2.232 0-11.835 8.996-21.105 20.48-21.105zm18.479 3.008c-.714 1.805-1.47 3.646-2.135 5.237 2.603 3.537 4.135 7.979 4.135 12.859 0 .763-.036 1.529-.109 2.276-.128 1.324.91 2.496 2.318 2.617l.235.01c1.309 0 2.425-.94 2.546-2.189.086-.891.13-1.804.13-2.712 0-7.108-2.694-13.458-7.121-18.096z"/></svg>
-              </span>
-              <span class="question__complexity-text">
-                Простой              </span>
-            </span>
-                            </div>
-        <h2 class="question__title">
-          <a class="question__title-link question__title-link_list" href="https://toster.ru/q/487258?from=questions_similar">
-            QT ошибка при сборе под андроид «No such file or directory »?          </a>
-        </h2>
-        <ul class="question__attrs inline-list">
-          <li class="inline-list__item inline-list__item_bullet">
-            <span class="question__views-count" title="Количество подписавшихся на вопрос">
-                              2                 подписчика                          </span>
-          </li>
-          <li class="inline-list__item inline-list__item_bullet">
-            <time class="question__date question__date_publish" pubdate="" title="Дата публикации: 10 дек. 2017, в 18:17" datetime="2017-12-10 18:17:30">
-              более года назад            </time>
-          </li>
-                      <li class="inline-list__item inline-list__item_bullet">
-              <span class="question__views-count">
-                340                 просмотров              </span>
-            </li>
-                                      </ul>
-      </div>
-    </div>
-    <div class="question__answers-count ">
-      <a class="mini-counter" href="https://toster.ru/q/487258#answers" title="Количество ответов на вопрос" role="lazy_anchor">
-        <div class="mini-counter__count mini-counter__count_grey">
-                    0        </div>
-        <div class="mini-counter__value">
-          ответов        </div>
-      </a>
-    </div>
-  </div>
-</li>
-          <li class="content-list__item" role="content-list_item">
-  <div class="question question_short">
-    <div class="question__content">
-      <div class="question__content_fluid">
-                <div class="question__tags">
-                      <a class="question__tags-image" href="https://toster.ru/tag/android">
-                      <img class="tag__image tag__image_bg" src="https://habrastorage.org/r/w32/webt/5b/0d/67/5b0d6718e4b6b295356228.png" alt="android">
-              </a>
-                                          <ul class="tags-list tags-list_short">
-                            <li class="tags-list__item  tag_405">
-                <a href="https://toster.ru/tag/android">
-                  Android                </a>
-              </li>
-                              <li class="tags-list__item tags-list__item_more">
-                  +2                  ещё
-                </li>
-                                        </ul>
-                                      </div>
-        <h2 class="question__title">
-          <a class="question__title-link question__title-link_list" href="https://toster.ru/q/463610?from=questions_similar">
-            Почему не собирается проект в Qt под Android?          </a>
-        </h2>
-        <ul class="question__attrs inline-list">
-          <li class="inline-list__item inline-list__item_bullet">
-            <span class="question__views-count" title="Количество подписавшихся на вопрос">
-                              1                 подписчик                          </span>
-          </li>
-          <li class="inline-list__item inline-list__item_bullet">
-            <time class="question__date question__date_publish" pubdate="" title="Дата публикации: 24 сент. 2017, в 14:01" datetime="2017-09-24 14:01:09">
-              более года назад            </time>
-          </li>
-                      <li class="inline-list__item inline-list__item_bullet">
-              <span class="question__views-count">
-                1177                 просмотров              </span>
-            </li>
-                                      </ul>
-      </div>
-    </div>
-    <div class="question__answers-count question__answers_has-solution">
-      <a class="mini-counter" href="https://toster.ru/q/463610#answers" title="Количество ответов на вопрос" role="lazy_anchor">
-        <div class="mini-counter__count mini-counter__count_grey">
-                      <svg class="icon_svg icon_check" viewBox="0 0 45 32">
-              <use xlink:href="https://toster.ru/images/sprite_0.1.svg#icon_check"></use>
-            </svg>
-                              2        </div>
-        <div class="mini-counter__value">
-          ответа        </div>
-      </a>
-    </div>
-  </div>
-</li>
-          <li class="content-list__item" role="content-list_item">
-  <div class="question question_short">
-    <div class="question__content">
-      <div class="question__content_fluid">
-                <div class="question__tags">
-                      <a class="question__tags-image" href="https://toster.ru/tag/bluetooth">
-                      <img class="tag__image tag__image_bg" src="https://habrastorage.org/r/w32/webt/5a/de/25/5ade2574ef8e5015565492.png" alt="bluetooth">
-              </a>
-                                          <ul class="tags-list tags-list_short">
-                            <li class="tags-list__item  tag_152694">
-                <a href="https://toster.ru/tag/bluetooth">
-                  Bluetooth                </a>
-              </li>
-                              <li class="tags-list__item tags-list__item_more">
-                  +3                  ещё
-                </li>
-                                        </ul>
-                                      </div>
-        <h2 class="question__title">
-          <a class="question__title-link question__title-link_list" href="https://toster.ru/q/453792?from=questions_similar">
-            Как в Qt узнать адрес bluetooth устройства, зная его имя?          </a>
-        </h2>
-        <ul class="question__attrs inline-list">
-          <li class="inline-list__item inline-list__item_bullet">
-            <span class="question__views-count" title="Количество подписавшихся на вопрос">
-                              1                 подписчик                          </span>
-          </li>
-          <li class="inline-list__item inline-list__item_bullet">
-            <time class="question__date question__date_publish" pubdate="" title="Дата публикации: 22 авг. 2017, в 10:42" datetime="2017-08-22 10:42:13">
-              более года назад            </time>
-          </li>
-                      <li class="inline-list__item inline-list__item_bullet">
-              <span class="question__views-count">
-                301                 просмотр              </span>
-            </li>
-                                      </ul>
-      </div>
-    </div>
-    <div class="question__answers-count ">
-      <a class="mini-counter" href="https://toster.ru/q/453792#answers" title="Количество ответов на вопрос" role="lazy_anchor">
-        <div class="mini-counter__count mini-counter__count_grey">
-                    1        </div>
-        <div class="mini-counter__value">
-          ответ        </div>
-      </a>
-    </div>
-  </div>
-</li>
-          <li class="content-list__item" role="content-list_item">
-  <div class="question question_short">
-    <div class="question__content">
-      <div class="question__content_fluid">
-                <div class="question__tags">
-                      <a class="question__tags-image" href="https://toster.ru/tag/программирование">
-                      <img class="tag__image tag__image_bg" src="https://habrastorage.org/r/w32/files/964/953/80f/96495380f6d9484792ec05815386d0e2.jpg" alt="программирование">
-              </a>
-                                          <ul class="tags-list tags-list_short">
-                            <li class="tags-list__item  tag_152707">
-                <a href="https://toster.ru/tag/программирование">
-                  Программирование                </a>
-              </li>
-                              <li class="tags-list__item tags-list__item_more">
-                  +3                  ещё
-                </li>
-                                        </ul>
-                                      </div>
-        <h2 class="question__title">
-          <a class="question__title-link question__title-link_list" href="https://toster.ru/q/450330?from=questions_similar">
-            Что учить в с++. План?          </a>
-        </h2>
-        <ul class="question__attrs inline-list">
-          <li class="inline-list__item inline-list__item_bullet">
-            <span class="question__views-count" title="Количество подписавшихся на вопрос">
-                              1                 подписчик                          </span>
-          </li>
-          <li class="inline-list__item inline-list__item_bullet">
-            <time class="question__date question__date_publish" pubdate="" title="Дата публикации: 10 авг. 2017, в 13:27" datetime="2017-08-10 13:27:00">
-              более года назад            </time>
-          </li>
-                      <li class="inline-list__item inline-list__item_bullet">
-              <span class="question__views-count">
-                955                 просмотров              </span>
-            </li>
-                                      </ul>
-      </div>
-    </div>
-    <div class="question__answers-count ">
-      <a class="mini-counter" href="https://toster.ru/q/450330#answers" title="Количество ответов на вопрос" role="lazy_anchor">
-        <div class="mini-counter__count mini-counter__count_grey">
-                    3        </div>
-        <div class="mini-counter__value">
-          ответа        </div>
-      </a>
-    </div>
-  </div>
-</li>
-          <li class="content-list__item" role="content-list_item">
-  <div class="question question_short">
-    <div class="question__content">
-      <div class="question__content_fluid">
-                <div class="question__tags">
-                      <a class="question__tags-image" href="https://toster.ru/tag/android">
-                      <img class="tag__image tag__image_bg" src="https://habrastorage.org/r/w32/webt/5b/0d/67/5b0d6718e4b6b295356228.png" alt="android">
-              </a>
-                                          <ul class="tags-list tags-list_short">
-                            <li class="tags-list__item  tag_405">
-                <a href="https://toster.ru/tag/android">
-                  Android                </a>
-              </li>
-                              <li class="tags-list__item tags-list__item_more">
-                  +2                  ещё
-                </li>
-                                        </ul>
-                                      </div>
-        <h2 class="question__title">
-          <a class="question__title-link question__title-link_list" href="https://toster.ru/q/441763?from=questions_similar">
-            Какие книги по С++ посоветуете для Android разраба?          </a>
-        </h2>
-        <ul class="question__attrs inline-list">
-          <li class="inline-list__item inline-list__item_bullet">
-            <span class="question__views-count" title="Количество подписавшихся на вопрос">
-                              1                 подписчик                          </span>
-          </li>
-          <li class="inline-list__item inline-list__item_bullet">
-            <time class="question__date question__date_publish" pubdate="" title="Дата публикации: 11 июля 2017, в 15:34" datetime="2017-07-11 15:34:21">
-              более года назад            </time>
-          </li>
-                      <li class="inline-list__item inline-list__item_bullet">
-              <span class="question__views-count">
-                418                 просмотров              </span>
-            </li>
-                                      </ul>
-      </div>
-    </div>
-    <div class="question__answers-count ">
-      <a class="mini-counter" href="https://toster.ru/q/441763#answers" title="Количество ответов на вопрос" role="lazy_anchor">
-        <div class="mini-counter__count mini-counter__count_grey">
-                    2        </div>
-        <div class="mini-counter__value">
-          ответа        </div>
-      </a>
-    </div>
-  </div>
-</li>
-          <li class="content-list__item" role="content-list_item">
-  <div class="question question_short">
-    <div class="question__content">
-      <div class="question__content_fluid">
-                <div class="question__tags">
-                      <a class="question__tags-image" href="https://toster.ru/tag/android">
-                      <img class="tag__image tag__image_bg" src="https://habrastorage.org/r/w32/webt/5b/0d/67/5b0d6718e4b6b295356228.png" alt="android">
-              </a>
-                                          <ul class="tags-list tags-list_short">
-                            <li class="tags-list__item  tag_405">
-                <a href="https://toster.ru/tag/android">
-                  Android                </a>
-              </li>
-                              <li class="tags-list__item tags-list__item_more">
-                  +4                  ещё
-                </li>
-                                        </ul>
-                                      </div>
-        <h2 class="question__title">
-          <a class="question__title-link question__title-link_list" href="https://toster.ru/q/424590?from=questions_similar">
-            Не удается собрать Android APK, даже Hello Word, как исправить?          </a>
-        </h2>
-        <ul class="question__attrs inline-list">
-          <li class="inline-list__item inline-list__item_bullet">
-            <span class="question__views-count" title="Количество подписавшихся на вопрос">
-                              1                 подписчик                          </span>
-          </li>
-          <li class="inline-list__item inline-list__item_bullet">
-            <time class="question__date question__date_publish" pubdate="" title="Дата публикации: 11 мая 2017, в 12:27" datetime="2017-05-11 12:27:29">
-              более года назад            </time>
-          </li>
-                      <li class="inline-list__item inline-list__item_bullet">
-              <span class="question__views-count">
-                1404                 просмотра              </span>
-            </li>
-                                      </ul>
-      </div>
-    </div>
-    <div class="question__answers-count ">
-      <a class="mini-counter" href="https://toster.ru/q/424590#answers" title="Количество ответов на вопрос" role="lazy_anchor">
-        <div class="mini-counter__count mini-counter__count_grey">
-                    3        </div>
-        <div class="mini-counter__value">
-          ответа        </div>
-      </a>
-    </div>
-  </div>
-</li>
-          <li class="content-list__item" role="content-list_item">
-  <div class="question question_short">
-    <div class="question__content">
-      <div class="question__content_fluid">
-                <div class="question__tags">
-                      <a class="question__tags-image" href="https://toster.ru/tag/android">
-                      <img class="tag__image tag__image_bg" src="https://habrastorage.org/r/w32/webt/5b/0d/67/5b0d6718e4b6b295356228.png" alt="android">
-              </a>
-                                          <ul class="tags-list tags-list_short">
-                            <li class="tags-list__item  tag_405">
-                <a href="https://toster.ru/tag/android">
-                  Android                </a>
-              </li>
-                              <li class="tags-list__item tags-list__item_more">
-                  +3                  ещё
-                </li>
-                                        </ul>
-                                      </div>
-        <h2 class="question__title">
-          <a class="question__title-link question__title-link_list" href="https://toster.ru/q/420855?from=questions_similar">
-            Как подключить библиотеку boost для Android в Qt?          </a>
-        </h2>
-        <ul class="question__attrs inline-list">
-          <li class="inline-list__item inline-list__item_bullet">
-            <span class="question__views-count" title="Количество подписавшихся на вопрос">
-                              2                 подписчика                          </span>
-          </li>
-          <li class="inline-list__item inline-list__item_bullet">
-            <time class="question__date question__date_publish" pubdate="" title="Дата публикации: 27 апр. 2017, в 15:11" datetime="2017-04-27 15:11:53">
-              более года назад            </time>
-          </li>
-                      <li class="inline-list__item inline-list__item_bullet">
-              <span class="question__views-count">
-                608                 просмотров              </span>
-            </li>
-                                      </ul>
-      </div>
-    </div>
-    <div class="question__answers-count question__answers_has-solution">
-      <a class="mini-counter" href="https://toster.ru/q/420855#answers" title="Количество ответов на вопрос" role="lazy_anchor">
-        <div class="mini-counter__count mini-counter__count_grey">
-                      <svg class="icon_svg icon_check" viewBox="0 0 45 32">
-              <use xlink:href="https://toster.ru/images/sprite_0.1.svg#icon_check"></use>
-            </svg>
-                              2        </div>
-        <div class="mini-counter__value">
-          ответа        </div>
-      </a>
-    </div>
-  </div>
-</li>
-          <li class="content-list__item" role="content-list_item">
-  <div class="question question_short">
-    <div class="question__content">
-      <div class="question__content_fluid">
-                <div class="question__tags">
-                      <a class="question__tags-image" href="https://toster.ru/tag/android">
-                      <img class="tag__image tag__image_bg" src="https://habrastorage.org/r/w32/webt/5b/0d/67/5b0d6718e4b6b295356228.png" alt="android">
-              </a>
-                                          <ul class="tags-list tags-list_short">
-                            <li class="tags-list__item  tag_405">
-                <a href="https://toster.ru/tag/android">
-                  Android                </a>
-              </li>
-                              <li class="tags-list__item tags-list__item_more">
-                  +3                  ещё
-                </li>
-                                        </ul>
-                                      </div>
-        <h2 class="question__title">
-          <a class="question__title-link question__title-link_list" href="https://toster.ru/q/404785?from=questions_similar">
-            Как исправить проблему с интерфейсом программы написаной на Qt под андроид?          </a>
-        </h2>
-        <ul class="question__attrs inline-list">
-          <li class="inline-list__item inline-list__item_bullet">
-            <span class="question__views-count" title="Количество подписавшихся на вопрос">
-                              2                 подписчика                          </span>
-          </li>
-          <li class="inline-list__item inline-list__item_bullet">
-            <time class="question__date question__date_publish" pubdate="" title="Дата публикации: 09 марта 2017, в 00:56" datetime="2017-03-09 00:56:42">
-              более двух лет назад            </time>
-          </li>
-                      <li class="inline-list__item inline-list__item_bullet">
-              <span class="question__views-count">
-                474                 просмотра              </span>
-            </li>
-                                      </ul>
-      </div>
-    </div>
-    <div class="question__answers-count question__answers_has-solution">
-      <a class="mini-counter" href="https://toster.ru/q/404785#answers" title="Количество ответов на вопрос" role="lazy_anchor">
-        <div class="mini-counter__count mini-counter__count_grey">
-                      <svg class="icon_svg icon_check" viewBox="0 0 45 32">
-              <use xlink:href="https://toster.ru/images/sprite_0.1.svg#icon_check"></use>
-            </svg>
-                              1        </div>
-        <div class="mini-counter__value">
-          ответ        </div>
-      </a>
-    </div>
-  </div>
-</li>
-          <li class="content-list__item" role="content-list_item">
-  <div class="question question_short">
-    <div class="question__content">
-      <div class="question__content_fluid">
-                <div class="question__tags">
-                      <a class="question__tags-image" href="https://toster.ru/tag/программирование">
-                      <img class="tag__image tag__image_bg" src="https://habrastorage.org/r/w32/files/964/953/80f/96495380f6d9484792ec05815386d0e2.jpg" alt="программирование">
-              </a>
-                                          <ul class="tags-list tags-list_short">
-                            <li class="tags-list__item  tag_152707">
-                <a href="https://toster.ru/tag/программирование">
-                  Программирование                </a>
-              </li>
-                              <li class="tags-list__item tags-list__item_more">
-                  +2                  ещё
-                </li>
-                                        </ul>
-                                      </div>
-        <h2 class="question__title">
-          <a class="question__title-link question__title-link_list" href="https://toster.ru/q/401180?from=questions_similar">
-            Как писать кроссплатформенные приложения на C++?          </a>
-        </h2>
-        <ul class="question__attrs inline-list">
-          <li class="inline-list__item inline-list__item_bullet">
-            <span class="question__views-count" title="Количество подписавшихся на вопрос">
-                              8                 подписчиков                          </span>
-          </li>
-          <li class="inline-list__item inline-list__item_bullet">
-            <time class="question__date question__date_publish" pubdate="" title="Дата публикации: 25 февр. 2017, в 10:53" datetime="2017-02-25 10:53:15">
-              более двух лет назад            </time>
-          </li>
-                      <li class="inline-list__item inline-list__item_bullet">
-              <span class="question__views-count">
-                4545                 просмотров              </span>
-            </li>
-                                      </ul>
-      </div>
-    </div>
-    <div class="question__answers-count ">
-      <a class="mini-counter" href="https://toster.ru/q/401180#answers" title="Количество ответов на вопрос" role="lazy_anchor">
-        <div class="mini-counter__count mini-counter__count_grey">
-                    6        </div>
-        <div class="mini-counter__value">
-          ответов        </div>
-      </a>
-    </div>
-  </div>
-</li>
-      <li class="content-list__item content-list__item_more" role="related_replace">
-    <a class="btn btn_outline_grey" role="related_more" data-remote="" href="questions/related?question_id=88501&skip=10">
-      <span class="more">Показать ещё</span>
-      <span class="load">Загружается&hellip;</span>
-    </a>
-  </li>
-  </ul>
-                  <div class="offered-services">
-          <div class="offered-services__service service" id="moikrug_block">
-        <div class="service__header">
-      <a class="service__name" href="http://moikrug.ru/?utm_source=tm_toster&utm_medium=tm_section&utm_campaign=vacancies_post" target="_blank">Вакансии с Моего Круга</a>
-    </div>
-                                                    <div class="service__offer">
-        <div class="service__preview">
-          <a class="service__title " href="https://moikrug.ru/vacancies/1000049719?utm_source=tm_toster&utm_medium=tm_section&utm_campaign=vacancies_post" target="_blank">Бэкенд C++, Qt разработчик</a>
-        </div>
-                  <div class="service__attributes">
-                          <a class="service__attribute" href="https://moikrug.ru/companies/micro-it?utm_source=tm_toster&utm_medium=tm_section&utm_campaign=vacancies_post" target="_blank">Микро-ИТ</a>
-                                              </div>
-                        <div class="service__salary">
-                      от 80 000 руб.                            </div>
-      </div>
-                                                        <div class="service__offer">
-        <div class="service__preview">
-          <a class="service__title " href="https://moikrug.ru/vacancies/1000023624?utm_source=tm_toster&utm_medium=tm_section&utm_campaign=vacancies_post" target="_blank">Android разработчик</a>
-        </div>
-                  <div class="service__attributes">
-                          <a class="service__attribute" href="https://moikrug.ru/companies/orangerockets?utm_source=tm_toster&utm_medium=tm_section&utm_campaign=vacancies_post" target="_blank">Orange Rockets</a>
-                                                  <span class="service__delimetr">&#8226;</span>
-              <span class="service__attribute">Тюмень</span>
-                                  </div>
-                        <div class="service__salary">
-                      от 60 000 до 120 000 руб.                            </div>
-      </div>
-                                                        <div class="service__offer">
-        <div class="service__preview">
-          <a class="service__title " href="https://moikrug.ru/vacancies/1000025427?utm_source=tm_toster&utm_medium=tm_section&utm_campaign=vacancies_post" target="_blank">Android-разработчик</a>
-        </div>
-                  <div class="service__attributes">
-                          <a class="service__attribute" href="https://moikrug.ru/companies/10335?utm_source=tm_toster&utm_medium=tm_section&utm_campaign=vacancies_post" target="_blank">Джем-Софт (Masters)</a>
-                                              </div>
-                        <div class="service__salary">
-                      До 160 000 руб.                            </div>
-      </div>
-            <div class="service__footer">
-      <a class="service__more" href="http://moikrug.ru/?utm_source=tm_toster&utm_medium=tm_section&utm_campaign=vacancies_post" target="_blank">Ещё вакансии</a>
-    </div>
-  </div>
-                <div class="offered-services__service service" id="freelansim_block">
-    <div class="service__header">
-      <a class="service__name" href="http://freelansim.ru/?utm_source=toster_tm&utm_medium=tm_section&utm_campaign=tm_promo" target="_blank">Заказы с Фрилансим</a>
-    </div>
-                                  <div class="service__offer">
-        <div class="service__preview">
-          <a class="service__title " href="http://freelansim.ru/tasks/243431?utm_source=toster_tm&utm_medium=tm_section&utm_campaign=tm_promo" target="_blank">Копирайьер / SEO / Link Builder</a>
-        </div>
-        <div class="service__attribute">17 апр. 2019, в 05:15</div>
-        <div class="service__salary">100000 руб./за проект</div>
-      </div>
-                                      <div class="service__offer">
-        <div class="service__preview">
-          <a class="service__title " href="http://freelansim.ru/tasks/243407?utm_source=toster_tm&utm_medium=tm_section&utm_campaign=tm_promo" target="_blank">Интегрировать форму оплаты товара на сайте </a>
-        </div>
-        <div class="service__attribute">16 апр. 2019, в 20:01</div>
-        <div class="service__salary">2000 руб./за проект</div>
-      </div>
-                                      <div class="service__offer">
-        <div class="service__preview">
-          <a class="service__title " href="http://freelansim.ru/tasks/243403?utm_source=toster_tm&utm_medium=tm_section&utm_campaign=tm_promo" target="_blank">SEO специалист для продвижения магазина</a>
-        </div>
-        <div class="service__attribute">16 апр. 2019, в 19:46</div>
-        <div class="service__salary">5000 руб./за проект</div>
-      </div>
-            <div class="service__footer">
-      <a class="service__more" href="http://freelansim.ru/?utm_source=toster_tm&utm_medium=tm_section&utm_campaign=tm_promo" target="_blank">Ещё заказы</a>
-    </div>
-  </div>
-      </div>
     </div>
   </div>
 </div>
-  <div class="notices-container notices-container--bottom-fixed hidden" id="register-banner" role="notice_container">
-    <div class="alert alert_info">
-  <div class="register-banner"><div class="register-banner__text">Присоединяйтесь к сообществу, чтобы узнавать новое и делиться знаниями</div><a onclick="safe_ga_event('banner', 'registration', 'register')" href="auth/tmid?ret=@referer&action=register" class="register-banner__button btn_white btn">Зарегистрироваться</a></div>  <a class="alert__btn_close" href="javascript:void(0)" role="notice_close" data-close-register-banner="0">
-    <svg class="icon_svg icon_close icon_close_small" viewBox="0 0 32 32">
-      <use xlink:href="https://toster.ru/images/sprite_0.1.svg#icon_close"></use>
-    </svg>
-  </a>
-</div>
-  </div>
               </div>
             </div>
             <aside class="column_sidebar">
-                  <div id="div-gpt-ts01_atf" class="dfp_banner" data-dfp-banner=""></div>
+                  <dl class="panel-heading panel-heading_inner">
+    <dt class="panel-heading__title panel-heading__title_underline">
+      Рекомендуем
+    </dt>
+    <dd class="panel-heading__content panel-heading__content_inner">
+      <ul class="content-list content-list_sidebar-block">
+                  <li class="content-list__item">
+            <img src="./MinGW или MSVC_ какой компилятор выбрать для приложений на Qt под Windows_ — Toster.ru_files/41d114bdc15022888faa73437601ccd1.gif">
+            <a class="question__title-link question__title_thin" href="https://u.tmtm.ru/p-mts-p-290319?utm_source=tm_toster&amp;utm_medium=tm_right_sidebar&amp;utm_campaign=tm_mp_promo">
+              Разбираемся как работает облачная миграция в #CloudМТS            </a>
+          </li>
+                          <li class="content-list__item">
+            <img src="./MinGW или MSVC_ какой компилятор выбрать для приложений на Qt под Windows_ — Toster.ru_files/5172769fe25d334e692462f689088676.jpg">
+            <a class="question__title-link question__title_thin" href="https://u.tmtm.ru/p-inno-q-050419?utm_source=tm_toster&amp;utm_medium=tm_right_sidebar&amp;utm_campaign=tm_mp_promo">
+              Иннополис-квест: как тимлид себе команду искал            </a>
+          </li>
+                      </ul>
+    </dd>
+  </dl>
     <dl class="panel-heading panel-heading_inner" role="most_interest">
     <dt class="panel-heading__title panel-heading__title_underline">
       Самое интересное за 24 часа
@@ -1327,8 +691,92 @@ MinGW как уже очевидно, это нативный порт под Wi
     <dd class="panel-heading__content panel-heading__content_inner">
       <ul class="content-list content-list_sidebar-block">
                 <li class="content-list__item">
-          <a class="question__title-link question__title_thin " href="https://toster.ru/q/622886" data-from="?from=questions_most">
-            Как рассчитывать мощности серверов?          </a>
+          <a class="question__title-link question__title_thin " href="https://toster.ru/q/629135" data-from="?from=questions_most">
+            Какими сервисами по мониторингу позиций в ПС вы используете при продвижении сайта?          </a>
+          <ul class="inline-list inline-list_meta-attrs">
+            <li class="inline-list__item inline-list__item_bullet">
+              <span title="Количество человек, интересующихся вопросом">
+                8                подписчиков              </span>
+            </li>
+            <li class="inline-list__item inline-list__item_bullet">
+              <span title="Количество ответов на вопрос">
+                3                ответа              </span>
+            </li>
+          </ul>
+        </li>
+                <li class="content-list__item">
+          <a class="question__title-link question__title_thin " href="https://toster.ru/q/629160" data-from="?from=questions_most">
+            Пытаются взломать аккаунт Google?          </a>
+          <ul class="inline-list inline-list_meta-attrs">
+            <li class="inline-list__item inline-list__item_bullet">
+              <span title="Количество человек, интересующихся вопросом">
+                8                подписчиков              </span>
+            </li>
+            <li class="inline-list__item inline-list__item_bullet">
+              <span title="Количество ответов на вопрос">
+                3                ответа              </span>
+            </li>
+          </ul>
+        </li>
+                <li class="content-list__item">
+          <a class="question__title-link question__title_thin " href="https://toster.ru/q/629217" data-from="?from=questions_most">
+            Что нужно знать и уметь джуниору PHP программисту для того чтобы устроится на работу(минимальный набор знаний)?          </a>
+          <ul class="inline-list inline-list_meta-attrs">
+            <li class="inline-list__item inline-list__item_bullet">
+              <span title="Количество человек, интересующихся вопросом">
+                7                подписчиков              </span>
+            </li>
+            <li class="inline-list__item inline-list__item_bullet">
+              <span title="Количество ответов на вопрос">
+                8                ответов              </span>
+            </li>
+          </ul>
+        </li>
+                <li class="content-list__item">
+          <a class="question__title-link question__title_thin " href="https://toster.ru/q/629238" data-from="?from=questions_most">
+            На каких ресурсах можно найти постоянную удаленную работу?          </a>
+          <ul class="inline-list inline-list_meta-attrs">
+            <li class="inline-list__item inline-list__item_bullet">
+              <span title="Количество человек, интересующихся вопросом">
+                9                подписчиков              </span>
+            </li>
+            <li class="inline-list__item inline-list__item_bullet">
+              <span title="Количество ответов на вопрос">
+                4                ответа              </span>
+            </li>
+          </ul>
+        </li>
+                <li class="content-list__item">
+          <a class="question__title-link question__title_thin " href="https://toster.ru/q/629257" data-from="?from=questions_most">
+            Первый заказ на сайт визитку.Что именно я должно скачять для создания сайта?          </a>
+          <ul class="inline-list inline-list_meta-attrs">
+            <li class="inline-list__item inline-list__item_bullet">
+              <span title="Количество человек, интересующихся вопросом">
+                3                подписчика              </span>
+            </li>
+            <li class="inline-list__item inline-list__item_bullet">
+              <span title="Количество ответов на вопрос">
+                4                ответа              </span>
+            </li>
+          </ul>
+        </li>
+                <li class="content-list__item">
+          <a class="question__title-link question__title_thin " href="https://toster.ru/q/629263" data-from="?from=questions_most">
+            Какой лучше процессор купить для machine learning?          </a>
+          <ul class="inline-list inline-list_meta-attrs">
+            <li class="inline-list__item inline-list__item_bullet">
+              <span title="Количество человек, интересующихся вопросом">
+                3                подписчика              </span>
+            </li>
+            <li class="inline-list__item inline-list__item_bullet">
+              <span title="Количество ответов на вопрос">
+                3                ответа              </span>
+            </li>
+          </ul>
+        </li>
+                <li class="content-list__item">
+          <a class="question__title-link question__title_thin " href="https://toster.ru/q/629287" data-from="?from=questions_most">
+            Как лучше такое сделать (сверстать)?          </a>
           <ul class="inline-list inline-list_meta-attrs">
             <li class="inline-list__item inline-list__item_bullet">
               <span title="Количество человек, интересующихся вопросом">
@@ -1336,13 +784,27 @@ MinGW как уже очевидно, это нативный порт под Wi
             </li>
             <li class="inline-list__item inline-list__item_bullet">
               <span title="Количество ответов на вопрос">
-                6                ответов              </span>
+                1                ответ              </span>
             </li>
           </ul>
         </li>
                 <li class="content-list__item">
-          <a class="question__title-link question__title_thin has_solution" href="https://toster.ru/q/622892" data-from="?from=questions_most">
-            Как сверстать схему?          </a>
+          <a class="question__title-link question__title_thin " href="https://toster.ru/q/629294" data-from="?from=questions_most">
+            Как улучшить проверку SpamAssassin?          </a>
+          <ul class="inline-list inline-list_meta-attrs">
+            <li class="inline-list__item inline-list__item_bullet">
+              <span title="Количество человек, интересующихся вопросом">
+                3                подписчика              </span>
+            </li>
+            <li class="inline-list__item inline-list__item_bullet">
+              <span title="Количество ответов на вопрос">
+                0                ответов              </span>
+            </li>
+          </ul>
+        </li>
+                <li class="content-list__item">
+          <a class="question__title-link question__title_thin " href="https://toster.ru/q/629300" data-from="?from=questions_most">
+            Как работает MVVM в js фреймворках?          </a>
           <ul class="inline-list inline-list_meta-attrs">
             <li class="inline-list__item inline-list__item_bullet">
               <span title="Количество человек, интересующихся вопросом">
@@ -1355,114 +817,16 @@ MinGW как уже очевидно, это нативный порт под Wi
           </ul>
         </li>
                 <li class="content-list__item">
-          <a class="question__title-link question__title_thin " href="https://toster.ru/q/622895" data-from="?from=questions_most">
-            Решать задачи VS Продолжать учиться?          </a>
+          <a class="question__title-link question__title_thin " href="https://toster.ru/q/629338" data-from="?from=questions_most">
+            Как обойти проверку теста анонимности при использовании vpn?          </a>
           <ul class="inline-list inline-list_meta-attrs">
             <li class="inline-list__item inline-list__item_bullet">
               <span title="Количество человек, интересующихся вопросом">
                 3                подписчика              </span>
-            </li>
-            <li class="inline-list__item inline-list__item_bullet">
-              <span title="Количество ответов на вопрос">
-                6                ответов              </span>
-            </li>
-          </ul>
-        </li>
-                <li class="content-list__item">
-          <a class="question__title-link question__title_thin " href="https://toster.ru/q/622958" data-from="?from=questions_most">
-            Почему Windows-юзеры обычно держат окна приложений развёрнутыми на весь экран, а пользователи macOS — нет?          </a>
-          <ul class="inline-list inline-list_meta-attrs">
-            <li class="inline-list__item inline-list__item_bullet">
-              <span title="Количество человек, интересующихся вопросом">
-                6                подписчиков              </span>
-            </li>
-            <li class="inline-list__item inline-list__item_bullet">
-              <span title="Количество ответов на вопрос">
-                5                ответов              </span>
-            </li>
-          </ul>
-        </li>
-                <li class="content-list__item">
-          <a class="question__title-link question__title_thin " href="https://toster.ru/q/623092" data-from="?from=questions_most">
-            Что рекомендуете почитать по компьютерному зрению?          </a>
-          <ul class="inline-list inline-list_meta-attrs">
-            <li class="inline-list__item inline-list__item_bullet">
-              <span title="Количество человек, интересующихся вопросом">
-                6                подписчиков              </span>
-            </li>
-            <li class="inline-list__item inline-list__item_bullet">
-              <span title="Количество ответов на вопрос">
-                1                ответ              </span>
-            </li>
-          </ul>
-        </li>
-                <li class="content-list__item">
-          <a class="question__title-link question__title_thin has_solution" href="https://toster.ru/q/623097" data-from="?from=questions_most">
-            Кто сталкивался с версткой такого типа макета?          </a>
-          <ul class="inline-list inline-list_meta-attrs">
-            <li class="inline-list__item inline-list__item_bullet">
-              <span title="Количество человек, интересующихся вопросом">
-                5                подписчиков              </span>
             </li>
             <li class="inline-list__item inline-list__item_bullet">
               <span title="Количество ответов на вопрос">
                 2                ответа              </span>
-            </li>
-          </ul>
-        </li>
-                <li class="content-list__item">
-          <a class="question__title-link question__title_thin " href="https://toster.ru/q/623157" data-from="?from=questions_most">
-            Как отключить splitting у webpack?          </a>
-          <ul class="inline-list inline-list_meta-attrs">
-            <li class="inline-list__item inline-list__item_bullet">
-              <span title="Количество человек, интересующихся вопросом">
-                6                подписчиков              </span>
-            </li>
-            <li class="inline-list__item inline-list__item_bullet">
-              <span title="Количество ответов на вопрос">
-                0                ответов              </span>
-            </li>
-          </ul>
-        </li>
-                <li class="content-list__item">
-          <a class="question__title-link question__title_thin " href="https://toster.ru/q/623169" data-from="?from=questions_most">
-            Книга о безопасном коде?          </a>
-          <ul class="inline-list inline-list_meta-attrs">
-            <li class="inline-list__item inline-list__item_bullet">
-              <span title="Количество человек, интересующихся вопросом">
-                3                подписчика              </span>
-            </li>
-            <li class="inline-list__item inline-list__item_bullet">
-              <span title="Количество ответов на вопрос">
-                1                ответ              </span>
-            </li>
-          </ul>
-        </li>
-                <li class="content-list__item">
-          <a class="question__title-link question__title_thin has_solution" href="https://toster.ru/q/623213" data-from="?from=questions_most">
-            Как сделать, чтобы картинка менялась при наведении на нее курсора мыши?          </a>
-          <ul class="inline-list inline-list_meta-attrs">
-            <li class="inline-list__item inline-list__item_bullet">
-              <span title="Количество человек, интересующихся вопросом">
-                2                подписчика              </span>
-            </li>
-            <li class="inline-list__item inline-list__item_bullet">
-              <span title="Количество ответов на вопрос">
-                1                ответ              </span>
-            </li>
-          </ul>
-        </li>
-                <li class="content-list__item">
-          <a class="question__title-link question__title_thin " href="https://toster.ru/q/623224" data-from="?from=questions_most">
-            На какую CMS перенести интернет-магазин?          </a>
-          <ul class="inline-list inline-list_meta-attrs">
-            <li class="inline-list__item inline-list__item_bullet">
-              <span title="Количество человек, интересующихся вопросом">
-                2                подписчика              </span>
-            </li>
-            <li class="inline-list__item inline-list__item_bullet">
-              <span title="Количество ответов на вопрос">
-                0                ответов              </span>
             </li>
           </ul>
         </li>
@@ -1477,15 +841,15 @@ MinGW как уже очевидно, это нативный порт под Wi
   <nav class="menu_services">
     <ul class="menu menu_inline">
       <li class="menu__item">
-        <a class="menu__item-link" href="http://tmtm.ru">
-          <span class="copyright_short">&copy; TM</span>
+        <a class="menu__item-link" href="http://tmtm.ru/">
+          <span class="copyright_short">© TM</span>
         </a>
       </li>
       <li class="menu__item">
-        <a class="menu__item-link" href="help/about">О сервисе</a>
+        <a class="menu__item-link" href="https://toster.ru/help/about">О сервисе</a>
       </li>
       <li class="menu__item">
-        <a class="menu__item-link" href="feedback">Обратная связь</a>
+        <a class="menu__item-link" href="https://toster.ru/feedback">Обратная связь</a>
       </li>
       <li class="menu__item">
         <a class="menu__item-link" href="https://habrahabr.ru/company/toster/">Блог</a>
@@ -1528,7 +892,7 @@ MinGW как уже очевидно, это нативный порт под Wi
       Войдите на сайт    </h3>
           <div class="empty-block__description" role="desc_replace">
         Чтобы задать вопрос и получить на него квалифицированный ответ.      </div>
-                  <a class="empty-block__button" href="auth/tmid">
+                  <a class="empty-block__button" href="https://toster.ru/auth/tmid">
         Войти через центр авторизации      </a>
           </div>
 </div>
@@ -1543,9 +907,6 @@ MinGW как уже очевидно, это нативный порт под Wi
       <div id="dfp_target" style="display: none">
           <var data-name="dev" data-values="0"></var>
               <var data-name="user" data-values="guest"></var>
-              <var data-name="pagetype" data-values="question"></var>
-              <var data-name="postid" data-values="88501"></var>
-              <var data-name="cat" data-values="t_android,t_программирование,t_qt,t_cpp"></var>
           </div>
           <script type="text/javascript">
     //<![CDATA[
@@ -1598,6 +959,7 @@ MinGW как уже очевидно, это нативный порт под Wi
     <img src="https://vk.com/rtrg?p=VK-RTRG-282392-6VDS9" style="position:fixed; left:-999px;" alt="">
   </noscript>
   <!-- /VK Pixel Code -->
-    <script src="https://dr.habracdn.net/toster/frontend.791dd21b-da2b-4de2-b9ed-3a84a35ddfbb.js"></script>
-          </body>
-</html>
+    <script src="./MinGW или MSVC_ какой компилятор выбрать для приложений на Qt под Windows_ — Toster.ru_files/frontend.3be5542c-603c-4672-85ff-11b36598cb99.js.загружено"></script>
+          
+
+<ul class="ui-autocomplete ui-front ui-menu ui-widget ui-widget-content ui-corner-all" id="ui-id-1" tabindex="0" style="display: none;"></ul></body></html>

@@ -12,7 +12,6 @@
 using namespace cocos2d;
 
 //https://github.com/war1oc/cocos2d-x-player/tree/master/Classes
-//https://habr.com/ru/post/450782/
 
 BattleLayer::BattleLayer()
 	: pPlayerTank(nullptr)
@@ -73,7 +72,6 @@ bool BattleLayer::init()
 	this->addChild(this->pPlayerTank);
 
 	this->scheduleUpdate();
-
 	mainGameLoop();
 
     return true;
@@ -147,12 +145,13 @@ void BattleLayer::update(float dt) {
 }*/
 
 void BattleLayer::mainGameLoop() {
-	//std::this_thread::sleep_for(std::chrono::seconds{ 3 });
+	//std::this_thread::sleep_for(std::chrono::seconds{ 5 });
 	log("Ta-da!");
 	for (const auto & base_pos : enemyBase) {
 		EnemyTank *pEnemyTank = EnemyTank::create(pMaze);
 		pEnemyTank->setPosition(base_pos);
 		addEnemyTank(pEnemyTank);
 		pEnemyTank->startGameLoop();
+		break;
 	}
 }
