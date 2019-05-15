@@ -1,10 +1,21 @@
 #include <thread>
+#include <random>
 
 #include "EnemyTank.h"
 
 #include "TextureFactory.h"
 
 //#include "Objectives/Patrol.h"
+
+int getRandom(int a, int b) {
+    std::random_device random_device; // Источник энтропии.
+    std::mt19937 generator(random_device()); // Генератор случайных чисел.
+    // (Здесь берется одно инициализирующее значение, можно брать больше)
+
+    std::uniform_int_distribution<> distribution(a, b); // Равномерное распределение [10, 20]
+
+    return distribution(generator); // Случайное число.
+}
 
 EnemyTank::~EnemyTank()
 {
@@ -71,6 +82,12 @@ void EnemyTank::setObjective(IObjective *pObjctv) {
 }
 
 void EnemyTank::calculateMove(int posX, int posY) {
+    eDirection dir[4] = {eDirection::LEFT, eDirection::RIGHT, eDirection::DOWN, eDirection::UP};
+    do {
+        std::this_thread::sleep_for(std::chrono::seconds{ 3 });
+        moveTo((eDirection)getRandom(0, 3));
+    } while(true);
+    return;
 	std::this_thread::sleep_for(std::chrono::seconds{ 3 });
     
     pathfinder::TMap map = pMaze->getPath();
@@ -95,7 +112,6 @@ void EnemyTank::calculateMove(int posX, int posY) {
     c[3] = map.getCell(curPosX, curPosY + 1);
 	cocos2d::log("%d;%d: %d %d\n", curPosX, curPosY + 1, map.offset(curPosX, curPosY + 1), map._data[map.offset(curPosX, curPosY + 1)]);
 
-    eDirection dir[4] = {eDirection::LEFT, eDirection::RIGHT, eDirection::DOWN, eDirection::UP};
     for (int i = 0; i < 4; i++) {
 		cocos2d::log("%d: %d\n", dir[i], c[i]);
         if (c[i] <= c_min && c[i] != 0) {
