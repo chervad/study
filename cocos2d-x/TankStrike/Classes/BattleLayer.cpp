@@ -12,6 +12,7 @@
 using namespace cocos2d;
 
 //https://github.com/war1oc/cocos2d-x-player/tree/master/Classes
+//https://habr.com/ru/company/ruvds/blog/451870/
 
 BattleLayer::BattleLayer()
 	: pPlayerTank(nullptr)

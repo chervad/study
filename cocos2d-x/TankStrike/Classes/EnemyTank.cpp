@@ -85,10 +85,10 @@ void EnemyTank::calculateMove(int posX, int posY) {
     eDirection dir[4] = {eDirection::LEFT, eDirection::RIGHT, eDirection::DOWN, eDirection::UP};
     do {
         std::this_thread::sleep_for(std::chrono::seconds{ 3 });
-        moveTo((eDirection)getRandom(0, 3));
+        moveTo(eDirection::RIGHT);
     } while(true);
     return;
-	std::this_thread::sleep_for(std::chrono::seconds{ 3 });
+	/*std::this_thread::sleep_for(std::chrono::seconds{ 3 });
     
     pathfinder::TMap map = pMaze->getPath();
     map.print();
@@ -119,5 +119,5 @@ void EnemyTank::calculateMove(int posX, int posY) {
 			cocos2d::log("moveTo: %d\n", dir[i]);
             c_min = c[i];
         }
-    }
+    }*/
 }
