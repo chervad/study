@@ -5,32 +5,36 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-      firstName : ''
-      , lastName : ''
-      , email : ''  
+      keywords : '', data : []
     };
   }
 
-  inputChanged = (event) => {
-    this.setState({ [event.target.name] : event.target.value });
+  fetchData = () => {
+    const url = `https://api.github.com/search/repositories?q=${this.state.keyword}`;
+    fetch(url)
+    .then(response => response.json())
+    .then(responseData => {
+      this.setState({ data : responseData.items });
+    });
   }
 
-  handleSubmit = (event) => {
-    alert(`Hello ${this.state.firstName} ${this.state.lastName}`);
-    event.preventDefault();
+  handleChange = (e) => {
+    this.setState({ keyword : e.target.value });
   }
 
   render() {
+    const tableRows = this.state.data.map((item, index) => 
+      <tr key={index}>
+        <td>{item.full_name}</td>
+        <td><a href={item.html_url}>{item.html_url}</a></td>
+      </tr>
+    );
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>First name </label>
-        <input type="text" name="firstName" onChange={this.inputChanged} value={this.state.firstName} /><br />
-        <label>Last name </label>
-        <input type="text" name="lastName" onChange={this.inputChanged} value={this.state.lastName} /><br />
-        <label>Email </label>
-        <input type="text" name="email" onChange={this.inputChanged} value={this.state.email} /><br />
-        <input type="submit" value="Press me" />
-      </form>
+      <div className="App">
+        <input type="text" onChange={this.handleChange} />
+        <button onClick={this.fetchData} value={this.state.keywords} >Fetch</button>
+        <table><tbody>{tableRows}</tbody></table>
+      </div>
     );
   }
 
