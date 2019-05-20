@@ -1,3 +1,7 @@
+/**
+ * npm install react-tiny-virtual-list --save
+ * npm install react-table --save
+ */
 import ReactTable from "react-table";
 import 'react-table/react-table.css';
 import React, { Component } from 'react';
