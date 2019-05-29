@@ -83,15 +83,15 @@ void EnemyTank::setObjective(IObjective *pObjctv) {
 
 void EnemyTank::calculateMove(int posX, int posY) {
     eDirection dir[4] = {eDirection::LEFT, eDirection::RIGHT, eDirection::DOWN, eDirection::UP};
-    do {
+    /*do {
         std::this_thread::sleep_for(std::chrono::seconds{ 3 });
         moveTo(eDirection::RIGHT);
     } while(true);
-    return;
-	/*std::this_thread::sleep_for(std::chrono::seconds{ 3 });
+    return;*/
+	std::this_thread::sleep_for(std::chrono::seconds{ 3 });
     
-    pathfinder::TMap map = pMaze->getPath();
-    map.print();
+    pathfinder::TMap pathMap = pMaze->getPath();
+    pathMap.print();
     Vec2 curPos = this->getPosition();
     std::tuple<uint16_t, uint16_t> curpos = EnemyTank::convertPos2Area(curPos);
     uint32_t curPosX = std::get<0>(curpos);
@@ -100,24 +100,25 @@ void EnemyTank::calculateMove(int posX, int posY) {
 
     unsigned char c[4], c_min = 0xFF;
 
-    c[0] = map.getCell(curPosX - 1, curPosY);
-    cocos2d::log("%d;%d: %d %d\n", curPosX - 1, curPosY, map.offset(curPosX - 1, curPosY), map._data[map.offset(curPosX - 1, curPosY)]);
+    c[0] = pathMap.getCell(curPosX - 1, curPosY);
+    c[1] = pathMap.getCell(curPosX + 1, curPosY);
+	c[2] = pathMap.getCell(curPosX, curPosY - 1);
+	c[3] = pathMap.getCell(curPosX, curPosY + 1);
 
-    c[1] = map.getCell(curPosX + 1, curPosY);
-	cocos2d::log("%d;%d: %d %d\n", curPosX + 1, curPosY, map.offset(curPosX + 1, curPosY), map._data[map.offset(curPosX + 1, curPosY)]);
-
-    c[2] = map.getCell(curPosX, curPosY - 1);
-	cocos2d::log("%d;%d: %d %d\n", curPosX, curPosY - 1, map.offset(curPosX, curPosY - 1), map._data[map.offset(curPosX, curPosY - 1)]);
-
-    c[3] = map.getCell(curPosX, curPosY + 1);
-	cocos2d::log("%d;%d: %d %d\n", curPosX, curPosY + 1, map.offset(curPosX, curPosY + 1), map._data[map.offset(curPosX, curPosY + 1)]);
+	cocos2d::log("cells: (%d:%d)%d, "
+              "(%d:%d)%d, "
+              "(%d:%d)%d, "
+              "(%d:%d)%d", curPosX - 1, curPosY, c[0],
+                 curPosX + 1, curPosY, c[1],
+                 curPosX, curPosY - 1, c[2],
+                 curPosX, curPosY + 1, c[3]
+    );
 
     for (int i = 0; i < 4; i++) {
-		cocos2d::log("%d: %d\n", dir[i], c[i]);
         if (c[i] <= c_min && c[i] != 0) {
             this->moveTo(dir[i]);
 			cocos2d::log("moveTo: %d\n", dir[i]);
             c_min = c[i];
         }
-    }*/
+    }
 }

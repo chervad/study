@@ -33,7 +33,7 @@ namespace pathfinder {
     public:
         //Можно заменить на Boost.MultiArray
         // https://www.boost.org/doc/libs/1_70_0/libs/multi_array/doc/index.html
-        char * const _data;
+        uint8_t * const _data;
         size_t _size;
 
         const uint32_t _width;
