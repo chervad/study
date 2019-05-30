@@ -148,7 +148,6 @@ void BattleLayer::update(float dt) {
 
 void BattleLayer::mainGameLoop() {
 	//std::this_thread::sleep_for(std::chrono::seconds{ 5 });
-	log("Ta-da!");
 	for (const auto & base_pos : enemyBase) {
 		EnemyTank *pEnemyTank = EnemyTank::create(pMaze);
 		pEnemyTank->setPosition(base_pos);

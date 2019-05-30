@@ -6,6 +6,7 @@
 
 #include <cassert>
 #include <queue>
+#include <sstream>
 
 #include "cocos2d.h"
 
@@ -19,12 +20,12 @@ TMap::TMap(const char *data[], uint32_t width, uint32_t height)
 : _width(width)
 , _height(height)
 , _size(width * height)
-, _data((char *) malloc(width * height))
+, _data((uint8_t *) malloc(width * height))
 {
     size_t offset = 0;
     for (int i = 0; i < height; ++i) {
         for (int j = 0; j < width; ++j) {
-            _data[offset] = data[i][j];
+            _data[offset] = (uint8_t)data[i][j];
             offset++;
         }
     }
@@ -34,7 +35,7 @@ TMap::TMap(uint32_t width, uint32_t height)
 : _width(width)
 , _height(height)
 , _size(width * height)
-, _data((char *) malloc(width * height))
+, _data((uint8_t *) malloc(width * height))
 {
     memset(_data, 0, _size);
 }
@@ -66,37 +67,38 @@ void TMap::setCell(uint32_t x, uint32_t y, char value) {
 
 void TMap::print() {
     cocos2d::log("TMap(0x%x)[%d x %d] size %d\n", this, _width, _height, _size);
+    size_t sz = 1024;
+    char *buffer = (char *)malloc(sz);
+    memset(buffer, 0, sz);
+    char *p_buffer = buffer;
+    sprintf(p_buffer, "   ");
+    p_buffer += 3;
+    for (int i = 0; i < _width; ++i) {
+        sprintf(p_buffer, "|%2d", i);
+        p_buffer += 3;
+    }
+    cocos2d::log("%s|", buffer);
+    memset(buffer, 0, sz);
+    p_buffer = buffer;
+    sprintf(p_buffer, "|--");
+    p_buffer += 3;
+    for (int i = 0; i < _width; ++i) {
+        sprintf(p_buffer, "|--", i);
+        p_buffer += 3;
+    }
+    cocos2d::log("%s|", buffer);
     for (int j = 0; j < _height; ++j) {
+        memset(buffer, 0, sz);
+        p_buffer = buffer;
+        sprintf(p_buffer, "|%2d", j);
+        p_buffer += 3;
         for (int i = 0; i < _width; ++i) {
-			cocos2d::log("%c", getCell(i, j));
+            sprintf(p_buffer, "|%2d", _data[offset(i, j)]);
+            p_buffer += 3;
         }
-		cocos2d::log("\n");
+        cocos2d::log("%s|", buffer);
     }
-}
-
-void TMap::fprintc(FILE *fl) {
-    fprintf(fl, "TMap(0x%x)[%d x %d] size %d\n", this, _width, _height, _size);
-    for (int j = 0; j < _height; ++j) {
-        for (int i = 0; i < _width; ++i) {
-            fprintf(fl, "%c", getCell(i, j));
-        }
-        fprintf(fl, "\n");
-    }
-    fprintf(fl, "\n");
-}
-
-void TMap::fprintd(FILE *fl) {
-    fprintf(fl, "TMap(0x%x)[%d x %d] size %d\n", this, _width, _height, _size);
-    for (int j = 0; j < _height; ++j) {
-        for (int i = 0; i < _width; ++i) {
-            fprintf(fl, "%2d", getCell(i, j));
-        }
-        fprintf(fl, "\n");
-    }
-    fprintf(fl, "\n");
-    for (int i = 0; i < _size; ++i) {
-        fprintf(fl, "%2d : %2d\n", i, _data[i]);
-    }
+    free(buffer);
 }
 
 TPoint TMap::searchFirstCell(char val) const {
