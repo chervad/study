@@ -2,8 +2,9 @@
 #include <random>
 
 #include "EnemyTank.h"
-
+#include "Shot.h"
 #include "TextureFactory.h"
+#include "BattleLayer.h"
 
 //#include "Objectives/Patrol.h"
 
@@ -73,19 +74,23 @@ Vec2 EnemyTank::convertArea2Pos(std::tuple<uint16_t, uint16_t> area) {
 	return convertArea2Pos(std::get<0>(area), std::get<1>(area));
 }
 
-/*void EnemyTank::update(float dt) {
+void EnemyTank::update(float dt) {
 	Tank::update(dt);
-}*/
+}
 
 void EnemyTank::setObjective(IObjective *pObjctv) {
 	//Patrol patrol(10, 10);
 }
 
 void EnemyTank::calculateMove(int posX, int posY) {
+	std::this_thread::sleep_for(std::chrono::seconds{ 3 });
     eDirection dir[4] = {eDirection::LEFT, eDirection::RIGHT, eDirection::DOWN, eDirection::UP};
     do {
-        std::this_thread::sleep_for(std::chrono::seconds{ 3 });
-        moveTo(eDirection::RIGHT);
+        std::this_thread::sleep_for(std::chrono::seconds{ getRandom(1, 3) });
+		moveTo((eDirection)getRandom(0, 3));
+		//Shot *pShot = Shot::create(this->direction, this->getPosition());
+		//BattleLayer *parent = (BattleLayer *)(this->getParent());
+		//parent->addShot(pShot);
     } while(true);
     return;
 	/*std::this_thread::sleep_for(std::chrono::seconds{ 3 });
