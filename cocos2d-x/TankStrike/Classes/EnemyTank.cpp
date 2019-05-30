@@ -82,7 +82,8 @@ void EnemyTank::setObjective(IObjective *pObjctv) {
 }
 
 void EnemyTank::calculateMove(int posX, int posY) {
-    eDirection dir[4] = {eDirection::LEFT, eDirection::RIGHT, eDirection::DOWN, eDirection::UP};
+	const char *eDirectionStr[] = {"LEFT", "RIGHT", "UP", "DOWN"};
+    //eDirection dir[4] = {eDirection::LEFT, eDirection::RIGHT, eDirection::DOWN, eDirection::UP};
     /*do {
         std::this_thread::sleep_for(std::chrono::seconds{ 3 });
         moveTo(eDirection::RIGHT);
@@ -91,12 +92,12 @@ void EnemyTank::calculateMove(int posX, int posY) {
 	std::this_thread::sleep_for(std::chrono::seconds{ 3 });
     
     pathfinder::TMap pathMap = pMaze->getPath();
-    pathMap.print();
+    //pathMap.print();
     Vec2 curPos = this->getPosition();
     std::tuple<uint16_t, uint16_t> curpos = EnemyTank::convertPos2Area(curPos);
     uint32_t curPosX = std::get<0>(curpos);
-    uint32_t curPosY = std::get<1>(curpos);
-    cocos2d::log("curPos %d:%d\n", curPosX, curPosY);
+    uint32_t curPosY = MAZE_HEIGHT - std::get<1>(curpos);
+    cocos2d::log("corpos %d:%d => curPos %d:%d\n", curPos.x, curPos.y, curPosX, curPosY);
 
     unsigned char c[4], c_min = 0xFF;
 
@@ -116,8 +117,8 @@ void EnemyTank::calculateMove(int posX, int posY) {
 
     for (int i = 0; i < 4; i++) {
         if (c[i] <= c_min && c[i] != 0) {
-            this->moveTo(dir[i]);
-			cocos2d::log("moveTo: %d\n", dir[i]);
+            this->moveTo((eDirection)i);
+			cocos2d::log("moveTo: %d, %s, %d\n", i, eDirectionStr[i], c[i]);
             c_min = c[i];
         }
     }

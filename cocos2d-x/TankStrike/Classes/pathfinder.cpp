@@ -71,6 +71,8 @@ void TMap::print() {
     char *buffer = (char *)malloc(sz);
     memset(buffer, 0, sz);
     char *p_buffer = buffer;
+    sprintf(p_buffer, "   ");
+    p_buffer += 3;
     for (int i = 0; i < _width; ++i) {
         sprintf(p_buffer, "|%2d", i);
         p_buffer += 3;
@@ -78,6 +80,8 @@ void TMap::print() {
     cocos2d::log("%s|", buffer);
     memset(buffer, 0, sz);
     p_buffer = buffer;
+    sprintf(p_buffer, "|--");
+    p_buffer += 3;
     for (int i = 0; i < _width; ++i) {
         sprintf(p_buffer, "|--", i);
         p_buffer += 3;
@@ -86,6 +90,8 @@ void TMap::print() {
     for (int j = 0; j < _height; ++j) {
         memset(buffer, 0, sz);
         p_buffer = buffer;
+        sprintf(p_buffer, "|%2d", j);
+        p_buffer += 3;
         for (int i = 0; i < _width; ++i) {
             sprintf(p_buffer, "|%2d", _data[offset(i, j)]);
             p_buffer += 3;
@@ -93,31 +99,6 @@ void TMap::print() {
         cocos2d::log("%s|", buffer);
     }
     free(buffer);
-}
-
-void TMap::fprintc(FILE *fl) {
-    fprintf(fl, "TMap(0x%x)[%d x %d] size %d\n", this, _width, _height, _size);
-    for (int j = 0; j < _height; ++j) {
-        for (int i = 0; i < _width; ++i) {
-            fprintf(fl, "%c", getCell(i, j));
-        }
-        fprintf(fl, "\n");
-    }
-    fprintf(fl, "\n");
-}
-
-void TMap::fprintd(FILE *fl) {
-    fprintf(fl, "TMap(0x%x)[%d x %d] size %d\n", this, _width, _height, _size);
-    for (int j = 0; j < _height; ++j) {
-        for (int i = 0; i < _width; ++i) {
-            fprintf(fl, "%2d", getCell(i, j));
-        }
-        fprintf(fl, "\n");
-    }
-    fprintf(fl, "\n");
-    for (int i = 0; i < _size; ++i) {
-        fprintf(fl, "%2d : %2d\n", i, _data[i]);
-    }
 }
 
 TPoint TMap::searchFirstCell(char val) const {

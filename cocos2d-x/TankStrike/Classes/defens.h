@@ -5,6 +5,9 @@
 
 #define DELTA 1
 
+#define MAZE_WIDTH   26
+#define MAZE_HEIGHT  18
+
 enum ObjType {
 	GROUND,
 	PLAYER = 0b00000001,

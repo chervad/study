@@ -8,7 +8,7 @@
 
 #define AUTOGENERATE false
 
-static char mazePlan[19][26] = {
+static char mazePlan[MAZE_HEIGHT + 1][MAZE_WIDTH] = {
 	  "xxxxxxxxxxxxxxxxxxxxxxxxx"
 	, "xT                     Tx"
 	, "xx  xxxx  xxxx  xxxx  xxx"
@@ -137,6 +137,7 @@ pathfinder::TMap Maze::getPath() {
     }
     pathfinder::TMap map = pathfinder::TMap::create(pplan, 26, 19);//TODO Карта не так часто изменяется, сделать через кэшь и добавить в событие инвалидации
     pathfinder::TPoint p(destPosX, destPosY);
+    //map.print();
     pathfinder::TMap result = map.findAllPath(p);
     return result;
 }

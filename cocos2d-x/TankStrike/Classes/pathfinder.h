@@ -57,8 +57,6 @@ namespace pathfinder {
         TMap findAllPath(const TPoint &begin);
 
         void print();
-        void fprintc(FILE *fl);
-        void fprintd(FILE *fl);
     };
 
     void pathfinderRecurse(uint32_t posX, uint32_t posY, const char map[11][10], char mapPath[11][10], uint32_t loop);
