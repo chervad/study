@@ -93,33 +93,37 @@ void EnemyTank::calculateMove(int posX, int posY) {
     
     pathfinder::TMap pathMap = pMaze->getPath();
     //pathMap.print();
-    Vec2 curPos = this->getPosition();
-    std::tuple<uint16_t, uint16_t> curpos = EnemyTank::convertPos2Area(curPos);
-    uint32_t curPosX = std::get<0>(curpos);
-    uint32_t curPosY = MAZE_HEIGHT - std::get<1>(curpos);
-    cocos2d::log("corpos %d:%d => curPos %d:%d\n", curPos.x, curPos.y, curPosX, curPosY);
+    do {
+        Vec2 curPos = this->getPosition();
+        std::tuple<uint16_t, uint16_t> curpos = EnemyTank::convertPos2Area(curPos);
+        uint32_t curPosX = std::get<0>(curpos);
+        uint32_t curPosY = MAZE_HEIGHT - std::get<1>(curpos);
 
-    unsigned char c[4], c_min = 0xFF;
+        unsigned char c[4], c_min = 0xFF;
 
-    c[0] = pathMap.getCell(curPosX - 1, curPosY);
-    c[1] = pathMap.getCell(curPosX + 1, curPosY);
-	c[2] = pathMap.getCell(curPosX, curPosY - 1);
-	c[3] = pathMap.getCell(curPosX, curPosY + 1);
+        c[0] = pathMap.getCell(curPosX - 1, curPosY);
+        c[1] = pathMap.getCell(curPosX + 1, curPosY);
+        c[2] = pathMap.getCell(curPosX, curPosY - 1);
+        c[3] = pathMap.getCell(curPosX, curPosY + 1);
 
-	cocos2d::log("cells: (%d:%d)%d, "
-              "(%d:%d)%d, "
-              "(%d:%d)%d, "
-              "(%d:%d)%d", curPosX - 1, curPosY, c[0],
-                 curPosX + 1, curPosY, c[1],
-                 curPosX, curPosY - 1, c[2],
-                 curPosX, curPosY + 1, c[3]
-    );
-
-    for (int i = 0; i < 4; i++) {
-        if (c[i] <= c_min && c[i] != 0) {
-            this->moveTo((eDirection)i);
-			cocos2d::log("moveTo: %d, %s, %d\n", i, eDirectionStr[i], c[i]);
-            c_min = c[i];
+        cocos2d::log("cells: (%d:%d)%d, "
+                  "(%d:%d)%d, "
+                  "(%d:%d)%d, "
+                  "(%d:%d)%d", curPosX - 1, curPosY, c[0],
+                     curPosX + 1, curPosY, c[1],
+                     curPosX, curPosY - 1, c[2],
+                     curPosX, curPosY + 1, c[3]
+        );
+        bool not_found = true;
+        for (int i = 0; i < 4; i++) {
+            if (c[i] <= c_min && c[i] != 0) {
+                this->moveTo((eDirection)i);
+                cocos2d::log("moveTo: %d, %s, %d\n", i, eDirectionStr[i], c[i]);
+                c_min = c[i];
+                not_found = false;
+            }
         }
-    }
+        if (not_found) break;
+        std::this_thread::sleep_for(std::chrono::milliseconds{ 500 });
+    } while(true);
 }
