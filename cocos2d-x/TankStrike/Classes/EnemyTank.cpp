@@ -106,19 +106,19 @@ void EnemyTank::calculateMove(int posX, int posY) {
         c[2] = pathMap.getCell(curPosX, curPosY - 1);
         c[3] = pathMap.getCell(curPosX, curPosY + 1);
 
-        cocos2d::log("cells: (%d:%d)%d, "
+        /*cocos2d::log("cells: (%d:%d)%d, "
                   "(%d:%d)%d, "
                   "(%d:%d)%d, "
                   "(%d:%d)%d", curPosX - 1, curPosY, c[0],
                      curPosX + 1, curPosY, c[1],
                      curPosX, curPosY - 1, c[2],
                      curPosX, curPosY + 1, c[3]
-        );
+        );*/
         bool not_found = true;
         for (int i = 0; i < 4; i++) {
             if (c[i] <= c_min && c[i] != 0) {
                 this->moveTo((eDirection)i);
-                cocos2d::log("moveTo: %d, %s, %d\n", i, eDirectionStr[i], c[i]);
+                //cocos2d::log("moveTo: %d, %s, %d\n", i, eDirectionStr[i], c[i]);
                 c_min = c[i];
                 not_found = false;
             }
