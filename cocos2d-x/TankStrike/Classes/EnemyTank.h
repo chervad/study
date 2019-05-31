@@ -1,5 +1,4 @@
 #pragma once
-
 #include "cocos2d.h"
 
 #include "defens.h"
@@ -20,7 +19,7 @@ public:
 
 	virtual ~EnemyTank();
 
-	//void update(float dt);
+	void update(float dt);
 	void setObjective(IObjective *pObjctv);
 protected:
     void calculateMove(int posX, int posY);

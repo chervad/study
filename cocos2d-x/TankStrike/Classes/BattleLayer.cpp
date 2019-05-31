@@ -113,7 +113,8 @@ bool BattleLayer::onContactBegin(PhysicsContact &contact)
 	return false;
 }
 
-void BattleLayer::addShot(Shot *pShot) { 
+void BattleLayer::addShot(Shot *pShot) {
+	std::lock_guard<std::mutex> guard(guard_mutex);
 	addChild(pShot); 
 	listShots.push_back(pShot); 
 }

@@ -1,4 +1,5 @@
 #pragma once
+#include <mutex>
 
 #include "cocos2d.h"
 
@@ -46,4 +47,6 @@ private:
 	std::list<Shot *> listShots;
 	std::list<EnemyTank *>listEnemyTanks;
 	std::list<Vec2> enemyBase;
+
+	std::mutex guard_mutex;
 };
