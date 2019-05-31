@@ -18,4 +18,7 @@ public:
 	}
 protected:
 	void initObject();
+public:
+    //запускается не из initObject, а из места создания спрайтов карты
+	void initPhysics();
 };

@@ -6,13 +6,9 @@
 #include "TextureFactory.h"
 #include "BattleLayer.h"
 
-//#include "Objectives/Patrol.h"
-
 int getRandom(int a, int b) {
     std::random_device random_device; // Источник энтропии.
     std::mt19937 generator(random_device()); // Генератор случайных чисел.
-    // (Здесь берется одно инициализирующее значение, можно брать больше)
-
     std::uniform_int_distribution<> distribution(a, b); // Равномерное распределение [10, 20]
 
     return distribution(generator); // Случайное число.
@@ -30,8 +26,8 @@ EnemyTank *EnemyTank::create(Maze *pMaze)
 	{
 		//enemyTank->autorelease();
 		enemyTank->initTank(pMaze);
-		//enemyTank->initPhysics();
-		//enemyTank->getPhysicsBody()->setContactTestBitmask(ObjType::ENEMY);
+		enemyTank->initPhysics();
+		enemyTank->getPhysicsBody()->setContactTestBitmask(ObjType::ENEMY);
 		return enemyTank;
 	}
 
@@ -40,8 +36,8 @@ EnemyTank *EnemyTank::create(Maze *pMaze)
 }
 
 void EnemyTank::startGameLoop() {
-	std::thread gameLoop(&EnemyTank::calculateMove, this, 0, 0);
-	gameLoop.detach();
+	//std::thread gameLoop(&EnemyTank::calculateMove, this, 0, 0);
+	//gameLoop.detach();
 }
 
 void EnemyTank::initTank(Maze *pMaze)
@@ -63,6 +59,16 @@ std::tuple<uint16_t, uint16_t> EnemyTank::convertPos2Area(Vec2 pos) {
 	return std::tuple<uint16_t, uint16_t>(x, y);
 }
 
+std::tuple<uint16_t, uint16_t> EnemyTank::inaccurPos2Area(Vec2 pos) {
+    Size sceneSize = Director::getInstance()->getWinSize();
+
+    uint16_t x = pos.x / TextureFactory::getInstance().getTileWidth();
+    uint16_t y = pos.y / TextureFactory::getInstance().getTileHeight();
+
+    return std::tuple<uint16_t, uint16_t>(x * TextureFactory::getInstance().getTileWidth(),
+                                          y *  TextureFactory::getInstance().getTileHeight());
+}
+
 Vec2 EnemyTank::convertArea2Pos(uint16_t areaX, uint16_t areaY) {
 	Size sceneSize = Director::getInstance()->getWinSize();
 	float x = areaX * TextureFactory::getInstance().getTileWidth() + (TextureFactory::getInstance().getTileWidth() / 2);
@@ -76,32 +82,27 @@ Vec2 EnemyTank::convertArea2Pos(std::tuple<uint16_t, uint16_t> area) {
 
 void EnemyTank::update(float dt) {
 	Tank::update(dt);
+	this->calculateMove();
 }
 
 void EnemyTank::setObjective(IObjective *pObjctv) {
 	//Patrol patrol(10, 10);
 }
 
-void EnemyTank::calculateMove(int posX, int posY) {
+void EnemyTank::calculateMove() {
 	const char *eDirectionStr[] = {"LEFT", "RIGHT", "UP", "DOWN"};
-    //eDirection dir[4] = {eDirection::LEFT, eDirection::RIGHT, eDirection::DOWN, eDirection::UP};
-    /*do {
-        std::this_thread::sleep_for(std::chrono::seconds{ getRandom(1, 3) });
-		moveTo((eDirection)getRandom(0, 3));
-		//Shot *pShot = Shot::create(this->direction, this->getPosition());
-		//BattleLayer *parent = (BattleLayer *)(this->getParent());
-		//parent->addShot(pShot);
-    } while(true);
-    return;*/
-	std::this_thread::sleep_for(std::chrono::seconds{ 3 });
+    //std::this_thread::sleep_for(std::chrono::seconds{ 3 });
     
     pathfinder::TMap pathMap = pMaze->getPath();
-    //pathMap.print();
-    do {
+    //do {
         Vec2 curPos = this->getPosition();
         std::tuple<uint16_t, uint16_t> curpos = EnemyTank::convertPos2Area(curPos);
+        std::tuple<uint16_t, uint16_t> inaccurpos= EnemyTank::inaccurPos2Area(curPos);
         uint32_t curPosX = std::get<0>(curpos);
         uint32_t curPosY = MAZE_HEIGHT - std::get<1>(curpos);
+        uint32_t inaccurPosX = std::get<0>(curpos);
+        uint32_t inaccurPosY = MAZE_HEIGHT - std::get<1>(curpos);
+        //cocos2d::log("corpos %.2f:.2%f => curPos %u:%u(%u:%u)\n", curPos.x, curPos.y, curPosX, curPosY, inaccurPosX, inaccurPosY);
 
         unsigned char c[4], c_min = 0xFF;
 
@@ -110,24 +111,15 @@ void EnemyTank::calculateMove(int posX, int posY) {
         c[2] = pathMap.getCell(curPosX, curPosY - 1);
         c[3] = pathMap.getCell(curPosX, curPosY + 1);
 
-        /*cocos2d::log("cells: (%d:%d)%d, "
-                  "(%d:%d)%d, "
-                  "(%d:%d)%d, "
-                  "(%d:%d)%d", curPosX - 1, curPosY, c[0],
-                     curPosX + 1, curPosY, c[1],
-                     curPosX, curPosY - 1, c[2],
-                     curPosX, curPosY + 1, c[3]
-        );*/
-        bool not_found = true;
+        //bool not_found = true;
         for (int i = 0; i < 4; i++) {
             if (c[i] <= c_min && c[i] != 0) {
                 this->moveTo((eDirection)i);
-                //cocos2d::log("moveTo: %d, %s, %d\n", i, eDirectionStr[i], c[i]);
                 c_min = c[i];
-                not_found = false;
+                //not_found = false;
             }
         }
-        if (not_found) break;
-        std::this_thread::sleep_for(std::chrono::milliseconds{ 500 });
-    } while(true);
+        //if (not_found) break;
+        //std::this_thread::sleep_for(std::chrono::milliseconds{ 500 });
+    //} while(true);
 }

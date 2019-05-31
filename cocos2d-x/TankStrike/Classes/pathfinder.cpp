@@ -175,47 +175,6 @@ TMap TMap::findAllPath(const TPoint &point_begin) {
     return mapPath;
 }
 
-/*void TMap::findAllPath(uint32_t pBeginX, uint32_t pBeginY, char **mapPath) {
-    struct tnode {
-        int posX;
-        int posY;
-        int weight;
-
-        tnode(int x, int y, int weight) : posX(x), posY(y), weight(weight) {}
-    };
-
-    tnode begin(pBeginX, pBeginY, 0);
-    std::queue<tnode> nodes;
-    nodes.push(begin);
-
-    while (!nodes.empty()) {
-        tnode node = nodes.front();
-        nodes.pop();
-        if (node.posX > 0 && getCell(node.posX - 1, node.posY) == ' ' && mapPath[node.posX - 1][node.posY] == 0) {
-            tnode new_node(node.posX - 1, node.posY, node.weight + 1);
-            mapPath[new_node.posX][new_node.posY] = new_node.weight;
-            nodes.push(new_node);
-        }
-        if (node.posY > 0 && getCell(node.posX, node.posY - 1) == ' ' && mapPath[node.posX][node.posY - 1] == 0) {
-            tnode new_node(node.posX, node.posY - 1, node.weight + 1);
-            mapPath[new_node.posX][new_node.posY] = new_node.weight;
-            nodes.push(new_node);
-        }
-        if (node.posX < (_width - 1) && getCell(node.posX + 1, node.posY) == ' ' && mapPath[node.posX + 1][node.posY] == 0) {
-            tnode new_node(node.posX + 1, node.posY, node.weight + 1);
-            mapPath[new_node.posX][new_node.posY] = new_node.weight;
-            nodes.push(new_node);
-        }
-        char c = getCell(node.posX, node.posY + 1);
-        char m = mapPath[node.posX][node.posY + 1];
-        if (node.posY < (_height - 1) && c == ' ' && m == 0) {
-            tnode new_node(node.posX, node.posY + 1, node.weight + 1);
-            mapPath[new_node.posX][new_node.posY] = new_node.weight;
-            nodes.push(new_node);
-        }
-    }
-}*/
-
 void pathfinderRecurse(uint32_t posX, uint32_t posY, const char map[11][10], char mapPath[11][10], int loop) {
     if (map[posX - 1][posY] == ' ' && mapPath[posX - 1][posY] == 0) {
         mapPath[posX - 1][posY] = loop;

@@ -16,7 +16,8 @@ PlayerTank *PlayerTank::create()
 	{
 		//playerTank->autorelease();
 		playerTank->initTank();
-		//playerTank->initPhysics();
+		playerTank->initPhysics();
+		playerTank->getPhysicsBody()->setContactTestBitmask(ObjType::PLAYER);
 		return playerTank;
 	}
 

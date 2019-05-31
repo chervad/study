@@ -9,15 +9,9 @@
 #include <cstdio>
 #include <list>
 
-#if defined(DLL_EXPORT)
-#  define DECLSPEC __declspec(dllexport)
-#else
-#  define DECLSPEC
-#endif //defined(DLL_EXPORT)
-
 namespace pathfinder {
 
-    struct DECLSPEC TPoint {
+    struct TPoint {
         uint32_t _x;
         uint32_t _y;
 
@@ -29,7 +23,7 @@ namespace pathfinder {
         }
     };
 
-    class DECLSPEC TMap {
+    class TMap {
     public:
         //Можно заменить на Boost.MultiArray
         // https://www.boost.org/doc/libs/1_70_0/libs/multi_array/doc/index.html

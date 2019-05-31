@@ -8,6 +8,7 @@
 
 #include "Wall.h"
 #include "Brick.h"
+#include "Ground.h"
 
 using namespace cocos2d;
 
@@ -33,7 +34,7 @@ Scene* BattleLayer::createScene()
 
 	PhysicsWorld* world = scene->getPhysicsWorld();
 	world->setGravity(Vec2(.0f, .0f));  
-	//world->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+	world->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
 
     return scene;
 }
@@ -72,8 +73,14 @@ bool BattleLayer::init()
 	this->pPlayerTank->setPosition(Vec2(sceneSize.width / 2, (sceneSize.height / 2) + 2));
 	this->addChild(this->pPlayerTank);
 
+	for (const auto & base_pos : enemyBase) {
+        EnemyTank *pEnemyTank = EnemyTank::create(pMaze);
+        pEnemyTank->setPosition(base_pos);
+        addEnemyTank(pEnemyTank);
+        pEnemyTank->startGameLoop();
+    }
+    //this->pMaze->calcPathMap();
 	this->scheduleUpdate();
-	mainGameLoop();
 
     return true;
 }
@@ -109,7 +116,16 @@ bool BattleLayer::onContactBegin(PhysicsContact &contact)
 			pBrick->Blast();
 		}
 		return true;
+	} else {
+        if (resMask == (ObjType::GROUND | ObjType::ENEMY)) {
+            EnemyTank *pEnemyTank = (EnemyTank *)(bodyA->getContactTestBitmask() == ObjType::ENEMY ? bodyA->getNode() : bodyB->getNode());
+            Ground *pGround = (Ground *)(bodyB->getContactTestBitmask() == ObjType::GROUND ? bodyB->getNode() : bodyA->getNode());
+            std::tuple<uint16_t, uint16_t> areaPos = EnemyTank::convertPos2Area(pGround->getPosition());
+            log("Enemy tank on %u:%u", std::get<0>(areaPos), std::get<1>(areaPos));
+            return true;
+        }
 	}
+    //log("mask %d", resMask);
 	return false;
 }
 
@@ -139,19 +155,5 @@ void BattleLayer::update(float dt) {
 	}
 	for (auto pShot : listShots) {
 		pShot->update(dt);
-	}
-}
-
-/*void BattleLayer::mainGameLoopProxy(BattleLayer *ptr) {
-	ptr->mainGameLoop();
-}*/
-
-void BattleLayer::mainGameLoop() {
-	//std::this_thread::sleep_for(std::chrono::seconds{ 5 });
-	for (const auto & base_pos : enemyBase) {
-		EnemyTank *pEnemyTank = EnemyTank::create(pMaze);
-		pEnemyTank->setPosition(base_pos);
-		addEnemyTank(pEnemyTank);
-		pEnemyTank->startGameLoop();
 	}
 }

@@ -12,11 +12,11 @@ static char mazePlan[MAZE_HEIGHT + 1][MAZE_WIDTH] = {
 	  "xxxxxxxxxxxxxxxxxxxxxxxxx"
 	, "xT                     Tx"
 	, "xx  xxxx  xxxx  xxxx  xxx"
-	, "xT                     Tx"
+	, "x                       x"
 	, "xbbbb  bbbb  bbbb  bbbbbx"
-	, "xT                     Tx"
+	, "x                       x"
 	, "xx  xxxx  xxxx  xxxx  xxx"
-	, "xT                     Tx"
+	, "x                       x"
 	, "xbbbb  bbbb  bbbb  bbbbbx"
 	, "x                       x"
 	, "xx  xxxx  xxxx  xxxx  xxx"
@@ -119,13 +119,37 @@ void Maze::build() {
 				} else if (block == 'T') {
 					BattleLayer *pBattleLayer = (BattleLayer *)this->pParentNode;
 					pBattleLayer->addEnemyBase(EnemyTank::convertArea2Pos(x, y));
+                    //инициализируем физику этой земли, т.к. по ней может ехать танчик
+                    pGround->initPhysics();
+				} else if (block == ' ') {
+                    //TODO: добавить инициализацию физики земли под кирпичной стеной после её разрушения, т.к. там теперь может ехать танчик
+                    //инициализируем физику этой земли, т.к. по ней может ехать танчик
+                    pGround->initPhysics();
 				}
 			}
 		}
 	}
 }
+
+void Maze::calcPathMap() {
+    PlayerTank *pPTank = ((BattleLayer *)pParentNode)->getPlayerTank();
+    Vec2 player_position = pPTank->getPosition();
+    std::tuple<uint16_t, uint16_t> pl_pos = EnemyTank::convertPos2Area(player_position);
+    uint16_t destPosX = std::get<0>(pl_pos);
+    uint16_t destPosY = std::get<1>(pl_pos);
+    const char *pplan[19];
+    for (int i = 0; i < 19; ++i) {
+        pplan[i] = mazePlan[i];
+    }
+    pathfinder::TMap map = pathfinder::TMap::create(pplan, 26, 19);//TODO Карта не так часто изменяется, сделать через кэшь и добавить в событие инвалидации
+    pathfinder::TPoint p(destPosX, destPosY);
+    //map.print();
+    //this->pathMap = (pathfinder::TMap*)malloc(sizeof(pathfinder::TMap));
+    //pathfinder::TMap m = map.findAllPath(p);
+}
 //TODO отрефакторить, с учётом использования в многопоточной среде, добавить кэширование
 pathfinder::TMap Maze::getPath() {
+    //return this->pathMap;
     PlayerTank *pPTank = ((BattleLayer *)pParentNode)->getPlayerTank();
     Vec2 player_position = pPTank->getPosition();
     std::tuple<uint16_t, uint16_t> pl_pos = EnemyTank::convertPos2Area(player_position);

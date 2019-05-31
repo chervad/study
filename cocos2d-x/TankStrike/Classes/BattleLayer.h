@@ -33,9 +33,6 @@ public:
     PlayerTank *getPlayerTank() const;
 
 	CREATE_FUNC(BattleLayer);
-protected:
-	void mainGameLoop();
-	//static void mainGameLoopProxy(BattleLayer *ptr);
 private:
 	PlayerTank *pPlayerTank;
 	Maze *pMaze;
