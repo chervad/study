@@ -134,7 +134,6 @@ int main()
 	std::cout << intT.getA() << std::endl;
 
 	system("PAUSE");
-
 	return 0;
 }
 
