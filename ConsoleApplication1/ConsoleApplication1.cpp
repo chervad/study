@@ -52,6 +52,9 @@ private:
 	int a;
 };
 
+/**
+* main function
+*/
 int main()
 {
 	A a;
