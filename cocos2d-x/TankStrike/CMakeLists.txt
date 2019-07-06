@@ -29,7 +29,7 @@ set(APP_NAME TankStrike)
 
 project(${APP_NAME})
 
-set(COCOS2DX_ROOT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cocos2d)
+set(COCOS2DX_ROOT_PATH $ENV{COCOS2DX_HOME})
 set(CMAKE_MODULE_PATH ${COCOS2DX_ROOT_PATH}/cmake/Modules/)
 
 include(CocosBuildSet)
