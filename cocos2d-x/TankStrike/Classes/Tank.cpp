@@ -65,7 +65,8 @@ void Tank::playAnimation() {
 			getActionManager()->resumeTarget(this);
 		}
 		else {
-			auto a = runAction(RepeatForever::create(pMoveAnimate));
+			Action* action = RepeatForever::create(pMoveAnimate);
+			auto a = runAction(action);
 		}
 	}
 }
