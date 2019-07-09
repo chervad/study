@@ -1,5 +1,6 @@
 #pragma once
 
+#include <array>
 #include "cocos2d.h"
 
 #include "defens.h"
@@ -13,8 +14,16 @@ public:
 
 	void moveTo(eDirection direct);
 	void moveTo(eDirection direct, int delta);
+	void stop();
 
 	virtual ~Tank();
+	void setNearbyObj(eDirection direction, ObjType objType);
+	std::string printNearbyObj() {
+		std::ostringstream stringStream;
+		stringStream << "[";
+		stringStream << "]";
+		return stringStream.str();
+	}
 protected:
 	int nX_delta;
 	int nY_delta;
@@ -27,8 +36,8 @@ protected:
 	int posY;
 
 	eDirection direction;
-
 	Animate *pMoveAnimate;
+	std::array<ObjType, 4> nearbyObj;
 
 	void initTank();
 	void initPhysics();

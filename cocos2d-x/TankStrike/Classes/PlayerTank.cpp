@@ -61,12 +61,12 @@ void PlayerTank::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event) {
 }
 
 void PlayerTank::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event) {
-	if (keyCode == EventKeyboard::KeyCode::KEY_LEFT_ARROW ||
+	/*if (keyCode == EventKeyboard::KeyCode::KEY_LEFT_ARROW ||
 		keyCode == EventKeyboard::KeyCode::KEY_RIGHT_ARROW ||
 		keyCode == EventKeyboard::KeyCode::KEY_UP_ARROW ||
 		keyCode == EventKeyboard::KeyCode::KEY_DOWN_ARROW ||
 		keyCode == EventKeyboard::KeyCode::KEY_SPACE)
-	{
+	{*/
 		if (keyCode == EventKeyboard::KeyCode::KEY_LEFT_ARROW ||
 			keyCode == EventKeyboard::KeyCode::KEY_RIGHT_ARROW)
 		{
@@ -77,7 +77,7 @@ void PlayerTank::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event) {
 		{
 			nY_delta = 0;
 		}
-	}
+	/*}*/
 	this->pauseAnimation();
 }
 

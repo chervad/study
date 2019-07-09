@@ -11,6 +11,10 @@ Tank::~Tank()
 	CC_SAFE_RELEASE(pMoveAnimate);
 }
 
+void Tank::setNearbyObj(eDirection direction, ObjType objType) {
+	this->nearbyObj[direction] = objType;
+}
+
 void Tank::initTank() {
 	this->winSize = Director::getInstance()->getWinSize();
 	Size size = this->getBoundingBox().size;
@@ -59,7 +63,18 @@ void Tank::moveTo(eDirection direct, int delta) {
 	pauseAnimation();
 }
 
+void Tank::stop() {
+	if (this->direction == eDirection::LEFT || this->direction == eDirection::RIGHT) {
+		nX_delta = 0;
+	}
+	if (this->direction == eDirection::UP || this->direction == eDirection::DOWN) {
+		nY_delta = 0;
+	}
+}
+
 void Tank::playAnimation() {
+	//todo: почему-то анимация вызывает жесткий эксепшн!
+	return;
 	if (nX_delta != 0 || nY_delta != 0) {
 		if (pMoveAnimate->getTarget() != nullptr) {
 			getActionManager()->resumeTarget(this);
@@ -72,6 +87,8 @@ void Tank::playAnimation() {
 }
 
 void Tank::pauseAnimation() {
+	//todo: почему-то анимация вызывает жесткий эксепшн!
+	return;
 	if (nX_delta == 0 && nY_delta == 0) {
 		getActionManager()->pauseTarget(this);
 	}
@@ -86,13 +103,13 @@ void Tank::update(float dt)
 			curPos.y + nY_delta > DELTA && curPos.y + nY_delta < winSize.height - DELTA)
 		{
 			Vec2 newPos = Vec2(curPos.x + nX_delta, curPos.y + nY_delta);
-			if (Maze::moveTankThisPosition(newPos, this->width, this->height, this->direction)) {
+			//if (Maze::moveTankThisPosition(newPos, this->width, this->height, this->direction)) {
 				this->setPosition(newPos);
 
                 std::tuple<uint16_t, uint16_t> post = EnemyTank::convertPos2Area(newPos);
                 this->posX = std::get<0>(post);
                 this->posY = 19 - std::get<1>(post) - 1;
-			}
+			//}
 		}
 	}
 }

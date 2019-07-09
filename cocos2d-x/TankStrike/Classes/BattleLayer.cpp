@@ -34,7 +34,7 @@ Scene* BattleLayer::createScene()
 
 	PhysicsWorld* world = scene->getPhysicsWorld();
 	world->setGravity(Vec2(.0f, .0f));  
-	world->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+	world->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_CONTACT);// DEBUGDRAW_ALL);
 
     return scene;
 }
@@ -51,6 +51,8 @@ bool BattleLayer::init()
 
 	auto contactListener = EventListenerPhysicsContact::create();
 	contactListener->onContactBegin = CC_CALLBACK_1(BattleLayer::onContactBegin, this);
+	//contactListener->onContactPreSolve = CC_CALLBACK_2(BattleLayer::onContactPreSolve, this);
+	contactListener->onContactSeparate = CC_CALLBACK_1(BattleLayer::onContactSeparate, this);
 
 	this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
 	this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(contactListener, this);
@@ -73,12 +75,12 @@ bool BattleLayer::init()
 	this->pPlayerTank->setPosition(Vec2(sceneSize.width / 2, (sceneSize.height / 2) + 2));
 	this->addChild(this->pPlayerTank);
 
-	for (const auto & base_pos : enemyBase) {
+	/*for (const auto & base_pos : enemyBase) {
         EnemyTank *pEnemyTank = EnemyTank::create(pMaze);
         pEnemyTank->setPosition(base_pos);
         addEnemyTank(pEnemyTank);
         pEnemyTank->startGameLoop();
-    }
+    }*/
     //this->pMaze->calcPathMap();
 	this->scheduleUpdate();
 
@@ -94,8 +96,51 @@ void BattleLayer::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event) {
 
 }
 
-bool BattleLayer::onContactBegin(PhysicsContact &contact) 
+bool BattleLayer::onContactSeparate(PhysicsContact & contact)
 {
+	PhysicsShape *shapeA = contact.getShapeA();
+	PhysicsBody *bodyA = shapeA->getBody();
+
+	PhysicsShape *shapeB = contact.getShapeB();
+	PhysicsBody *bodyB = shapeB->getBody();
+
+	int resMask = bodyA->getContactTestBitmask() | bodyB->getContactTestBitmask();
+
+	if (resMask == (ObjType::PLAYER | ObjType::WALL)
+		|| resMask == (ObjType::PLAYER | ObjType::BRICK))
+	{
+		PlayerTank *pTank = nullptr;
+		Vec2 tankPos;
+		Vec2 hardlePos;
+		if (bodyA->getContactTestBitmask() == ObjType::PLAYER) {
+			pTank = (PlayerTank *)bodyA->getNode();
+			tankPos = pTank->getPosition();
+			hardlePos = bodyB->getNode()->getPosition();
+		}
+		else {
+			pTank = (PlayerTank *)bodyB->getNode();
+			tankPos = pTank->getPosition();
+			hardlePos = bodyA->getNode()->getPosition();
+		}
+		if (tankPos.x > hardlePos.x) {
+			pTank->setNearbyObj(eDirection::LEFT, ObjType::GROUND);
+		}
+		else if (tankPos.x < hardlePos.x) {
+			pTank->setNearbyObj(eDirection::RIGHT, ObjType::GROUND);
+		}
+		if (tankPos.y > hardlePos.y) {
+			pTank->setNearbyObj(eDirection::DOWN, ObjType::GROUND);
+		}
+		else if (tankPos.y < hardlePos.y) {
+			pTank->setNearbyObj(eDirection::UP, ObjType::GROUND);
+		}
+		log("separate %s", pTank->printNearbyObj());
+		return true;
+	}
+	return false;
+}
+
+bool BattleLayer::onContactBegin(PhysicsContact &contact) {
 	PhysicsShape *shapeA = contact.getShapeA();
 	PhysicsBody *bodyA = shapeA->getBody();
 
@@ -116,15 +161,55 @@ bool BattleLayer::onContactBegin(PhysicsContact &contact)
 			pBrick->Blast();
 		}
 		return true;
-	} else {
+	} else if (resMask == (ObjType::PLAYER | ObjType::WALL)
+		|| resMask == (ObjType::PLAYER | ObjType::BRICK))
+	{
+		PlayerTank *pTank = nullptr;
+		ObjType objType;
+		Vec2 tankPos;
+		Vec2 hardlePos;
+		if (bodyA->getContactTestBitmask() == ObjType::PLAYER) {
+			pTank = (PlayerTank *)bodyA->getNode();
+			objType = (ObjType)bodyB->getContactTestBitmask();
+			tankPos = pTank->getPosition();
+			hardlePos = bodyB->getNode()->getPosition();
+		}
+		else {
+			pTank = (PlayerTank *)bodyB->getNode();
+			objType = (ObjType)bodyA->getContactTestBitmask();
+			tankPos = pTank->getPosition();
+			hardlePos = bodyA->getNode()->getPosition();
+		}
+		if (tankPos.x > hardlePos.x) {
+			pTank->setNearbyObj(eDirection::LEFT, objType);
+		}
+		else if (tankPos.x < hardlePos.x) {
+			pTank->setNearbyObj(eDirection::RIGHT, objType);
+		}
+		if (tankPos.y > hardlePos.y) {
+			pTank->setNearbyObj(eDirection::DOWN, objType);
+		}
+		else if (tankPos.y < hardlePos.y) {
+			pTank->setNearbyObj(eDirection::UP, objType);
+		}
+		log("contact %s", pTank->printNearbyObj());
+		return true;
+	}
+	/*else {
         if (resMask == (ObjType::GROUND | ObjType::ENEMY)) {
             EnemyTank *pEnemyTank = (EnemyTank *)(bodyA->getContactTestBitmask() == ObjType::ENEMY ? bodyA->getNode() : bodyB->getNode());
             Ground *pGround = (Ground *)(bodyB->getContactTestBitmask() == ObjType::GROUND ? bodyB->getNode() : bodyA->getNode());
             std::tuple<uint16_t, uint16_t> areaPos = EnemyTank::convertPos2Area(pGround->getPosition());
             log("Enemy tank on %u:%u", std::get<0>(areaPos), std::get<1>(areaPos));
             return true;
-        }
-	}
+        } else if (resMask == (ObjType::GROUND | ObjType::PLAYER)) {
+			PlayerTank *pPlayerTank = (PlayerTank *)(bodyA->getContactTestBitmask() == ObjType::PLAYER ? bodyA->getNode() : bodyB->getNode());
+			Ground *pGround = (Ground *)(bodyB->getContactTestBitmask() == ObjType::GROUND ? bodyB->getNode() : bodyA->getNode());
+			std::tuple<uint16_t, uint16_t> areaPos = EnemyTank::convertPos2Area(pGround->getPosition());
+			log("Player tank on %u:%u", std::get<0>(areaPos), std::get<1>(areaPos));
+			return true;
+		}
+	}*/
     //log("mask %d", resMask);
 	return false;
 }
