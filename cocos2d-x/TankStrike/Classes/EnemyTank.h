@@ -23,7 +23,7 @@ public:
 	 * @param pos
 	 * @return
 	 */
-    static std::tuple<uint16_t, uint16_t> inaccurPos2Area(Vec2 pos);
+    static bool accurancyPosition(Vec2 pos);
     /**
      * преобразование координаты карты к координатам экрана
      * @param areaX
@@ -40,10 +40,10 @@ public:
 
 	virtual ~EnemyTank();
 
-	void update(float dt);
 	void setObjective(IObjective *pObjctv);
 protected:
     void calculateMove();
+	virtual void calcParams();
 private:
 	uint16_t targetAreaX;
 	uint16_t targetAreaY;

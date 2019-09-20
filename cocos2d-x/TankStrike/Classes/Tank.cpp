@@ -96,6 +96,7 @@ void Tank::pauseAnimation() {
 
 void Tank::update(float dt)
 {
+	this->calcParams();
 	if (nX_delta != 0 || nY_delta != 0) {
 		Point curPos = this->getPosition();
 

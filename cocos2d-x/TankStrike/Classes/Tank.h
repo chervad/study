@@ -27,7 +27,7 @@ public:
 protected:
 	int nX_delta;
 	int nY_delta;
-	Size winSize;//���� ��� ������� ��� ���������� ������ update(), �� ���-�� �� ������� �������
+	Size winSize;//пока как костыль для убыстрения работы update(), но как-то не красиво сделано
 	int width;
 	int height;
 	float life = 100.f;
@@ -43,4 +43,8 @@ protected:
 	void initPhysics();
 	virtual void playAnimation();
 	virtual void pauseAnimation();
+	/**
+	 * Метод перерасчёта всех основных параметров объекта, будб то вектор движения, скорость, жизни т.д.
+	 */
+	virtual void calcParams() = 0;
 };

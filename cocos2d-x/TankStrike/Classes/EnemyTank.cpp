@@ -52,21 +52,17 @@ void EnemyTank::initTank(Maze *pMaze)
 }
 
 std::tuple<uint16_t, uint16_t> EnemyTank::convertPos2Area(Vec2 pos) {
-	Size sceneSize = Director::getInstance()->getWinSize();
-	uint16_t x = pos.x / TextureFactory::getInstance().getTileWidth();
-	uint16_t y = pos.y / TextureFactory::getInstance().getTileHeight();
+	uint16_t x = static_cast<uint16_t>(pos.x / TextureFactory::getInstance().getTileWidth());
+	uint16_t y = static_cast<uint16_t>(pos.y / TextureFactory::getInstance().getTileHeight());
 
 	return std::tuple<uint16_t, uint16_t>(x, y);
 }
 
-std::tuple<uint16_t, uint16_t> EnemyTank::inaccurPos2Area(Vec2 pos) {
-    Size sceneSize = Director::getInstance()->getWinSize();
+bool EnemyTank::accurancyPosition(Vec2 pos) {
+    float x = pos.x / TextureFactory::getInstance().getTileWidth();
+    float y = pos.y / TextureFactory::getInstance().getTileHeight();
 
-    uint16_t x = pos.x / TextureFactory::getInstance().getTileWidth();
-    uint16_t y = pos.y / TextureFactory::getInstance().getTileHeight();
-
-    return std::tuple<uint16_t, uint16_t>(x * TextureFactory::getInstance().getTileWidth(),
-                                          y *  TextureFactory::getInstance().getTileHeight());
+    return x == y == 0.0f;
 }
 
 Vec2 EnemyTank::convertArea2Pos(uint16_t areaX, uint16_t areaY) {
@@ -80,12 +76,20 @@ Vec2 EnemyTank::convertArea2Pos(std::tuple<uint16_t, uint16_t> area) {
 	return convertArea2Pos(std::get<0>(area), std::get<1>(area));
 }
 
-void EnemyTank::update(float dt) {
-	Tank::update(dt);
-}
-
 void EnemyTank::setObjective(IObjective *pObjctv) {
 	//Patrol patrol(10, 10);
+}
+
+virtual void EnemyTank::calcParams() {
+    Vec2 curPos = this->getPosition();
+    if (accurancyPosition(curPos)) {
+        //TODO считается что танк находится точно в центре клетки и может повернуть, вычисляем куда ему поворачивать
+        const char *eDirectionStr[] = {"LEFT", "RIGHT", "UP", "DOWN"};
+        std::tuple<uint16_t, uint16_t> curposеtuple = EnemyTank::convertPos2Area(curPos);
+        uint32_t curPosX = std::get<0>(curposеtuple);
+        uint32_t curPosY = MAZE_HEIGHT - std::get<1>(curposеtuple);
+
+    }
 }
 
 void EnemyTank::calculateMove() {
@@ -95,7 +99,6 @@ void EnemyTank::calculateMove() {
     //do {
         Vec2 curPos = this->getPosition();
         std::tuple<uint16_t, uint16_t> curpos = EnemyTank::convertPos2Area(curPos);
-        std::tuple<uint16_t, uint16_t> inaccurpos= EnemyTank::inaccurPos2Area(curPos);
         uint32_t curPosX = std::get<0>(curpos);
         uint32_t curPosY = MAZE_HEIGHT - std::get<1>(curpos);
         uint32_t inaccurPosX = std::get<0>(curpos);
