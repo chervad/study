@@ -82,7 +82,6 @@ Vec2 EnemyTank::convertArea2Pos(std::tuple<uint16_t, uint16_t> area) {
 
 void EnemyTank::update(float dt) {
 	Tank::update(dt);
-	this->calculateMove();
 }
 
 void EnemyTank::setObjective(IObjective *pObjctv) {
@@ -92,8 +91,7 @@ void EnemyTank::setObjective(IObjective *pObjctv) {
 void EnemyTank::calculateMove() {
 	const char *eDirectionStr[] = {"LEFT", "RIGHT", "UP", "DOWN"};
     //std::this_thread::sleep_for(std::chrono::seconds{ 3 });
-    
-    pathfinder::TMap pathMap = pMaze->getPath();
+
     //do {
         Vec2 curPos = this->getPosition();
         std::tuple<uint16_t, uint16_t> curpos = EnemyTank::convertPos2Area(curPos);
@@ -106,19 +104,6 @@ void EnemyTank::calculateMove() {
 
         unsigned char c[4], c_min = 0xFF;
 
-        c[0] = pathMap.getCell(curPosX - 1, curPosY);
-        c[1] = pathMap.getCell(curPosX + 1, curPosY);
-        c[2] = pathMap.getCell(curPosX, curPosY - 1);
-        c[3] = pathMap.getCell(curPosX, curPosY + 1);
-
-        //bool not_found = true;
-        for (int i = 0; i < 4; i++) {
-            if (c[i] <= c_min && c[i] != 0) {
-                this->moveTo((eDirection)i);
-                c_min = c[i];
-                //not_found = false;
-            }
-        }
         //if (not_found) break;
         //std::this_thread::sleep_for(std::chrono::milliseconds{ 500 });
     //} while(true);

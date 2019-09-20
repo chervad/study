@@ -2,7 +2,6 @@
 
 #include "cocos2d.h"
 #include "defens.h"
-#include "pathfinder.h"
 #include <atomic>
 
 using namespace cocos2d;
@@ -17,9 +16,6 @@ public:
 
 	static void setMazePlan(Vec2 pos, char block);
 	static char getMazePlan(Vec2 pos);
-
-    void calcPathMap();
-    pathfinder::TMap getPath();
 private:
 	uint16_t width;
 	uint16_t height;
@@ -28,6 +24,4 @@ private:
 
 	//std::list<Wall *> listWall;
     void build();
-
-	std::atomic<pathfinder::TMap *> pPathMap;
 };

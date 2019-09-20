@@ -131,41 +131,6 @@ void Maze::build() {
 	}
 }
 
-void Maze::calcPathMap() {
-    PlayerTank *pPTank = ((BattleLayer *)pParentNode)->getPlayerTank();
-    Vec2 player_position = pPTank->getPosition();
-    std::tuple<uint16_t, uint16_t> pl_pos = EnemyTank::convertPos2Area(player_position);
-    uint16_t destPosX = std::get<0>(pl_pos);
-    uint16_t destPosY = std::get<1>(pl_pos);
-    const char *pplan[19];
-    for (int i = 0; i < 19; ++i) {
-        pplan[i] = mazePlan[i];
-    }
-    pathfinder::TMap map = pathfinder::TMap::create(pplan, 26, 19);//TODO Карта не так часто изменяется, сделать через кэшь и добавить в событие инвалидации
-    pathfinder::TPoint p(destPosX, destPosY);
-    //map.print();
-    //this->pathMap = (pathfinder::TMap*)malloc(sizeof(pathfinder::TMap));
-    //pathfinder::TMap m = map.findAllPath(p);
-}
-//TODO отрефакторить, с учётом использования в многопоточной среде, добавить кэширование
-pathfinder::TMap Maze::getPath() {
-    //return this->pathMap;
-    PlayerTank *pPTank = ((BattleLayer *)pParentNode)->getPlayerTank();
-    Vec2 player_position = pPTank->getPosition();
-    std::tuple<uint16_t, uint16_t> pl_pos = EnemyTank::convertPos2Area(player_position);
-    uint16_t destPosX = std::get<0>(pl_pos);
-    uint16_t destPosY = std::get<1>(pl_pos);
-    const char *pplan[19];
-    for (int i = 0; i < 19; ++i) {
-        pplan[i] = mazePlan[i];
-    }
-    pathfinder::TMap map = pathfinder::TMap::create(pplan, 26, 19);//TODO Карта не так часто изменяется, сделать через кэшь и добавить в событие инвалидации
-    pathfinder::TPoint p(destPosX, destPosY);
-    //map.print();
-    pathfinder::TMap result = map.findAllPath(p);
-    return result;
-}
-
 bool Maze::moveTankThisPosition(Vec2 newPos, float width, float height, eDirection direction) {
 	Vec2 checkPos_leftTrack = newPos;
 	Vec2 checkPos_rightTrack = newPos;
