@@ -80,7 +80,7 @@ void EnemyTank::setObjective(IObjective *pObjctv) {
 	//Patrol patrol(10, 10);
 }
 
-virtual void EnemyTank::calcParams() {
+void EnemyTank::calcParams() {
     Vec2 curPos = this->getPosition();
     if (accurancyPosition(curPos)) {
         //TODO считается что танк находится точно в центре клетки и может повернуть, вычисляем куда ему поворачивать

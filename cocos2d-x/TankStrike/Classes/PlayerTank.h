@@ -19,7 +19,7 @@ public:
 	virtual ~PlayerTank();
 protected:
 	void initTank();
-
+	virtual void calcParams();
 	//void runMoveAnimate();
 	//void stopMoveAnimate();
 };

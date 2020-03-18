@@ -93,3 +93,7 @@ void PlayerTank::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event) {
 		stopAction(pCurrentMoveAction);
 	}
 }*/
+
+void PlayerTank::calcParams() {
+	
+}

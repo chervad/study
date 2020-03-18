@@ -29,7 +29,7 @@ set(APP_NAME TankStrike)
 
 project(${APP_NAME})
 
-set(COCOS2DX_ROOT_PATH "D:/work/_proj/cocos2d-x-3.17.2")
+set(COCOS2DX_ROOT_PATH "C:/Games/cocos2d-x-3.17.2")
 set(CMAKE_MODULE_PATH ${COCOS2DX_ROOT_PATH}/cmake/Modules/)
 
 include(CocosBuildSet)
@@ -61,7 +61,6 @@ list(APPEND GAME_SOURCE
      Classes/TextureFactory.cpp  
      Classes/Utils.cpp
      Classes/Wall.cpp
-     Classes/pathfinder.cpp
      )
 list(APPEND GAME_HEADER
      Classes/AppDelegate.h
@@ -79,7 +78,6 @@ list(APPEND GAME_HEADER
      Classes/Utils.h
      Classes/Wall.h  
      Classes/defens.h
-     Classes/pathfinder.h
      )
 
 if(ANDROID)

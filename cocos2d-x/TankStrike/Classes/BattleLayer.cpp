@@ -162,7 +162,7 @@ bool BattleLayer::onContactBegin(PhysicsContact &contact) {
 		}
 		return true;
 	} else if (resMask == (ObjType::PLAYER | ObjType::WALL)
-		|| resMask == (ObjType::PLAYER | ObjType::BRICK))
+               || resMask == (ObjType::PLAYER | ObjType::BRICK))
 	{
 		PlayerTank *pTank = nullptr;
 		ObjType objType;
@@ -173,8 +173,7 @@ bool BattleLayer::onContactBegin(PhysicsContact &contact) {
 			objType = (ObjType)bodyB->getContactTestBitmask();
 			tankPos = pTank->getPosition();
 			hardlePos = bodyB->getNode()->getPosition();
-		}
-		else {
+		} else {
 			pTank = (PlayerTank *)bodyB->getNode();
 			objType = (ObjType)bodyA->getContactTestBitmask();
 			tankPos = pTank->getPosition();
