@@ -60,7 +60,7 @@ void Tank::moveTo(eDirection direct, int delta) {
 		break;
 	}
 	this->playAnimation();
-	pauseAnimation();
+	//pauseAnimation();
 }
 
 void Tank::stop() {
@@ -96,7 +96,7 @@ void Tank::pauseAnimation() {
 	}
 }
 
-/*void Tank::update(float dt)
+void Tank::update(float dt)
 {
 	if (nX_delta != 0 || nY_delta != 0) {
 		Point curPos = this->getPosition();
@@ -119,4 +119,4 @@ void Tank::pauseAnimation() {
 		}
         //log("update");
 	}
-}*/
+}

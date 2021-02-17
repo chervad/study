@@ -81,6 +81,7 @@ Vec2 EnemyTank::convertArea2Pos(std::tuple<uint16_t, uint16_t> area) {
 }
 
 void EnemyTank::update(float dt) {
+	this->moveTo(eDirection::RIGHT);
 	Tank::update(dt);
 	//this->calculateMove();
 }

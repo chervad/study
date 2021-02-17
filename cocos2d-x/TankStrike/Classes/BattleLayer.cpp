@@ -33,9 +33,9 @@ Scene* BattleLayer::createScene()
 	auto layer = BattleLayer::create(); //тут вызывается конструктор сцены и сразу же метод init сцены
 	scene->addChild(layer);
 
-	PhysicsWorld* world = scene->getPhysicsWorld();
+	/*PhysicsWorld* world = scene->getPhysicsWorld();
 	world->setGravity(Vec2(.0f, .0f));  
-	world->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_CONTACT);// DEBUGDRAW_ALL);
+	world->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_CONTACT);// DEBUGDRAW_ALL);*/
 
     return scene;
 }
@@ -66,7 +66,6 @@ bool BattleLayer::init()
 	Menu *menu = Menu::create(item1, NULL);
 	menu->alignItemsHorizontallyWithPadding(10);
 	addChild(menu);*/
-
 	Size sceneSize = Director::getInstance()->getWinSize();
 	std::tuple<uint16_t, uint16_t> max_pos = EnemyTank::convertPos2Area(Vec2(sceneSize.width, sceneSize.height));
 
@@ -266,7 +265,7 @@ PlayerTank *BattleLayer::getPlayerTank() const {
 void BattleLayer::update(float dt) {
 	pPlayerTank->update(dt);
 	for (auto pEnemyTank : listEnemyTanks) {
-		//pEnemyTank->update(dt);
+		pEnemyTank->update(dt);
 	}
 	for (auto pShot : listShots) {
 		pShot->update(dt);

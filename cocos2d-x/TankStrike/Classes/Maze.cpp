@@ -210,7 +210,9 @@ bool Maze::moveTankThisPosition(Vec2 newPos, float width, float height, eDirecti
 	uint16_t x2 = std::get<0>(pos_2);
 	uint16_t y2 = std::get<1>(pos_2);
     //TODO T - вражеский танк, разве можно на него заезжать?
-	return mazePlan[19 - y1 - 1][x1] == ' ' && mazePlan[19 - y2 - 1][x2] == ' ';
+	char a1 = mazePlan[19 - y1 - 1][x1];
+	char a2 = mazePlan[19 - y2 - 1][x2];
+	return (a1 == ' ' || a1 == 'T') && (a2 == ' ' || a2 == 'T');
 }
 
 void Maze::setMazePlan(Vec2 pos, char block) {
