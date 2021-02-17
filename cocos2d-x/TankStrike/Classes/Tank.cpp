@@ -66,15 +66,17 @@ void Tank::moveTo(eDirection direct, int delta) {
 void Tank::stop() {
 	if (this->direction == eDirection::LEFT || this->direction == eDirection::RIGHT) {
 		nX_delta = 0;
+        log("stop x");
 	}
 	if (this->direction == eDirection::UP || this->direction == eDirection::DOWN) {
 		nY_delta = 0;
+        log("stop y");
 	}
 }
 
 void Tank::playAnimation() {
 	//todo: почему-то анимация вызывает жесткий эксепшн!
-	return;
+	//return;
 	if (nX_delta != 0 || nY_delta != 0) {
 		if (pMoveAnimate->getTarget() != nullptr) {
 			getActionManager()->resumeTarget(this);
@@ -88,13 +90,13 @@ void Tank::playAnimation() {
 
 void Tank::pauseAnimation() {
 	//todo: почему-то анимация вызывает жесткий эксепшн!
-	return;
+	//return;
 	if (nX_delta == 0 && nY_delta == 0) {
 		getActionManager()->pauseTarget(this);
 	}
 }
 
-void Tank::update(float dt)
+/*void Tank::update(float dt)
 {
 	if (nX_delta != 0 || nY_delta != 0) {
 		Point curPos = this->getPosition();
@@ -103,13 +105,18 @@ void Tank::update(float dt)
 			curPos.y + nY_delta > DELTA && curPos.y + nY_delta < winSize.height - DELTA)
 		{
 			Vec2 newPos = Vec2(curPos.x + nX_delta, curPos.y + nY_delta);
-			//if (Maze::moveTankThisPosition(newPos, this->width, this->height, this->direction)) {
+			if (Maze::moveTankThisPosition(newPos, this->width, this->height, this->direction)) {
 				this->setPosition(newPos);
 
                 std::tuple<uint16_t, uint16_t> post = EnemyTank::convertPos2Area(newPos);
                 this->posX = std::get<0>(post);
                 this->posY = 19 - std::get<1>(post) - 1;
-			//}
+			}
+
+			Rect bbox = this->getBoundingBox();
+            log("%.2f, %.2f, %.2f, %.2f", bbox.getMinX(), bbox.getMinY(), bbox.size.width, bbox.size.height);
+			//Rect newBbox = Rect(bbox.getMinX())
 		}
+        //log("update");
 	}
-}
+}*/

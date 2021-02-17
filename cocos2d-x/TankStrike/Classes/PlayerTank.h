@@ -17,6 +17,8 @@ public:
 	//void stopMove();
 	//void moveTo(int deltaX, int deltaY);
 	virtual ~PlayerTank();
+
+	virtual void update(float dt);
 protected:
 	void initTank();
 

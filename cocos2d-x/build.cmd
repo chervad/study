@@ -3,7 +3,7 @@
 
 @rem https://yadi.sk/d/v9xPRkKC7ZLGTQ
 
-set COCOS2DX_HOME=%COCOS2DX_HOME%
+@rem set COCOS2DX_HOME=%COCOS2DX_HOME%
 set APP_ROOT=%CD%
 set BUILD_PATH=%APP_ROOT%\_build
 set SRC_PATH=%APP_ROOT%\TankStrike

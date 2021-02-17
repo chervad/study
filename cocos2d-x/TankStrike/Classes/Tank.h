@@ -10,7 +10,7 @@ using namespace cocos2d;
 class Tank : public Sprite {
 public:
 
-	void update(float dt);
+	//void update(float dt);
 
 	void moveTo(eDirection direct);
 	void moveTo(eDirection direct, int delta);

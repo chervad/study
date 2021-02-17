@@ -93,3 +93,57 @@ void PlayerTank::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event) {
 		stopAction(pCurrentMoveAction);
 	}
 }*/
+
+void PlayerTank::update(float dt)
+{
+    if (nX_delta != 0 || nY_delta != 0) {
+        Point curPos = this->getPosition();
+
+        if (curPos.x + nX_delta > DELTA && curPos.x + nX_delta < winSize.width - DELTA &&
+            curPos.y + nY_delta > DELTA && curPos.y + nY_delta < winSize.height - DELTA)
+        {
+			int collisions = 0;
+            Vec2 newPos = Vec2(curPos.x + nX_delta, curPos.y + nY_delta);
+
+			auto director = Director::getInstance();
+
+			auto func = [](PhysicsWorld& world, PhysicsShape& shape, void* userData)->bool
+			{
+				int collisions = *((int *)userData);
+				//Return true from the callback to continue rect queries
+				int bitmask = shape.getContactTestBitmask();
+				if (bitmask != ObjType::PLAYER && bitmask != ObjType::GROUND) {
+					log("new pos %d (%.2f, %.2f)", bitmask, shape.getBody()->getPosition().x, shape.getBody()->getPosition().y);
+					collisions++;
+				}
+				return false;
+			};
+			//log("pos old(%.2f, %.2f) -> new(%.2f, %.2f)", curPos.x, curPos.y, newPos.x, newPos.y);
+			//Rect rc = this->getBoundingBox();
+			//Rect rc_new(rc.getMinX() + nX_delta, rc.getMinY() + nY_delta, rc.size.width, rc.size.height);
+			Rect rc_new(newPos.x - this->width, newPos.y - this->height, 2*this->width, 2*this->height);
+
+			/*auto rectNode = DrawNode::create();
+			Color4F white(1, 1, 1, 0.15);
+			rectNode->drawRect(Vec2(rc_new.getMinX(), rc_new.getMinY()), Vec2(rc_new.getMaxX(), rc_new.getMaxY()), white);
+			this->getParent()->addChild(rectNode);*/
+
+			log("box (%.2f, %.2f, %.2f, %.2f)", rc_new.getMinX(), rc_new.getMinY(), rc_new.getMaxX(), rc_new.getMaxY());
+			PhysicsWorld* world = director->getRunningScene()->getPhysicsWorld();
+			world->queryRect(func, rc_new, &collisions);
+			log("collisions %d", collisions);
+            if (Maze::moveTankThisPosition(newPos, this->width, this->height, this->direction)) {
+                this->setPosition(newPos);
+
+                std::tuple<uint16_t, uint16_t> post = EnemyTank::convertPos2Area(newPos);
+                this->posX = std::get<0>(post);
+                this->posY = 19 - std::get<1>(post) - 1;
+            }
+
+            //Rect bbox = this->getBoundingBox();
+            //log("%.2f, %.2f, %.2f, %.2f", bbox.getMinX(), bbox.getMinY(), bbox.size.width, bbox.size.height);
+            //Rect newBbox = Rect(bbox.getMinX())
+        }
+        //log("update");
+    }
+}

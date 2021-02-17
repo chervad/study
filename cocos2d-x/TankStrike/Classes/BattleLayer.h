@@ -24,7 +24,8 @@ public:
 	void onKeyPressed(EventKeyboard::KeyCode keyCode, Event * event);
 	void onKeyReleased(EventKeyboard::KeyCode keyCode, Event * event);
 	bool onContactBegin(PhysicsContact &contact);
-	bool onContactSeparate(PhysicsContact& contact);
+	//void onContactSeparate(PhysicsContact& contact);
+	//bool onContactPreSolve(PhysicsContact& contact, PhysicsContactPreSolve& solve);
 
 	virtual void update(float dt);
 
