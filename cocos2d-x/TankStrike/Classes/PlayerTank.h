@@ -16,10 +16,11 @@ public:
 
 	//void stopMove();
 	//void moveTo(int deltaX, int deltaY);
-	virtual ~PlayerTank();
+	virtual ~PlayerTank() override;
+
+	void update(float dt) override;
 protected:
 	void initTank();
-	virtual void calcParams();
 	//void runMoveAnimate();
 	//void stopMoveAnimate();
 };

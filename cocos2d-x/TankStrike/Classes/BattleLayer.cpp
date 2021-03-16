@@ -14,6 +14,7 @@ using namespace cocos2d;
 
 //https://github.com/war1oc/cocos2d-x-player/tree/master/Classes
 //https://habr.com/ru/company/ruvds/blog/451870/
+//https://docs.cocos2d-x.org/api-ref/cplusplus/V3.17/d9/d66/classcocos2d_1_1_event_listener_physics_contact.html#a644614522bde93c371f44d42eb5c52ea
 
 BattleLayer::BattleLayer()
 	: pPlayerTank(nullptr)
@@ -32,9 +33,9 @@ Scene* BattleLayer::createScene()
 	auto layer = BattleLayer::create(); //тут вызывается конструктор сцены и сразу же метод init сцены
 	scene->addChild(layer);
 
-	PhysicsWorld* world = scene->getPhysicsWorld();
+	/*PhysicsWorld* world = scene->getPhysicsWorld();
 	world->setGravity(Vec2(.0f, .0f));  
-	world->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_CONTACT);// DEBUGDRAW_ALL);
+	world->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_CONTACT);// DEBUGDRAW_ALL);*/
 
     return scene;
 }
@@ -52,7 +53,7 @@ bool BattleLayer::init()
 	auto contactListener = EventListenerPhysicsContact::create();
 	contactListener->onContactBegin = CC_CALLBACK_1(BattleLayer::onContactBegin, this);
 	//contactListener->onContactPreSolve = CC_CALLBACK_2(BattleLayer::onContactPreSolve, this);
-	contactListener->onContactSeparate = CC_CALLBACK_1(BattleLayer::onContactSeparate, this);
+	//contactListener->onContactSeparate = CC_CALLBACK_1(BattleLayer::onContactSeparate, this);
 
 	this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
 	this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(contactListener, this);
@@ -65,7 +66,6 @@ bool BattleLayer::init()
 	Menu *menu = Menu::create(item1, NULL);
 	menu->alignItemsHorizontallyWithPadding(10);
 	addChild(menu);*/
-
 	Size sceneSize = Director::getInstance()->getWinSize();
 	std::tuple<uint16_t, uint16_t> max_pos = EnemyTank::convertPos2Area(Vec2(sceneSize.width, sceneSize.height));
 
@@ -75,13 +75,12 @@ bool BattleLayer::init()
 	this->pPlayerTank->setPosition(Vec2(sceneSize.width / 2, (sceneSize.height / 2) + 2));
 	this->addChild(this->pPlayerTank);
 
-	/*for (const auto & base_pos : enemyBase) {
+	for (const auto & base_pos : enemyBase) {
         EnemyTank *pEnemyTank = EnemyTank::create(pMaze);
         pEnemyTank->setPosition(base_pos);
         addEnemyTank(pEnemyTank);
         pEnemyTank->startGameLoop();
-    }*/
-    //this->pMaze->calcPathMap();
+    }
 	this->scheduleUpdate();
 
     return true;
@@ -96,7 +95,7 @@ void BattleLayer::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event) {
 
 }
 
-bool BattleLayer::onContactSeparate(PhysicsContact & contact)
+/*void BattleLayer::onContactSeparate(PhysicsContact & contact)
 {
 	PhysicsShape *shapeA = contact.getShapeA();
 	PhysicsBody *bodyA = shapeA->getBody();
@@ -134,11 +133,9 @@ bool BattleLayer::onContactSeparate(PhysicsContact & contact)
 		else if (tankPos.y < hardlePos.y) {
 			pTank->setNearbyObj(eDirection::UP, ObjType::GROUND);
 		}
-		log("separate %s", pTank->printNearbyObj());
-		return true;
+		//log("separate %s", pTank->printNearbyObj().c_str());
 	}
-	return false;
-}
+}*/
 
 bool BattleLayer::onContactBegin(PhysicsContact &contact) {
 	PhysicsShape *shapeA = contact.getShapeA();
@@ -161,7 +158,7 @@ bool BattleLayer::onContactBegin(PhysicsContact &contact) {
 			pBrick->Blast();
 		}
 		return true;
-	} else if (resMask == (ObjType::PLAYER | ObjType::WALL)
+	} /*else if (resMask == (ObjType::PLAYER | ObjType::WALL)
                || resMask == (ObjType::PLAYER | ObjType::BRICK))
 	{
 		PlayerTank *pTank = nullptr;
@@ -173,11 +170,14 @@ bool BattleLayer::onContactBegin(PhysicsContact &contact) {
 			objType = (ObjType)bodyB->getContactTestBitmask();
 			tankPos = pTank->getPosition();
 			hardlePos = bodyB->getNode()->getPosition();
-		} else {
+			pTank->stop();
+            //log("player tank");
 			pTank = (PlayerTank *)bodyB->getNode();
 			objType = (ObjType)bodyA->getContactTestBitmask();
 			tankPos = pTank->getPosition();
 			hardlePos = bodyA->getNode()->getPosition();
+			pTank->stop();
+			//log("player tank");
 		}
 		if (tankPos.x > hardlePos.x) {
 			pTank->setNearbyObj(eDirection::LEFT, objType);
@@ -191,9 +191,9 @@ bool BattleLayer::onContactBegin(PhysicsContact &contact) {
 		else if (tankPos.y < hardlePos.y) {
 			pTank->setNearbyObj(eDirection::UP, objType);
 		}
-		log("contact %s", pTank->printNearbyObj());
+		//log("contact %s, %d", pTank->printNearbyObj().c_str(), bodyA->getContactTestBitmask());
 		return true;
-	}
+	}*/
 	/*else {
         if (resMask == (ObjType::GROUND | ObjType::ENEMY)) {
             EnemyTank *pEnemyTank = (EnemyTank *)(bodyA->getContactTestBitmask() == ObjType::ENEMY ? bodyA->getNode() : bodyB->getNode());
@@ -212,6 +212,32 @@ bool BattleLayer::onContactBegin(PhysicsContact &contact) {
     //log("mask %d", resMask);
 	return false;
 }
+
+/*bool BattleLayer::onContactPreSolve(PhysicsContact& contact, PhysicsContactPreSolve& solve) {
+    PhysicsShape *shapeA = contact.getShapeA();
+    PhysicsBody *bodyA = shapeA->getBody();
+
+    PhysicsShape *shapeB = contact.getShapeB();
+    PhysicsBody *bodyB = shapeB->getBody();
+
+    int resMask = bodyA->getContactTestBitmask() | bodyB->getContactTestBitmask();
+
+    if (resMask == (ObjType::PLAYER | ObjType::WALL) || resMask == (ObjType::PLAYER | ObjType::BRICK))
+    {
+        PlayerTank *pTank = nullptr;
+        if (bodyA->getContactTestBitmask() == ObjType::PLAYER) {
+            pTank = (PlayerTank *)bodyA->getNode();
+        } else {
+            pTank = (PlayerTank *)bodyB->getNode();
+        }
+        if (pTank != nullptr) {
+            pTank->stop();
+        }
+        log("player tank");
+        return true;
+    }
+    return false;
+}*/
 
 void BattleLayer::addShot(Shot *pShot) {
 	std::lock_guard<std::mutex> guard(guard_mutex);
@@ -233,11 +259,11 @@ PlayerTank *BattleLayer::getPlayerTank() const {
 }
 
 void BattleLayer::update(float dt) {
-	pPlayerTank->update(dt);
-	for (auto pEnemyTank : listEnemyTanks) {
+	//pPlayerTank->update(dt);
+	/*for (auto pEnemyTank : listEnemyTanks) {
 		pEnemyTank->update(dt);
-	}
-	for (auto pShot : listShots) {
+	}*/
+	/*for (auto pShot : listShots) {
 		pShot->update(dt);
-	}
+	}*/
 }

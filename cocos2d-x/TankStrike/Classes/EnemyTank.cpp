@@ -1,18 +1,9 @@
 #include <thread>
-#include <random>
 
 #include "EnemyTank.h"
 #include "Shot.h"
 #include "TextureFactory.h"
 #include "BattleLayer.h"
-
-int getRandom(int a, int b) {
-    std::random_device random_device; // Источник энтропии.
-    std::mt19937 generator(random_device()); // Генератор случайных чисел.
-    std::uniform_int_distribution<> distribution(a, b); // Равномерное распределение [10, 20]
-
-    return distribution(generator); // Случайное число.
-}
 
 EnemyTank::~EnemyTank()
 {
@@ -36,8 +27,6 @@ EnemyTank *EnemyTank::create(Maze *pMaze)
 }
 
 void EnemyTank::startGameLoop() {
-	//std::thread gameLoop(&EnemyTank::calculateMove, this, 0, 0);
-	//gameLoop.detach();
 }
 
 void EnemyTank::initTank(Maze *pMaze)
@@ -45,10 +34,13 @@ void EnemyTank::initTank(Maze *pMaze)
 	Tank::initTank();
 	//pMoveAnimate = TextureFactory::getInstance().getEnemyTankAnimate();
 	pMoveAnimate = TextureFactory::getInstance().getAnimate(ObjType::ENEMY);
+	pMoveAnimate->retain();
 	nX_delta = 0;
 	nY_delta = 0;
 	direction = eDirection::UP;
     this->pMaze = pMaze;
+	this->moveTo(eDirection::RIGHT);
+	this->playAnimation();
 }
 
 std::tuple<uint16_t, uint16_t> EnemyTank::convertPos2Area(Vec2 pos) {
@@ -77,37 +69,4 @@ Vec2 EnemyTank::convertArea2Pos(std::tuple<uint16_t, uint16_t> area) {
 }
 
 void EnemyTank::setObjective(IObjective *pObjctv) {
-	//Patrol patrol(10, 10);
-}
-
-void EnemyTank::calcParams() {
-    Vec2 curPos = this->getPosition();
-    if (accurancyPosition(curPos)) {
-        //TODO считается что танк находится точно в центре клетки и может повернуть, вычисляем куда ему поворачивать
-        const char *eDirectionStr[] = {"LEFT", "RIGHT", "UP", "DOWN"};
-        std::tuple<uint16_t, uint16_t> curposеtuple = EnemyTank::convertPos2Area(curPos);
-        uint32_t curPosX = std::get<0>(curposеtuple);
-        uint32_t curPosY = MAZE_HEIGHT - std::get<1>(curposеtuple);
-
-    }
-}
-
-void EnemyTank::calculateMove() {
-	const char *eDirectionStr[] = {"LEFT", "RIGHT", "UP", "DOWN"};
-    //std::this_thread::sleep_for(std::chrono::seconds{ 3 });
-
-    //do {
-        Vec2 curPos = this->getPosition();
-        std::tuple<uint16_t, uint16_t> curpos = EnemyTank::convertPos2Area(curPos);
-        uint32_t curPosX = std::get<0>(curpos);
-        uint32_t curPosY = MAZE_HEIGHT - std::get<1>(curpos);
-        uint32_t inaccurPosX = std::get<0>(curpos);
-        uint32_t inaccurPosY = MAZE_HEIGHT - std::get<1>(curpos);
-        //cocos2d::log("corpos %.2f:.2%f => curPos %u:%u(%u:%u)\n", curPos.x, curPos.y, curPosX, curPosY, inaccurPosX, inaccurPosY);
-
-        unsigned char c[4], c_min = 0xFF;
-
-        //if (not_found) break;
-        //std::this_thread::sleep_for(std::chrono::milliseconds{ 500 });
-    //} while(true);
 }

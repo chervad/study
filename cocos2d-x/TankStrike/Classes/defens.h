@@ -9,20 +9,20 @@
 #define MAZE_HEIGHT  18
 
 enum ObjType {
-	GROUND = 0b01000000,
 	PLAYER = 0b00000001,
 	ENEMY  = 0b00000010,
 	WALL   = 0b00000100,
 	BRICK  = 0b00001000,
 	EAGLE  = 0b00010000,
-	SHOT   = 0b00100000
+	SHOT   = 0b00100000,
+	GROUND = 0b01000000
 };
 
 enum eDirection {
-	LEFT  = 0,
-	RIGHT = 1,
-	UP    = 2,
-	DOWN  = 3
+	LEFT  = 0b0001,
+	RIGHT = 0b0010,
+	UP    = 0b0100,
+	DOWN  = 0b1000
 };
 
 //высокоуровневые команды для вражеских танков. 

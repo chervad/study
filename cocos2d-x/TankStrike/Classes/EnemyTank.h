@@ -41,9 +41,6 @@ public:
 	virtual ~EnemyTank();
 
 	void setObjective(IObjective *pObjctv);
-protected:
-    void calculateMove();
-	virtual void calcParams();
 private:
 	uint16_t targetAreaX;
 	uint16_t targetAreaY;

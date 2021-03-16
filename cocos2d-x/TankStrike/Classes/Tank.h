@@ -38,13 +38,11 @@ protected:
 	eDirection direction;
 	Animate *pMoveAnimate;
 	std::array<ObjType, 4> nearbyObj;
+	uint8_t posiblePos; //bitmask
 
 	void initTank();
 	void initPhysics();
 	virtual void playAnimation();
 	virtual void pauseAnimation();
-	/**
-	 * Метод перерасчёта всех основных параметров объекта, будб то вектор движения, скорость, жизни т.д.
-	 */
-	virtual void calcParams() = 0;
+	bool checkMoveToPosition(eDirection dir);
 };
