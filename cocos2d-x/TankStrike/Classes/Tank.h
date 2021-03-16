@@ -30,7 +30,7 @@ protected:
 	uint8_t posiblePos; //bitmask
 
     virtual void initTank();
-	void initPhysics();
+	virtual void initPhysics();
 	virtual void playAnimation();
 	virtual void pauseAnimation();
 	bool checkMoveToPosition(eDirection dir);

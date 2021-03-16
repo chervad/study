@@ -10,7 +10,9 @@ void Brick::initObject() {
 void Brick::initPhysics() {
 	Size size = this->getBoundingBox().size;
 	PhysicsBody *physicsBody = PhysicsBody::createBox(size);
-	physicsBody->setDynamic(false);
+	physicsBody->setDynamic(true);
+    physicsBody->setMass(1.f);
+    physicsBody->setMoment(1.f);
 	physicsBody->setContactTestBitmask(ObjType::BRICK);
 	this->setPhysicsBody(physicsBody);
 }

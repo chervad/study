@@ -99,9 +99,9 @@ void Maze::build() {
 		for (uint16_t x = 0; x < width; x++) {
 			for (uint16_t y = 0; y < height; y++) {
 				char block = mazePlan[height - y - 1][x];
-				Ground *pGround = GameObject::create<Ground>();
+				/*Ground *pGround = GameObject::create<Ground>();
 				pGround->setPosition(EnemyTank::convertArea2Pos(x, y));
-				this->pParentNode->addChild(pGround);
+				this->pParentNode->addChild(pGround);*/
 
 				if (block == 'x') {
 					Wall *pWall = GameObject::create<Wall>();
@@ -120,11 +120,11 @@ void Maze::build() {
 					BattleLayer *pBattleLayer = (BattleLayer *)this->pParentNode;
 					pBattleLayer->addEnemyBase(EnemyTank::convertArea2Pos(x, y));
                     //инициализируем физику этой земли, т.к. по ней может ехать танчик
-                    pGround->initPhysics();
+                    //pGround->initPhysics();
 				} else if (block == ' ') {
                     //TODO: добавить инициализацию физики земли под кирпичной стеной после её разрушения, т.к. там теперь может ехать танчик
                     //инициализируем физику этой земли, т.к. по ней может ехать танчик
-                    pGround->initPhysics();
+                    //pGround->initPhysics();
 				}
 			}
 		}

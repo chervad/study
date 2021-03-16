@@ -33,9 +33,9 @@ Scene* BattleLayer::createScene()
 	auto layer = BattleLayer::create(); //тут вызывается конструктор сцены и сразу же метод init сцены
 	scene->addChild(layer);
 
-	/*PhysicsWorld* world = scene->getPhysicsWorld();
+	PhysicsWorld* world = scene->getPhysicsWorld();
 	world->setGravity(Vec2(.0f, .0f));  
-	world->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_CONTACT);// DEBUGDRAW_ALL);*/
+	world->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);// DEBUGDRAW_ALL);
 
     return scene;
 }
@@ -100,6 +100,7 @@ bool BattleLayer::onContactBegin(PhysicsContact &contact) {
 
 	PhysicsShape *shapeB = contact.getShapeB();
 	PhysicsBody *bodyB = shapeB->getBody();
+    PhysicsBody *body = nullptr;
 
 	int resMask = bodyA->getContactTestBitmask() | bodyB->getContactTestBitmask();
 
@@ -115,42 +116,17 @@ bool BattleLayer::onContactBegin(PhysicsContact &contact) {
 			pBrick->Blast();
 		}
 		return true;
-	} /*else if (resMask == (ObjType::PLAYER | ObjType::WALL)
-               || resMask == (ObjType::PLAYER | ObjType::BRICK))
+	}
+	else if (resMask == (ObjType::PLAYER | ObjType::BRICK))
 	{
-		PlayerTank *pTank = nullptr;
-		ObjType objType;
-		Vec2 tankPos;
-		Vec2 hardlePos;
 		if (bodyA->getContactTestBitmask() == ObjType::PLAYER) {
-			pTank = (PlayerTank *)bodyA->getNode();
-			objType = (ObjType)bodyB->getContactTestBitmask();
-			tankPos = pTank->getPosition();
-			hardlePos = bodyB->getNode()->getPosition();
-			pTank->stop();
-            //log("player tank");
-			pTank = (PlayerTank *)bodyB->getNode();
-			objType = (ObjType)bodyA->getContactTestBitmask();
-			tankPos = pTank->getPosition();
-			hardlePos = bodyA->getNode()->getPosition();
-			pTank->stop();
-			//log("player tank");
-		}
-		if (tankPos.x > hardlePos.x) {
-			pTank->setNearbyObj(eDirection::LEFT, objType);
-		}
-		else if (tankPos.x < hardlePos.x) {
-			pTank->setNearbyObj(eDirection::RIGHT, objType);
-		}
-		if (tankPos.y > hardlePos.y) {
-			pTank->setNearbyObj(eDirection::DOWN, objType);
-		}
-		else if (tankPos.y < hardlePos.y) {
-			pTank->setNearbyObj(eDirection::UP, objType);
-		}
-		//log("contact %s, %d", pTank->printNearbyObj().c_str(), bodyA->getContactTestBitmask());
+            body = bodyA;
+        } else {
+            body = bodyB;
+        }
+		body->setVelocity(Vec2(.0f, .0f));
 		return true;
-	}*/
+	}
 	/*else {
         if (resMask == (ObjType::GROUND | ObjType::ENEMY)) {
             EnemyTank *pEnemyTank = (EnemyTank *)(bodyA->getContactTestBitmask() == ObjType::ENEMY ? bodyA->getNode() : bodyB->getNode());

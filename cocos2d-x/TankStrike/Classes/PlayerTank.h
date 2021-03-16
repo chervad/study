@@ -19,6 +19,7 @@ public:
 	void update(float dt) override;
 protected:
 	void initTank();
+	void initPhysics() override ;
 	//void runMoveAnimate();
 	//void stopMoveAnimate();
 };

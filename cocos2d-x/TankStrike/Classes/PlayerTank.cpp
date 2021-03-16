@@ -2,7 +2,6 @@
 #include "PlayerTank.h"
 #include "TextureFactory.h"
 #include "Shot.h"
-#include "EnemyTank.h"
 
 PlayerTank::~PlayerTank()
 {
@@ -36,19 +35,31 @@ void PlayerTank::initTank()
 	life = 250.f;
 }
 
+void PlayerTank::initPhysics() {
+    PhysicsBody *physicsBody = PhysicsBody::createBox(this->getBoundingBox().size);
+    physicsBody->setDynamic(false);
+    physicsBody->setMass(10.f);
+    physicsBody->setMoment(10.f);
+    this->setPhysicsBody(physicsBody);
+}
+
 void PlayerTank::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event) {
 	switch (keyCode) {
 	case EventKeyboard::KeyCode::KEY_LEFT_ARROW: 
-		moveTo(eDirection::LEFT);
+		//moveTo(eDirection::LEFT);
+        this->getPhysicsBody()->setVelocity(Vec2(-100.0f, .0f));
 		break;
 	case EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
-		moveTo(eDirection::RIGHT);
+		//moveTo(eDirection::RIGHT);
+        this->getPhysicsBody()->setVelocity(Vec2(100.0f, .0f));
 		break;
 	case EventKeyboard::KeyCode::KEY_UP_ARROW:
-		moveTo(eDirection::UP);
+		//moveTo(eDirection::UP);
+        this->getPhysicsBody()->setVelocity(Vec2(.0f, 100.0f));
 		break;
 	case EventKeyboard::KeyCode::KEY_DOWN_ARROW:
-		moveTo(eDirection::DOWN);
+		//moveTo(eDirection::DOWN);
+        this->getPhysicsBody()->setVelocity(Vec2(.0f, -100.0f));
 		break;
 	case EventKeyboard::KeyCode::KEY_SPACE:
 		Shot *pShot = Shot::create(direction, this->getPosition());
@@ -60,35 +71,25 @@ void PlayerTank::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event) {
 }
 
 void PlayerTank::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event) {
+    this->getPhysicsBody()->setVelocity(Vec2(.0f, .0f));
     if (keyCode == EventKeyboard::KeyCode::KEY_LEFT_ARROW ||
         keyCode == EventKeyboard::KeyCode::KEY_RIGHT_ARROW)
     {
         nX_delta = 0;
+        this->getPhysicsBody()->setVelocity(Vec2(.0f, .0f));
     }
     if (keyCode == EventKeyboard::KeyCode::KEY_UP_ARROW ||
         keyCode == EventKeyboard::KeyCode::KEY_DOWN_ARROW)
     {
         nY_delta = 0;
+        this->getPhysicsBody()->setVelocity(Vec2(.0f, .0f));
     }
 	this->pauseAnimation();
 }
 
-/*void PlayerTank::runMoveAnimate() {
-	if (!pCurrentMoveAction) {
-		stopAction(pCurrentMoveAction);
-	}
-	pCurrentMoveAction = runAction(RepeatForever::create(pMoveAnimate));
-}*/
-
-/*void PlayerTank::stopMoveAnimate() {
-	if (!pCurrentMoveAction) {
-		stopAction(pCurrentMoveAction);
-	}
-}*/
-
 void PlayerTank::update(float dt)
 {
-    if (nX_delta != 0 || nY_delta != 0) {
+    /*if (nX_delta != 0 || nY_delta != 0) {
         Point curPos = this->getPosition();
 
         if (curPos.x + nX_delta > DELTA && curPos.x + nX_delta < winSize.width - DELTA &&
@@ -101,5 +102,18 @@ void PlayerTank::update(float dt)
 				this->setPosition(newPos);
             }
         }
-    }
+    }*/
 }
+
+/*void PlayerTank::runMoveAnimate() {
+	if (!pCurrentMoveAction) {
+		stopAction(pCurrentMoveAction);
+	}
+	pCurrentMoveAction = runAction(RepeatForever::create(pMoveAnimate));
+}
+
+void PlayerTank::stopMoveAnimate() {
+	if (!pCurrentMoveAction) {
+		stopAction(pCurrentMoveAction);
+	}
+}*/
