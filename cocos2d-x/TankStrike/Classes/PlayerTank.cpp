@@ -128,10 +128,10 @@ void PlayerTank::update(float dt)
 			rectNode->drawRect(Vec2(rc_new.getMinX(), rc_new.getMinY()), Vec2(rc_new.getMaxX(), rc_new.getMaxY()), white);
 			this->getParent()->addChild(rectNode);*/
 
-			log("box (%.2f, %.2f, %.2f, %.2f)", rc_new.getMinX(), rc_new.getMinY(), rc_new.getMaxX(), rc_new.getMaxY());
-			PhysicsWorld* world = director->getRunningScene()->getPhysicsWorld();
-			world->queryRect(func, rc_new, &collisions);
-			log("collisions %d", collisions);
+			//log("box (%.2f, %.2f, %.2f, %.2f)", rc_new.getMinX(), rc_new.getMinY(), rc_new.getMaxX(), rc_new.getMaxY());
+			//PhysicsWorld* world = director->getRunningScene()->getPhysicsWorld();
+			//world->queryRect(func, rc_new, &collisions);
+			//log("collisions %d", collisions);
             if (Maze::moveTankThisPosition(newPos, this->width, this->height, this->direction)) {
                 this->setPosition(newPos);
 
@@ -139,7 +139,7 @@ void PlayerTank::update(float dt)
                 this->posX = std::get<0>(post);
                 this->posY = 19 - std::get<1>(post) - 1;
             }
-
+			
             //Rect bbox = this->getBoundingBox();
             //log("%.2f, %.2f, %.2f, %.2f", bbox.getMinX(), bbox.getMinY(), bbox.size.width, bbox.size.height);
             //Rect newBbox = Rect(bbox.getMinX())

@@ -1,18 +1,9 @@
 #include <thread>
-#include <random>
 
 #include "EnemyTank.h"
 #include "Shot.h"
 #include "TextureFactory.h"
 #include "BattleLayer.h"
-
-int getRandom(int a, int b) {
-    std::random_device random_device; // Источник энтропии.
-    std::mt19937 generator(random_device()); // Генератор случайных чисел.
-    std::uniform_int_distribution<> distribution(a, b); // Равномерное распределение [10, 20]
-
-    return distribution(generator); // Случайное число.
-}
 
 EnemyTank::~EnemyTank()
 {
@@ -45,10 +36,13 @@ void EnemyTank::initTank(Maze *pMaze)
 	Tank::initTank();
 	//pMoveAnimate = TextureFactory::getInstance().getEnemyTankAnimate();
 	pMoveAnimate = TextureFactory::getInstance().getAnimate(ObjType::ENEMY);
+	pMoveAnimate->retain();
 	nX_delta = 0;
 	nY_delta = 0;
 	direction = eDirection::UP;
     this->pMaze = pMaze;
+	this->moveTo(eDirection::RIGHT);
+	this->playAnimation();
 }
 
 std::tuple<uint16_t, uint16_t> EnemyTank::convertPos2Area(Vec2 pos) {
@@ -81,7 +75,6 @@ Vec2 EnemyTank::convertArea2Pos(std::tuple<uint16_t, uint16_t> area) {
 }
 
 void EnemyTank::update(float dt) {
-	this->moveTo(eDirection::RIGHT);
 	Tank::update(dt);
 	//this->calculateMove();
 }

@@ -38,9 +38,11 @@ protected:
 	eDirection direction;
 	Animate *pMoveAnimate;
 	std::array<ObjType, 4> nearbyObj;
+	uint8_t posiblePos; //bitmask
 
 	void initTank();
 	void initPhysics();
 	virtual void playAnimation();
 	virtual void pauseAnimation();
+	bool checkMoveToPosition(eDirection dir);
 };

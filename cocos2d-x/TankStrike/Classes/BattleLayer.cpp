@@ -234,7 +234,6 @@ bool BattleLayer::onContactBegin(PhysicsContact &contact) {
             pTank = (PlayerTank *)bodyB->getNode();
         }
         if (pTank != nullptr) {
-            pTank->getBoundingBox().intersectsRect()
             pTank->stop();
         }
         log("player tank");
@@ -263,11 +262,11 @@ PlayerTank *BattleLayer::getPlayerTank() const {
 }
 
 void BattleLayer::update(float dt) {
-	pPlayerTank->update(dt);
-	for (auto pEnemyTank : listEnemyTanks) {
+	//pPlayerTank->update(dt);
+	/*for (auto pEnemyTank : listEnemyTanks) {
 		pEnemyTank->update(dt);
-	}
-	for (auto pShot : listShots) {
+	}*/
+	/*for (auto pShot : listShots) {
 		pShot->update(dt);
-	}
+	}*/
 }

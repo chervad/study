@@ -26,7 +26,7 @@ static char mazePlan[MAZE_HEIGHT + 1][MAZE_WIDTH] = {
 	, "xx  bbbb  xxxx  bbbb  xxx"
 	, "x                       x"
 	, "x   x     bbb     x     x"
-	, "x   x     bEb     x     x"
+	, "xT  x     bEb     x    Tx"
 	, "xxxxxxxxxxxxxxxxxxxxxxxxx"
 };
 

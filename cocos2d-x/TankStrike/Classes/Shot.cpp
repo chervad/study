@@ -1,10 +1,19 @@
 #include "Shot.h"
 
+#define TX(X) std::get<0>(X)
+#define TY(Y) std::get<1>(Y)
+#define TILERECT(TILEDIFF, TILEWIDTH, TILEHEIGHT) Rect(TX(TILEDIFF) * TILEWIDTH, TY(TILEDIFF) * TILEHEIGHT, TILEWIDTH, TILEHEIGHT)
+
+inline tiletype diff2tiletype(uint16_t d) {
+	uint8_t x = d % TextureFactory::maxXTile;
+	uint8_t y = d / TextureFactory::maxXTile;
+	return std::tuple<uint8_t, uint8_t>(x, y);
+}
+
 Shot::~Shot()
 {
 	CC_SAFE_RELEASE(pBoomAnimate);
 }
-
 
 Shot *Shot::create(eDirection direction, const Vec2 &position)
 {
@@ -20,8 +29,7 @@ Shot *Shot::create(eDirection direction, const Vec2 &position)
 
 void Shot::initObject() {
 	isBoom = false;
-
-	pBoomAnimate = TextureFactory::getInstance().getAnimate(getObjectType())->clone();
+	pBoomAnimate = TextureFactory::getInstance().getAnimate(getObjectType());
 	pBoomAnimate->retain();
 
 	initPhysics();
@@ -61,7 +69,9 @@ void Shot::update(float dt) {
 void Shot::Boom() {
 	isBoom = true;
 	auto func = CallFunc::create([this]() {
-		this->pBoomAnimate->release();
+		//this->pBoomAnimate->stop();
+		this->stopAllActions();
+		//this->pBoomAnimate->release();
 		this->removeFromParent();
 		this->release();
 	});
