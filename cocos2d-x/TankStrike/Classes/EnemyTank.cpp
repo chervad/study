@@ -1,22 +1,20 @@
 #include <thread>
 
 #include "EnemyTank.h"
-#include "Shot.h"
 #include "TextureFactory.h"
-#include "BattleLayer.h"
 
 EnemyTank::~EnemyTank()
 {
 	CC_SAFE_RELEASE(pMoveAnimate);
 }
 
-EnemyTank *EnemyTank::create(Maze *pMaze)
+EnemyTank *EnemyTank::create()
 {
 	EnemyTank *enemyTank = new EnemyTank();
 	if (enemyTank && enemyTank->initWithSpriteFrame(TextureFactory::getInstance().getEnemyTankSprite()))
 	{
 		//enemyTank->autorelease();
-		enemyTank->initTank(pMaze);
+		enemyTank->initTank();
 		enemyTank->initPhysics();
 		enemyTank->getPhysicsBody()->setContactTestBitmask(ObjType::ENEMY);
 		return enemyTank;
@@ -26,10 +24,7 @@ EnemyTank *EnemyTank::create(Maze *pMaze)
 	return NULL;
 }
 
-void EnemyTank::startGameLoop() {
-}
-
-void EnemyTank::initTank(Maze *pMaze)
+void EnemyTank::initTank()
 {
 	Tank::initTank();
 	//pMoveAnimate = TextureFactory::getInstance().getEnemyTankAnimate();
@@ -38,7 +33,6 @@ void EnemyTank::initTank(Maze *pMaze)
 	nX_delta = 0;
 	nY_delta = 0;
 	direction = eDirection::UP;
-    this->pMaze = pMaze;
 	this->moveTo(eDirection::RIGHT);
 	this->playAnimation();
 }
@@ -66,7 +60,4 @@ Vec2 EnemyTank::convertArea2Pos(uint16_t areaX, uint16_t areaY) {
 
 Vec2 EnemyTank::convertArea2Pos(std::tuple<uint16_t, uint16_t> area) {
 	return convertArea2Pos(std::get<0>(area), std::get<1>(area));
-}
-
-void EnemyTank::setObjective(IObjective *pObjctv) {
 }

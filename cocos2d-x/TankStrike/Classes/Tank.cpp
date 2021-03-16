@@ -22,10 +22,6 @@ Tank::~Tank()
 	CC_SAFE_RELEASE(pMoveAnimate);
 }
 
-void Tank::setNearbyObj(eDirection direction, ObjType objType) {
-	this->nearbyObj[direction] = objType;
-}
-
 void Tank::initTank() {
 	this->winSize = Director::getInstance()->getWinSize();
 	Size size = this->getBoundingBox().size;
@@ -36,7 +32,6 @@ void Tank::initTank() {
 void Tank::initPhysics() {
 	PhysicsBody *physicsBody = PhysicsBody::createBox(this->getBoundingBox().size);
 	physicsBody->setDynamic(false);
-	//physicsBody->setContactTestBitmask(0b00000000);
 	this->setPhysicsBody(physicsBody);
 }
 
@@ -132,10 +127,6 @@ void Tank::update(float dt)
 			Vec2 newPos = Vec2(curPos.x + nX_delta, curPos.y + nY_delta);
 			if (Maze::moveTankThisPosition(newPos, this->width, this->height, this->direction)) {
 				this->setPosition(newPos);
-
-                std::tuple<uint16_t, uint16_t> post = EnemyTank::convertPos2Area(newPos);
-                this->posX = std::get<0>(post);
-                this->posY = 19 - std::get<1>(post) - 1;
 			}
 			else {
 				this->posiblePos = 0;

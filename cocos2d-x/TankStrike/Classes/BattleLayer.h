@@ -24,15 +24,10 @@ public:
 	void onKeyPressed(EventKeyboard::KeyCode keyCode, Event * event);
 	void onKeyReleased(EventKeyboard::KeyCode keyCode, Event * event);
 	bool onContactBegin(PhysicsContact &contact);
-	//void onContactSeparate(PhysicsContact& contact);
-	//bool onContactPreSolve(PhysicsContact& contact, PhysicsContactPreSolve& solve);
-
-	virtual void update(float dt);
 
 	void addShot(Shot *pShot);
 	void addEnemyTank(EnemyTank *pEnemyTank);
 	void addEnemyBase(Vec2 position);
-    PlayerTank *getPlayerTank() const;
 
 	CREATE_FUNC(BattleLayer);
 private:
@@ -48,4 +43,13 @@ private:
 	std::list<Vec2> enemyBase;
 
 	std::mutex guard_mutex;
+
+public:
+    /*
+    PlayerTank *getPlayerTank() const;
+    void onContactSeparate(PhysicsContact& contact);
+	bool onContactPreSolve(PhysicsContact& contact, PhysicsContactPreSolve& solve);
+
+	virtual void update(float dt);
+     */
 };

@@ -10,8 +10,7 @@ using namespace cocos2d;
 
 class EnemyTank : public Tank {
 public:
-	static EnemyTank *create(Maze *pMaze);
-	void startGameLoop();
+	static EnemyTank *create();
 	/**
 	 * преобразовываем координаты спрайта на экране к координатам карты
 	 * @param pos
@@ -39,12 +38,6 @@ public:
 	static Vec2 convertArea2Pos(std::tuple<uint16_t, uint16_t> area);
 
 	virtual ~EnemyTank();
-
-	void setObjective(IObjective *pObjctv);
 private:
-	uint16_t targetAreaX;
-	uint16_t targetAreaY;
-    Maze *pMaze;
-
-	void initTank(Maze *pMaze);
+	void initTank();
 };

@@ -17,13 +17,6 @@ public:
 	void stop();
 
 	virtual ~Tank();
-	void setNearbyObj(eDirection direction, ObjType objType);
-	std::string printNearbyObj() {
-		std::ostringstream stringStream;
-		stringStream << "[";
-		stringStream << "]";
-		return stringStream.str();
-	}
 protected:
 	int nX_delta;
 	int nY_delta;
@@ -31,16 +24,12 @@ protected:
 	int width;
 	int height;
 	float life = 100.f;
-	float damage_koef = .75f;
-	int posX;
-	int posY;
 
 	eDirection direction;
 	Animate *pMoveAnimate;
-	std::array<ObjType, 4> nearbyObj;
 	uint8_t posiblePos; //bitmask
 
-	void initTank();
+    virtual void initTank();
 	void initPhysics();
 	virtual void playAnimation();
 	virtual void pauseAnimation();

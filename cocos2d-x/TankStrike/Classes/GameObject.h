@@ -19,11 +19,11 @@ public:
 			return pObj;
 		}
 
-		CC_SAFE_DELETE(pObj);
+        CC_SAFE_DELETE(pObj);
 		return NULL;
 	}
 
-	virtual ~GameObject() {}
+	virtual ~GameObject() = default;
 
 	virtual ObjType getObjectType() = 0;
 protected:
