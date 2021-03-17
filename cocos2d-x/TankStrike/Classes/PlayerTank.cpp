@@ -36,29 +36,51 @@ void PlayerTank::initTank()
 }
 
 void PlayerTank::initPhysics() {
-    PhysicsBody *physicsBody = PhysicsBody::createBox(this->getBoundingBox().size);
+    //PhysicsBody *physicsBody = PhysicsBody::createBox(this->getBoundingBox().size);
+    PhysicsBody *physicsBody = PhysicsBody::createBox(Size(this->getContentSize().width - 4, this->getContentSize().height - 4));
     physicsBody->setDynamic(false);
-    physicsBody->setMass(10.f);
-    physicsBody->setMoment(10.f);
     this->setPhysicsBody(physicsBody);
 }
 
+void PlayerTank::search() {
+    auto director = Director::getInstance();
+
+    auto func = [](PhysicsWorld& world, PhysicsShape& shape, void* userData)->bool
+    {
+        //Return true from the callback to continue rect queries
+        int bitmask = shape.getContactTestBitmask();
+        //if (bitmask != ObjType::PLAYER && bitmask != ObjType::GROUND) {
+        //    log("new pos %d (%.2f, %.2f)", bitmask, shape.getBody()->getPosition().x, shape.getBody()->getPosition().y);
+        //}
+        log("bitmask %d", bitmask);
+        return true;
+    };
+    PhysicsWorld* world = director->getRunningScene()->getPhysicsWorld();
+    world->queryRect(func, this->getBoundingBox(), nullptr);
+}
+
 void PlayerTank::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event) {
+    //this->search();
+    log("unposible: %d", unposibleDir_);
 	switch (keyCode) {
-	case EventKeyboard::KeyCode::KEY_LEFT_ARROW: 
-		//moveTo(eDirection::LEFT);
+	case EventKeyboard::KeyCode::KEY_LEFT_ARROW:
+	    moveTo(eDirection::LEFT);
+	    if (unposibleDir_ & eDirection::LEFT) break;
         this->getPhysicsBody()->setVelocity(Vec2(-100.0f, .0f));
 		break;
 	case EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
-		//moveTo(eDirection::RIGHT);
+		moveTo(eDirection::RIGHT);
+		if (unposibleDir_ & eDirection::RIGHT) break;
         this->getPhysicsBody()->setVelocity(Vec2(100.0f, .0f));
 		break;
 	case EventKeyboard::KeyCode::KEY_UP_ARROW:
-		//moveTo(eDirection::UP);
+		moveTo(eDirection::UP);
+		if (unposibleDir_ & eDirection::UP) break;
         this->getPhysicsBody()->setVelocity(Vec2(.0f, 100.0f));
 		break;
 	case EventKeyboard::KeyCode::KEY_DOWN_ARROW:
-		//moveTo(eDirection::DOWN);
+		moveTo(eDirection::DOWN);
+		if (unposibleDir_ & eDirection::DOWN) break;
         this->getPhysicsBody()->setVelocity(Vec2(.0f, -100.0f));
 		break;
 	case EventKeyboard::KeyCode::KEY_SPACE:
@@ -73,19 +95,25 @@ void PlayerTank::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event) {
 void PlayerTank::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event) {
     this->getPhysicsBody()->setVelocity(Vec2(.0f, .0f));
     if (keyCode == EventKeyboard::KeyCode::KEY_LEFT_ARROW ||
-        keyCode == EventKeyboard::KeyCode::KEY_RIGHT_ARROW)
-    {
-        nX_delta = 0;
-        this->getPhysicsBody()->setVelocity(Vec2(.0f, .0f));
-    }
-    if (keyCode == EventKeyboard::KeyCode::KEY_UP_ARROW ||
+        keyCode == EventKeyboard::KeyCode::KEY_RIGHT_ARROW ||
+        keyCode == EventKeyboard::KeyCode::KEY_UP_ARROW ||
         keyCode == EventKeyboard::KeyCode::KEY_DOWN_ARROW)
     {
-        nY_delta = 0;
         this->getPhysicsBody()->setVelocity(Vec2(.0f, .0f));
     }
 	this->pauseAnimation();
 }
+
+void PlayerTank::setUnposibleDirection(eDirection dir) {
+    unposibleDir_ |= dir;
+    log("add unposible %d, now %d", dir, unposibleDir_);
+}
+
+void PlayerTank::resetUnposibleDirection(eDirection dir) {
+    if (unposibleDir_ & dir) unposibleDir_ ^= dir;
+    log("remove unposible %d, now %d", dir, unposibleDir_);
+}
+
 
 void PlayerTank::update(float dt)
 {

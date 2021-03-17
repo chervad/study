@@ -52,6 +52,7 @@ bool BattleLayer::init()
 
 	auto contactListener = EventListenerPhysicsContact::create();
 	contactListener->onContactBegin = CC_CALLBACK_1(BattleLayer::onContactBegin, this);
+	contactListener->onContactSeparate = CC_CALLBACK_1(BattleLayer::onContactSeparate, this);
 	//contactListener->onContactPreSolve = CC_CALLBACK_2(BattleLayer::onContactPreSolve, this);
 	//contactListener->onContactSeparate = CC_CALLBACK_1(BattleLayer::onContactSeparate, this);
 
@@ -100,7 +101,7 @@ bool BattleLayer::onContactBegin(PhysicsContact &contact) {
 
 	PhysicsShape *shapeB = contact.getShapeB();
 	PhysicsBody *bodyB = shapeB->getBody();
-    PhysicsBody *body = nullptr;
+    PhysicsBody *bodyPlayer = nullptr;
 
 	int resMask = bodyA->getContactTestBitmask() | bodyB->getContactTestBitmask();
 
@@ -117,14 +118,17 @@ bool BattleLayer::onContactBegin(PhysicsContact &contact) {
 		}
 		return true;
 	}
-	else if (resMask == (ObjType::PLAYER | ObjType::BRICK))
+	else if (resMask == (ObjType::PLAYER | ObjType::BRICK) || resMask == (ObjType::PLAYER | ObjType::WALL))
 	{
 		if (bodyA->getContactTestBitmask() == ObjType::PLAYER) {
-            body = bodyA;
+            bodyPlayer = bodyA;
         } else {
-            body = bodyB;
+            bodyPlayer = bodyB;
         }
-		body->setVelocity(Vec2(.0f, .0f));
+		PlayerTank *playerTank = (PlayerTank *)bodyPlayer->getNode();
+		const eDirection dir = playerTank->getDirection();
+        playerTank->setUnposibleDirection(dir);
+		bodyPlayer->setVelocity(Vec2(.0f, .0f));
 		return true;
 	}
 	/*else {
@@ -144,6 +148,35 @@ bool BattleLayer::onContactBegin(PhysicsContact &contact) {
 	}*/
     //log("mask %d", resMask);
 	return false;
+}
+
+void BattleLayer::onContactSeparate(PhysicsContact &contact) {
+    PhysicsShape *shapeA = contact.getShapeA();
+    PhysicsBody *bodyA = shapeA->getBody();
+
+    PhysicsShape *shapeB = contact.getShapeB();
+    PhysicsBody *bodyB = shapeB->getBody();
+    PhysicsBody *bodyPlayer = nullptr;
+
+    int resMask = bodyA->getContactTestBitmask() | bodyB->getContactTestBitmask();
+
+    if (resMask == (ObjType::PLAYER | ObjType::BRICK) || resMask == (ObjType::PLAYER | ObjType::WALL))
+    {
+        if (bodyA->getContactTestBitmask() == ObjType::PLAYER) {
+            bodyPlayer = bodyA;
+        } else {
+            bodyPlayer = bodyB;
+        }
+        PlayerTank *playerTank = (PlayerTank *)bodyPlayer->getNode();
+        const eDirection dir = playerTank->getDirection();
+        switch (dir) {
+            case eDirection::LEFT: playerTank->resetUnposibleDirection(eDirection::RIGHT); break;
+            case eDirection::RIGHT: playerTank->resetUnposibleDirection(eDirection::LEFT); break;
+            case eDirection::UP: playerTank->resetUnposibleDirection(eDirection::DOWN); break;
+            case eDirection::DOWN: playerTank->resetUnposibleDirection(eDirection::UP); break;
+        }
+        bodyPlayer->setVelocity(Vec2(.0f, .0f));
+    }
 }
 
 void BattleLayer::addShot(Shot *pShot) {
@@ -225,20 +258,30 @@ bool BattleLayer::onContactPreSolve(PhysicsContact& contact, PhysicsContactPreSo
     PhysicsShape *shapeB = contact.getShapeB();
     PhysicsBody *bodyB = shapeB->getBody();
 
+    PhysicsBody *bodyPlayer = nullptr;
+
     int resMask = bodyA->getContactTestBitmask() | bodyB->getContactTestBitmask();
 
-    if (resMask == (ObjType::PLAYER | ObjType::WALL) || resMask == (ObjType::PLAYER | ObjType::BRICK))
+    if (resMask == (ObjType::SHOT | ObjType::WALL) || resMask == (ObjType::SHOT | ObjType::BRICK))
     {
-        PlayerTank *pTank = nullptr;
+        Shot *pShot = (Shot *)(bodyA->getContactTestBitmask() == ObjType::SHOT ? bodyA->getNode() : bodyB->getNode());
+        listShots.remove(pShot);
+        pShot->Boom();
+
+        if (resMask & ObjType::BRICK) {
+            Brick *pBrick = (Brick *)(bodyA->getContactTestBitmask() == ObjType::BRICK ? bodyA->getNode() : bodyB->getNode());
+            pBrick->Blast();
+        }
+        return true;
+    }
+    else if (resMask == (ObjType::PLAYER | ObjType::BRICK) || resMask == (ObjType::PLAYER | ObjType::WALL))
+    {
         if (bodyA->getContactTestBitmask() == ObjType::PLAYER) {
-            pTank = (PlayerTank *)bodyA->getNode();
+            bodyPlayer = bodyA;
         } else {
-            pTank = (PlayerTank *)bodyB->getNode();
+            bodyPlayer = bodyB;
         }
-        if (pTank != nullptr) {
-            pTank->stop();
-        }
-        log("player tank");
+        bodyPlayer->setVelocity(Vec2(.0f, .0f));
         return true;
     }
     return false;

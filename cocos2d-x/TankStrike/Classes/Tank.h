@@ -10,11 +10,15 @@ using namespace cocos2d;
 class Tank : public Sprite {
 public:
 
-	void update(float dt);
+	void update(float dt) override;
 
 	void moveTo(eDirection direct);
 	void moveTo(eDirection direct, int delta);
 	void stop();
+
+	eDirection getDirection() const {
+	    return direction;
+	};
 
 	virtual ~Tank();
 protected:
@@ -26,8 +30,8 @@ protected:
 	float life = 100.f;
 
 	eDirection direction;
+    uint8_t posiblePos; //bitmask
 	Animate *pMoveAnimate;
-	uint8_t posiblePos; //bitmask
 
     virtual void initTank();
 	virtual void initPhysics();

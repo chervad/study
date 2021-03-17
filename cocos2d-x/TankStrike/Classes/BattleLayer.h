@@ -24,6 +24,7 @@ public:
 	void onKeyPressed(EventKeyboard::KeyCode keyCode, Event * event);
 	void onKeyReleased(EventKeyboard::KeyCode keyCode, Event * event);
 	bool onContactBegin(PhysicsContact &contact);
+	void onContactSeparate(PhysicsContact &contact);
 
 	void addShot(Shot *pShot);
 	void addEnemyTank(EnemyTank *pEnemyTank);
@@ -49,7 +50,6 @@ public:
     PlayerTank *getPlayerTank() const;
     void onContactSeparate(PhysicsContact& contact);
 	bool onContactPreSolve(PhysicsContact& contact, PhysicsContactPreSolve& solve);
-
 	virtual void update(float dt);
      */
 };
