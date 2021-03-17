@@ -17,12 +17,10 @@ public:
 	virtual ~PlayerTank() override;
 
 	void update(float dt) override;
-	void setUnposibleDirection(eDirection dir);
-    void resetUnposibleDirection(eDirection dir);
 protected:
 	void initTank();
 	void initPhysics() override;
-	void search();
+	void search(eDirection dir);
 	//void runMoveAnimate();
 	//void stopMoveAnimate();
 private:

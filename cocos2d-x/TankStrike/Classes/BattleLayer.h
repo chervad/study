@@ -24,7 +24,6 @@ public:
 	void onKeyPressed(EventKeyboard::KeyCode keyCode, Event * event);
 	void onKeyReleased(EventKeyboard::KeyCode keyCode, Event * event);
 	bool onContactBegin(PhysicsContact &contact);
-	void onContactSeparate(PhysicsContact &contact);
 
 	void addShot(Shot *pShot);
 	void addEnemyTank(EnemyTank *pEnemyTank);

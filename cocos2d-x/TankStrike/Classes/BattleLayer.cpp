@@ -52,7 +52,6 @@ bool BattleLayer::init()
 
 	auto contactListener = EventListenerPhysicsContact::create();
 	contactListener->onContactBegin = CC_CALLBACK_1(BattleLayer::onContactBegin, this);
-	contactListener->onContactSeparate = CC_CALLBACK_1(BattleLayer::onContactSeparate, this);
 	//contactListener->onContactPreSolve = CC_CALLBACK_2(BattleLayer::onContactPreSolve, this);
 	//contactListener->onContactSeparate = CC_CALLBACK_1(BattleLayer::onContactSeparate, this);
 
@@ -125,9 +124,6 @@ bool BattleLayer::onContactBegin(PhysicsContact &contact) {
         } else {
             bodyPlayer = bodyB;
         }
-		PlayerTank *playerTank = (PlayerTank *)bodyPlayer->getNode();
-		const eDirection dir = playerTank->getDirection();
-        playerTank->setUnposibleDirection(dir);
 		bodyPlayer->setVelocity(Vec2(.0f, .0f));
 		return true;
 	}
@@ -148,35 +144,6 @@ bool BattleLayer::onContactBegin(PhysicsContact &contact) {
 	}*/
     //log("mask %d", resMask);
 	return false;
-}
-
-void BattleLayer::onContactSeparate(PhysicsContact &contact) {
-    PhysicsShape *shapeA = contact.getShapeA();
-    PhysicsBody *bodyA = shapeA->getBody();
-
-    PhysicsShape *shapeB = contact.getShapeB();
-    PhysicsBody *bodyB = shapeB->getBody();
-    PhysicsBody *bodyPlayer = nullptr;
-
-    int resMask = bodyA->getContactTestBitmask() | bodyB->getContactTestBitmask();
-
-    if (resMask == (ObjType::PLAYER | ObjType::BRICK) || resMask == (ObjType::PLAYER | ObjType::WALL))
-    {
-        if (bodyA->getContactTestBitmask() == ObjType::PLAYER) {
-            bodyPlayer = bodyA;
-        } else {
-            bodyPlayer = bodyB;
-        }
-        PlayerTank *playerTank = (PlayerTank *)bodyPlayer->getNode();
-        const eDirection dir = playerTank->getDirection();
-        switch (dir) {
-            case eDirection::LEFT: playerTank->resetUnposibleDirection(eDirection::RIGHT); break;
-            case eDirection::RIGHT: playerTank->resetUnposibleDirection(eDirection::LEFT); break;
-            case eDirection::UP: playerTank->resetUnposibleDirection(eDirection::DOWN); break;
-            case eDirection::DOWN: playerTank->resetUnposibleDirection(eDirection::UP); break;
-        }
-        bodyPlayer->setVelocity(Vec2(.0f, .0f));
-    }
 }
 
 void BattleLayer::addShot(Shot *pShot) {
