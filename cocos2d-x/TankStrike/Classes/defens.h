@@ -4,6 +4,8 @@
 #define HEIGHT 480
 
 #define DELTA 1
+#define DELTA_MV 1.0f
+#define DELTA_PH 4
 
 #define MAZE_WIDTH   26
 #define MAZE_HEIGHT  18

@@ -124,7 +124,9 @@ bool BattleLayer::onContactBegin(PhysicsContact &contact) {
         } else {
             bodyPlayer = bodyB;
         }
-		bodyPlayer->setVelocity(Vec2(.0f, .0f));
+		if (!((PlayerTank *)bodyPlayer->getNode())->checkMove()) {
+            bodyPlayer->setVelocity(Vec2(.0f, .0f));
+        }
 		return true;
 	}
 	/*else {
