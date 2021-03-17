@@ -116,8 +116,6 @@ SpriteFrame *TextureFactory::getSprite(ObjType objType) {
 		return pPlayerTank;
 	} else if (objType == ObjType::WALL) {
 		return pWall;
-	} else if (objType == ObjType::GROUND) {
-		return pGround;
 	} else if (objType == ObjType::BRICK) {
 		return pBricks[0];
 	} else if (objType == ObjType::EAGLE) {

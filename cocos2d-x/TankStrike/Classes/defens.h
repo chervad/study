@@ -16,8 +16,7 @@ enum ObjType {
 	WALL   = 0b00000100,
 	BRICK  = 0b00001000,
 	EAGLE  = 0b00010000,
-	SHOT   = 0b00100000,
-	GROUND = 0b01000000
+	SHOT   = 0b00100000
 };
 
 enum eDirection {

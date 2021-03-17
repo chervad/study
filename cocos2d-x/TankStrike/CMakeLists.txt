@@ -53,7 +53,6 @@ list(APPEND GAME_SOURCE
      Classes/Brick.cpp
      Classes/EnemyTank.cpp  
      Classes/Eagle.cpp
-     Classes/Ground.cpp
      Classes/Maze.cpp
      Classes/PlayerTank.cpp  
      Classes/Shot.cpp
@@ -68,8 +67,7 @@ list(APPEND GAME_HEADER
      Classes/Brick.h
      Classes/Eagle.h
      Classes/EnemyTank.h  
-     Classes/GameObject.h  
-     Classes/Ground.h
+     Classes/GameObject.h 
      Classes/Maze.h
      Classes/PlayerTank.h  
      Classes/Shot.h

@@ -84,7 +84,7 @@ void Tank::stop() {
 void Tank::playAnimation() {
 	//todo: почему-то анимация вызывает жесткий эксепшн!
 	//return;
-	if (nX_delta != 0 || nY_delta != 0) {
+	//if (nX_delta != 0 || nY_delta != 0) {
 		if (pMoveAnimate->getTarget() != nullptr) {
 			getActionManager()->resumeTarget(this);
 		}
@@ -92,15 +92,15 @@ void Tank::playAnimation() {
 			Action* action = RepeatForever::create(pMoveAnimate);
 			auto a = runAction(action);
 		}
-	}
+	//}
 }
 
 void Tank::pauseAnimation() {
 	//todo: почему-то анимация вызывает жесткий эксепшн!
 	//return;
-	if (nX_delta == 0 && nY_delta == 0) {
+	//if (nX_delta == 0 && nY_delta == 0) {
 		getActionManager()->pauseTarget(this);
-	}
+	//}
 }
 
 bool Tank::checkMoveToPosition(eDirection dir) {

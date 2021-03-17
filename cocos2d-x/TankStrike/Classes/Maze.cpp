@@ -1,6 +1,5 @@
 #include "Maze.h"
 #include "EnemyTank.h"
-#include "Ground.h"
 #include "Brick.h"
 #include "Wall.h"
 #include "Eagle.h"

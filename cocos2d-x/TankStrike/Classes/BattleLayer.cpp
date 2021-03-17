@@ -8,7 +8,6 @@
 
 #include "Wall.h"
 #include "Brick.h"
-#include "Ground.h"
 
 using namespace cocos2d;
 

@@ -103,7 +103,9 @@ void PlayerTank::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event) {
 		parent->addShot(pShot);
 		break;
 	}
-	this->playAnimation();
+	if (!this->getPhysicsBody()->getVelocity().isZero()) {
+        this->playAnimation();
+    }
 }
 
 void PlayerTank::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event) {
@@ -113,8 +115,8 @@ void PlayerTank::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event) {
         keyCode == EventKeyboard::KeyCode::KEY_DOWN_ARROW)
     {
         this->getPhysicsBody()->setVelocity(Vec2(.0f, .0f));
+        this->pauseAnimation();
     }
-	this->pauseAnimation();
 }
 
 void PlayerTank::update(float dt)
