@@ -43,7 +43,6 @@ private:
 	std::list<Vec2> enemyBase;
 
 	std::mutex guard_mutex;
-
 public:
     /*
     PlayerTank *getPlayerTank() const;

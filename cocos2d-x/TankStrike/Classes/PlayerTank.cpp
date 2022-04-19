@@ -84,18 +84,22 @@ void PlayerTank::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event) {
 	case EventKeyboard::KeyCode::KEY_LEFT_ARROW:
         moveTo(eDirection::LEFT);
 	    if (checkMove()) body->setVelocity(Vec2(-100.0f, .0f));
+	    _lastKeyCode = keyCode;
 		break;
 	case EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
         moveTo(eDirection::RIGHT);
         if (checkMove()) body->setVelocity( Vec2(100.0f, .0f));
+            _lastKeyCode = keyCode;
         break;
 	case EventKeyboard::KeyCode::KEY_UP_ARROW:
         moveTo(eDirection::UP);
         if (checkMove()) body->setVelocity(Vec2(.0f, 100.0f));
+            _lastKeyCode = keyCode;
 		break;
 	case EventKeyboard::KeyCode::KEY_DOWN_ARROW:
         moveTo(eDirection::DOWN);
         if (checkMove()) body->setVelocity(Vec2(.0f, -100.0f));
+            _lastKeyCode = keyCode;
 		break;
 	case EventKeyboard::KeyCode::KEY_SPACE:
 		Shot *pShot = Shot::create(direction, this->getPosition());
@@ -109,6 +113,7 @@ void PlayerTank::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event) {
 }
 
 void PlayerTank::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event) {
+    if (keyCode == _lastKeyCode)
     if (keyCode == EventKeyboard::KeyCode::KEY_LEFT_ARROW ||
         keyCode == EventKeyboard::KeyCode::KEY_RIGHT_ARROW ||
         keyCode == EventKeyboard::KeyCode::KEY_UP_ARROW ||

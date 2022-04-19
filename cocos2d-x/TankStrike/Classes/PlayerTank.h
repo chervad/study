@@ -23,4 +23,6 @@ protected:
 	void initPhysics() override;
 	//void runMoveAnimate();
 	//void stopMoveAnimate();
+private:
+    EventKeyboard::KeyCode _lastKeyCode;
 };

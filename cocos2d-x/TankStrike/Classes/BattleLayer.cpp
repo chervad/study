@@ -34,7 +34,7 @@ Scene* BattleLayer::createScene()
 
 	PhysicsWorld* world = scene->getPhysicsWorld();
 	world->setGravity(Vec2(.0f, .0f));  
-	world->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);// DEBUGDRAW_ALL);
+	world->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_NONE);// DEBUGDRAW_ALL);
 
     return scene;
 }
@@ -85,10 +85,18 @@ bool BattleLayer::init()
 }
 
 void BattleLayer::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event) {
+	log("key pressed %d", keyCode);
+    if (event != nullptr) {
+        log("is Stopped key pressed %d", event->isStopped());
+    }
 	pPlayerTank->onKeyPressed(keyCode, event);
 }
 
 void BattleLayer::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event) {
+	log("key release %d", keyCode);
+	if (event != nullptr) {
+		log("is Stopped key released %d", event->isStopped());
+	}
 	pPlayerTank->onKeyReleased(keyCode, event);
 
 }

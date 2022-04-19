@@ -128,11 +128,11 @@ SpriteFrame *TextureFactory::getSprite(ObjType objType) {
 
 Animate *TextureFactory::getAnimate(ObjType objType) {
 	if (objType == ObjType::ENEMY) {
-		return pEnemyTankAnimate/*->clone()*/;
+		return pEnemyTankAnimate->clone();
 	} else if (objType == ObjType::PLAYER) {
 		return pPlayerTankAnimate;
 	} else if (objType == ObjType::SHOT) {
-		return pShotAnimate/*->clone()*/;
+		return pShotAnimate->clone();
 	}
 	return nullptr;
 }

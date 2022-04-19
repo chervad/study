@@ -4,7 +4,8 @@
 #include "Tank.h"
 #include "Maze.h"
 #include "EnemyTank.h"
-
+#include "Shot.h"
+#include "BattleLayer.h"
 #include "TextureFactory.h"
 
 using namespace cocos2d;
@@ -159,6 +160,10 @@ void Tank::update(float dt)
 					}
 					moveTo((eDirection)newDir);
 				}
+			}
+			if (r % 75 == 0) {
+				BattleLayer *parent = (BattleLayer *)(this->getParent());
+				parent->addShot(Shot::create(direction, this->getPosition()));
 			}
 		}
 	}
